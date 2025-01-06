@@ -55,7 +55,7 @@ public class temp extends javax.swing.JFrame {
                 btn_home3ActionPerformed(evt);
             }
         });
-        panel_parent.add(btn_home3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 131, 54));
+        panel_parent.add(btn_home3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 131, 54));
 
         panel_home1.setBackground(new java.awt.Color(153, 0, 51));
         panel_home1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
