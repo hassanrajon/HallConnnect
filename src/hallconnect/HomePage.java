@@ -29,6 +29,16 @@ public class HomePage extends javax.swing.JFrame {
         panel_parent = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         label_hallconnect = new javax.swing.JLabel();
+        panel_parent1 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        label_home4 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        label_home3 = new javax.swing.JLabel();
+        label_signup1 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        combo_role = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -43,26 +53,125 @@ public class HomePage extends javax.swing.JFrame {
 
         label_hallconnect.setFont(new java.awt.Font("Arial Black", 1, 48)); // NOI18N
         label_hallconnect.setForeground(new java.awt.Color(255, 255, 255));
-        label_hallconnect.setText("HallConnect");
+        label_hallconnect.setText("Welcome To HallConnect");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(552, 552, 552)
-                .addComponent(label_hallconnect, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(635, Short.MAX_VALUE))
+                .addGap(409, 409, 409)
+                .addComponent(label_hallconnect)
+                .addContainerGap(439, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(50, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
                 .addComponent(label_hallconnect, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         panel_parent.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, 130));
+
+        panel_parent1.setBackground(new java.awt.Color(0, 51, 51));
+        panel_parent1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panel_parent1.setForeground(new java.awt.Color(255, 255, 255));
+        panel_parent1.setPreferredSize(new java.awt.Dimension(1536, 800));
+        panel_parent1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel3.setBackground(new java.awt.Color(0, 51, 51));
+        jPanel3.setLayout(null);
+
+        jPanel4.setBackground(new java.awt.Color(0, 51, 51, 150));
+
+        label_home4.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        label_home4.setForeground(new java.awt.Color(255, 255, 255));
+        label_home4.setText("Summary of all of the hall's info");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(125, Short.MAX_VALUE)
+                .addComponent(label_home4)
+                .addGap(110, 110, 110))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(97, 97, 97)
+                .addComponent(label_home4, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(89, Short.MAX_VALUE))
+        );
+
+        jPanel3.add(jPanel4);
+        jPanel4.setBounds(170, 40, 670, 580);
+
+        jPanel5.setBackground(new java.awt.Color(0, 51, 51, 150));
+
+        label_home3.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        label_home3.setForeground(new java.awt.Color(255, 255, 255));
+        label_home3.setText("HALL :");
+
+        label_signup1.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
+        label_signup1.setForeground(new java.awt.Color(255, 255, 255));
+        label_signup1.setText("Individual Hall Info");
+
+        combo_role.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        combo_role.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(label_home3))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(88, 88, 88)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(label_signup1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jSeparator2))))
+                .addContainerGap(121, Short.MAX_VALUE))
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(combo_role, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(label_signup1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60)
+                .addComponent(label_home3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(131, Short.MAX_VALUE))
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(combo_role, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        jPanel3.add(jPanel5);
+        jPanel5.setBounds(900, 220, 600, 290);
+
+        jLabel1.setBackground(new java.awt.Color(0, 51, 51));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/final.jpg"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        jPanel3.add(jLabel1);
+        jLabel1.setBounds(0, 0, 1540, 670);
+
+        panel_parent1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 1540, 670));
+
+        panel_parent.add(panel_parent1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, 800));
 
         getContentPane().add(panel_parent, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, 800));
 
@@ -99,6 +208,10 @@ public class HomePage extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -109,8 +222,18 @@ public class HomePage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> combo_role;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel label_hallconnect;
+    private javax.swing.JLabel label_home3;
+    private javax.swing.JLabel label_home4;
+    private javax.swing.JLabel label_signup1;
     private javax.swing.JPanel panel_parent;
+    private javax.swing.JPanel panel_parent1;
     // End of variables declaration//GEN-END:variables
 }
