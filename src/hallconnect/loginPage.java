@@ -58,7 +58,12 @@ public class loginPage extends javax.swing.JFrame {
         jPanel1.add(label_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, 150, -1));
 
         txt_username.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        jPanel1.add(txt_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 170, 209, -1));
+        txt_username.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_usernameActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txt_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 180, 209, -1));
 
         label_role.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         label_role.setText("Role:");
@@ -119,6 +124,10 @@ public class loginPage extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btn_loginActionPerformed
+
+    private void txt_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_usernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_usernameActionPerformed
 
     /**
      * @param args the command line arguments
