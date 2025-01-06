@@ -64,7 +64,6 @@ public class SignUp extends javax.swing.JFrame {
         label_home16 = new javax.swing.JLabel();
         label_home17 = new javax.swing.JLabel();
         txt_dob = new com.toedter.calendar.JDateChooser();
-        btn_home2 = new javax.swing.JButton();
         label_home18 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -300,17 +299,6 @@ public class SignUp extends javax.swing.JFrame {
         txt_dob.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         panel_parent1.add(txt_dob, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 310, 280, 40));
 
-        btn_home2.setBackground(new java.awt.Color(102, 102, 102));
-        btn_home2.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        btn_home2.setText("HOME");
-        btn_home2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 4, true));
-        btn_home2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_home2ActionPerformed(evt);
-            }
-        });
-        panel_parent1.add(btn_home2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 670, 131, 54));
-
         label_home18.setFont(new java.awt.Font("Colonna MT", 1, 18)); // NOI18N
         label_home18.setForeground(new java.awt.Color(0, 255, 102));
         label_home18.setText("(OPTIONAL)");
@@ -352,10 +340,6 @@ public class SignUp extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_localGuardianRelationActionPerformed
 
-    private void btn_home2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_home2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_home2ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -395,7 +379,6 @@ public class SignUp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_home2;
     private javax.swing.JButton btn_home3;
     private javax.swing.JButton btn_home4;
     private javax.swing.JComboBox<String> combo_blood;

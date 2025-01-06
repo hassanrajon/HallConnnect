@@ -27,8 +27,6 @@ public class temp extends javax.swing.JFrame {
     private void initComponents() {
 
         panel_parent = new javax.swing.JPanel();
-        btn_home = new javax.swing.JButton();
-        btn_home2 = new javax.swing.JButton();
         btn_home3 = new javax.swing.JButton();
         panel_home1 = new javax.swing.JPanel();
         label_home2 = new javax.swing.JLabel();
@@ -44,28 +42,6 @@ public class temp extends javax.swing.JFrame {
         panel_parent.setForeground(new java.awt.Color(255, 255, 255));
         panel_parent.setPreferredSize(new java.awt.Dimension(1536, 800));
         panel_parent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btn_home.setBackground(new java.awt.Color(153, 153, 153));
-        btn_home.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        btn_home.setText("HOME");
-        btn_home.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 0, 204), 3, true));
-        btn_home.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_homeActionPerformed(evt);
-            }
-        });
-        panel_parent.add(btn_home, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 550, 131, 54));
-
-        btn_home2.setBackground(new java.awt.Color(102, 102, 102));
-        btn_home2.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        btn_home2.setText("HOME");
-        btn_home2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 4, true));
-        btn_home2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_home2ActionPerformed(evt);
-            }
-        });
-        panel_parent.add(btn_home2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 400, 131, 54));
 
         btn_home3.setBackground(new java.awt.Color(102, 102, 102));
         btn_home3.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
@@ -124,14 +100,6 @@ public class temp extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_homeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_homeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_homeActionPerformed
-
-    private void btn_home2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_home2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_home2ActionPerformed
-
     private void btn_home3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_home3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_home3ActionPerformed
@@ -173,8 +141,6 @@ public class temp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_home;
-    private javax.swing.JButton btn_home2;
     private javax.swing.JButton btn_home3;
     private javax.swing.JComboBox<String> combo_role;
     private javax.swing.JLabel label_home2;
