@@ -37,11 +37,7 @@ public class MuktijoddhaHall extends javax.swing.JFrame {
         label_home6 = new javax.swing.JLabel();
         label_home7 = new javax.swing.JLabel();
         label_home8 = new javax.swing.JLabel();
-        label_home9 = new javax.swing.JLabel();
-        label_home10 = new javax.swing.JLabel();
-        label_home11 = new javax.swing.JLabel();
-        label_home12 = new javax.swing.JLabel();
-        label_home13 = new javax.swing.JLabel();
+        label_home14 = new javax.swing.JLabel();
         label_image = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -106,25 +102,9 @@ public class MuktijoddhaHall extends javax.swing.JFrame {
         label_home8.setForeground(new java.awt.Color(255, 255, 255));
         label_home8.setText("Events                   :");
 
-        label_home9.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        label_home9.setForeground(new java.awt.Color(255, 255, 255));
-        label_home9.setText("(2019-2020)");
-
-        label_home10.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        label_home10.setForeground(new java.awt.Color(255, 255, 255));
-        label_home10.setText("(2019-2020)");
-
-        label_home11.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        label_home11.setForeground(new java.awt.Color(255, 255, 255));
-        label_home11.setText("(2019-2020)");
-
-        label_home12.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        label_home12.setForeground(new java.awt.Color(255, 255, 255));
-        label_home12.setText("(2019-2020)");
-
-        label_home13.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        label_home13.setForeground(new java.awt.Color(255, 255, 255));
-        label_home13.setText("(2019-2020)");
+        label_home14.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        label_home14.setForeground(new java.awt.Color(255, 255, 255));
+        label_home14.setText("Bangabandhu Hall");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -136,25 +116,21 @@ public class MuktijoddhaHall extends javax.swing.JFrame {
                     .addComponent(label_home8)
                     .addComponent(label_home5)
                     .addComponent(label_home4)
-                    .addComponent(label_home3)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label_home6)
-                            .addComponent(label_home7))
+                        .addComponent(label_home3)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label_home10)
-                            .addComponent(label_home9)
-                            .addComponent(label_home11)
-                            .addComponent(label_home12)
-                            .addComponent(label_home13))))
-                .addContainerGap(1066, Short.MAX_VALUE))
+                        .addComponent(label_home14))
+                    .addComponent(label_home6)
+                    .addComponent(label_home7))
+                .addContainerGap(986, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addComponent(label_home3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label_home3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label_home14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(label_home4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -162,20 +138,10 @@ public class MuktijoddhaHall extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(label_home7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label_home6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label_home9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(label_home10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(label_home11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(label_home12, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(label_home13, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
+                .addComponent(label_home6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(label_home8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(171, Short.MAX_VALUE))
+                .addContainerGap(363, Short.MAX_VALUE))
         );
 
         jPanel3.add(jPanel2);
@@ -264,17 +230,13 @@ public class MuktijoddhaHall extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel label_hallconnect;
-    private javax.swing.JLabel label_home10;
-    private javax.swing.JLabel label_home11;
-    private javax.swing.JLabel label_home12;
-    private javax.swing.JLabel label_home13;
+    private javax.swing.JLabel label_home14;
     private javax.swing.JLabel label_home3;
     private javax.swing.JLabel label_home4;
     private javax.swing.JLabel label_home5;
     private javax.swing.JLabel label_home6;
     private javax.swing.JLabel label_home7;
     private javax.swing.JLabel label_home8;
-    private javax.swing.JLabel label_home9;
     private javax.swing.JLabel label_image;
     private javax.swing.JPanel panel_parent;
     // End of variables declaration//GEN-END:variables

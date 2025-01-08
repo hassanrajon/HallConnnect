@@ -130,23 +130,15 @@
                               <Component id="label_home8" min="-2" max="-2" attributes="0"/>
                               <Component id="label_home5" min="-2" max="-2" attributes="0"/>
                               <Component id="label_home4" min="-2" max="-2" attributes="0"/>
-                              <Component id="label_home3" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="label_home6" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="label_home7" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="label_home3" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="label_home10" min="-2" max="-2" attributes="0"/>
-                                      <Component id="label_home9" min="-2" max="-2" attributes="0"/>
-                                      <Component id="label_home11" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="label_home12" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="label_home13" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="label_home14" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <Component id="label_home6" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="label_home7" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="1066" max="32767" attributes="0"/>
+                          <EmptySpace pref="1017" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -154,7 +146,10 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                          <Component id="label_home3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="label_home3" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="label_home14" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="label_home4" min="-2" pref="30" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -162,21 +157,10 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="label_home7" min="-2" pref="30" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="label_home6" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="label_home9" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="label_home10" min="-2" pref="30" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="label_home11" min="-2" pref="30" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="label_home12" min="-2" pref="30" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="label_home13" min="-2" pref="30" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                          <Component id="label_home6" min="-2" pref="30" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="label_home8" min="-2" pref="30" max="-2" attributes="0"/>
-                          <EmptySpace pref="171" max="32767" attributes="0"/>
+                          <EmptySpace pref="363" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -248,7 +232,7 @@
                     <Property name="text" type="java.lang.String" value="Events                   :"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="label_home9">
+                <Component class="javax.swing.JLabel" name="label_home14">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Arial Black" size="24" style="1"/>
@@ -256,51 +240,7 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="(2019-2020)"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="label_home10">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial Black" size="24" style="1"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="(2019-2020)"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="label_home11">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial Black" size="24" style="1"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="(2019-2020)"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="label_home12">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial Black" size="24" style="1"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="(2019-2020)"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="label_home13">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Arial Black" size="24" style="1"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="(2019-2020)"/>
+                    <Property name="text" type="java.lang.String" value="Bangamata Hall"/>
                   </Properties>
                 </Component>
               </SubComponents>

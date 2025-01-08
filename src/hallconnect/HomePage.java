@@ -31,11 +31,14 @@ public class HomePage extends javax.swing.JFrame {
         label_hallconnect = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        btn_home4 = new javax.swing.JButton();
-        btn_home5 = new javax.swing.JButton();
-        combo_role = new javax.swing.JComboBox<>();
-        panel_home1 = new javax.swing.JPanel();
+        btn_SignUp = new javax.swing.JButton();
+        btn_SignIn = new javax.swing.JButton();
+        panel_BH = new javax.swing.JPanel();
         label_home2 = new javax.swing.JLabel();
+        panel_MH = new javax.swing.JPanel();
+        label_home3 = new javax.swing.JLabel();
+        panel_BmH = new javax.swing.JPanel();
+        label_home4 = new javax.swing.JLabel();
         label_image = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -76,82 +79,131 @@ public class HomePage extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(0, 51, 51, 150));
 
-        btn_home4.setBackground(new java.awt.Color(102, 102, 102));
-        btn_home4.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        btn_home4.setForeground(new java.awt.Color(255, 255, 255));
-        btn_home4.setText("Sign Up");
-        btn_home4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
-        btn_home4.addActionListener(new java.awt.event.ActionListener() {
+        btn_SignUp.setBackground(new java.awt.Color(102, 102, 102));
+        btn_SignUp.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        btn_SignUp.setForeground(new java.awt.Color(255, 255, 255));
+        btn_SignUp.setText("Sign Up");
+        btn_SignUp.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
+        btn_SignUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_home4ActionPerformed(evt);
+                btn_SignUpActionPerformed(evt);
             }
         });
 
-        btn_home5.setBackground(new java.awt.Color(102, 102, 102));
-        btn_home5.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        btn_home5.setForeground(new java.awt.Color(255, 255, 255));
-        btn_home5.setText("Sign In");
-        btn_home5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
-        btn_home5.addActionListener(new java.awt.event.ActionListener() {
+        btn_SignIn.setBackground(new java.awt.Color(102, 102, 102));
+        btn_SignIn.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        btn_SignIn.setForeground(new java.awt.Color(255, 255, 255));
+        btn_SignIn.setText("Sign In");
+        btn_SignIn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
+        btn_SignIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_home5ActionPerformed(evt);
+                btn_SignInActionPerformed(evt);
             }
         });
 
-        combo_role.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        combo_role.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bangabandhu Hall (Boys)", "Muktijoddha Hall (Boys)", "Bangamata Hall (Girls)" }));
-
-        panel_home1.setBackground(new java.awt.Color(153, 0, 51));
-        panel_home1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panel_BH.setBackground(new java.awt.Color(153, 0, 51));
+        panel_BH.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         label_home2.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         label_home2.setForeground(new java.awt.Color(255, 255, 255));
-        label_home2.setText("See Hall Info");
+        label_home2.setText("Bangabandhu Hall (Boys)");
 
-        javax.swing.GroupLayout panel_home1Layout = new javax.swing.GroupLayout(panel_home1);
-        panel_home1.setLayout(panel_home1Layout);
-        panel_home1Layout.setHorizontalGroup(
-            panel_home1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_home1Layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+        javax.swing.GroupLayout panel_BHLayout = new javax.swing.GroupLayout(panel_BH);
+        panel_BH.setLayout(panel_BHLayout);
+        panel_BHLayout.setHorizontalGroup(
+            panel_BHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_BHLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(label_home2)
-                .addGap(19, 19, 19))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        panel_home1Layout.setVerticalGroup(
-            panel_home1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_home1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(label_home2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+        panel_BHLayout.setVerticalGroup(
+            panel_BHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_BHLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(label_home2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        panel_MH.setBackground(new java.awt.Color(153, 0, 51));
+        panel_MH.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        label_home3.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        label_home3.setForeground(new java.awt.Color(255, 255, 255));
+        label_home3.setText("Muktijoddha Hall (Boys)");
+
+        javax.swing.GroupLayout panel_MHLayout = new javax.swing.GroupLayout(panel_MH);
+        panel_MH.setLayout(panel_MHLayout);
+        panel_MHLayout.setHorizontalGroup(
+            panel_MHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_MHLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(label_home3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panel_MHLayout.setVerticalGroup(
+            panel_MHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_MHLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(label_home3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        panel_BmH.setBackground(new java.awt.Color(153, 0, 51));
+        panel_BmH.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        label_home4.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        label_home4.setForeground(new java.awt.Color(255, 255, 255));
+        label_home4.setText("Bangamata Hall (Girls)");
+
+        javax.swing.GroupLayout panel_BmHLayout = new javax.swing.GroupLayout(panel_BmH);
+        panel_BmH.setLayout(panel_BmHLayout);
+        panel_BmHLayout.setHorizontalGroup(
+            panel_BmHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_BmHLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(label_home4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panel_BmHLayout.setVerticalGroup(
+            panel_BmHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_BmHLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(label_home4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(404, 404, 404)
-                .addComponent(combo_role, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
-                .addComponent(panel_home1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(492, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btn_home4, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(629, Short.MAX_VALUE)
+                .addComponent(btn_SignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
-                .addComponent(btn_home5, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_SignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(621, 621, 621))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(193, 193, 193)
+                .addComponent(panel_BH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(panel_MH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(panel_BmH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(204, 204, 204)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panel_home1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(combo_role))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 227, Short.MAX_VALUE)
+                .addGap(208, 208, 208)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panel_BH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panel_MH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panel_BmH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 211, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_home5)
-                    .addComponent(btn_home4))
+                    .addComponent(btn_SignIn)
+                    .addComponent(btn_SignUp))
                 .addGap(159, 159, 159))
         );
 
@@ -170,13 +222,13 @@ public class HomePage extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_home4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_home4ActionPerformed
+    private void btn_SignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SignUpActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_home4ActionPerformed
+    }//GEN-LAST:event_btn_SignUpActionPerformed
 
-    private void btn_home5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_home5ActionPerformed
+    private void btn_SignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SignInActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_home5ActionPerformed
+    }//GEN-LAST:event_btn_SignInActionPerformed
 
     /**
      * @param args the command line arguments
@@ -221,16 +273,19 @@ public class HomePage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_home4;
-    private javax.swing.JButton btn_home5;
-    private javax.swing.JComboBox<String> combo_role;
+    private javax.swing.JButton btn_SignIn;
+    private javax.swing.JButton btn_SignUp;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel label_hallconnect;
     private javax.swing.JLabel label_home2;
+    private javax.swing.JLabel label_home3;
+    private javax.swing.JLabel label_home4;
     private javax.swing.JLabel label_image;
-    private javax.swing.JPanel panel_home1;
+    private javax.swing.JPanel panel_BH;
+    private javax.swing.JPanel panel_BmH;
+    private javax.swing.JPanel panel_MH;
     private javax.swing.JPanel panel_parent;
     // End of variables declaration//GEN-END:variables
 }
