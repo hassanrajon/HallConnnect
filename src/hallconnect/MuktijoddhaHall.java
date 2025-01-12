@@ -29,7 +29,6 @@ public class MuktijoddhaHall extends javax.swing.JFrame {
         panel_parent = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         label_hallconnect = new javax.swing.JLabel();
-        btn_home3 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         label_home3 = new javax.swing.JLabel();
@@ -39,6 +38,7 @@ public class MuktijoddhaHall extends javax.swing.JFrame {
         label_home7 = new javax.swing.JLabel();
         label_home8 = new javax.swing.JLabel();
         label_home14 = new javax.swing.JLabel();
+        btn_home3 = new javax.swing.JButton();
         label_image = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -56,39 +56,21 @@ public class MuktijoddhaHall extends javax.swing.JFrame {
         label_hallconnect.setForeground(new java.awt.Color(255, 255, 255));
         label_hallconnect.setText("HallConnect");
 
-        btn_home3.setBackground(new java.awt.Color(102, 102, 102));
-        btn_home3.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        btn_home3.setForeground(new java.awt.Color(255, 255, 255));
-        btn_home3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/back_arrow.png"))); // NOI18N
-        btn_home3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
-        btn_home3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_home3ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(btn_home3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(479, 479, 479)
+                .addGap(564, 564, 564)
                 .addComponent(label_hallconnect, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(623, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(label_hallconnect, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(btn_home3, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(label_hallconnect, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         panel_parent.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, 130));
@@ -123,7 +105,18 @@ public class MuktijoddhaHall extends javax.swing.JFrame {
 
         label_home14.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         label_home14.setForeground(new java.awt.Color(255, 255, 255));
-        label_home14.setText("Bangabandhu Hall");
+        label_home14.setText("Muktijoddha Hall");
+
+        btn_home3.setBackground(new java.awt.Color(0, 61, 139));
+        btn_home3.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        btn_home3.setForeground(new java.awt.Color(255, 255, 255));
+        btn_home3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/backward.png"))); // NOI18N
+        btn_home3.setBorder(null);
+        btn_home3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_home3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -132,16 +125,20 @@ public class MuktijoddhaHall extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label_home8)
-                    .addComponent(label_home5)
-                    .addComponent(label_home4)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(label_home3)
                         .addGap(18, 18, 18)
                         .addComponent(label_home14))
-                    .addComponent(label_home6)
-                    .addComponent(label_home7))
-                .addContainerGap(986, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label_home5)
+                            .addComponent(label_home4)
+                            .addComponent(label_home7)
+                            .addComponent(label_home8)
+                            .addComponent(label_home6))
+                        .addGap(432, 432, 432)
+                        .addComponent(btn_home3)))
+                .addContainerGap(735, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,17 +147,22 @@ public class MuktijoddhaHall extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_home3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label_home14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(94, 94, 94)
                 .addComponent(label_home4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(label_home5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(label_home7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(label_home6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(label_home8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(363, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(label_home6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(label_home8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_home3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(287, Short.MAX_VALUE))
         );
 
         jPanel3.add(jPanel2);

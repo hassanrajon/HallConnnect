@@ -4,6 +4,8 @@
  */
 package hallconnect;
 
+import java.awt.Color;
+
 /**
  *
  * @author Lenovo
@@ -103,6 +105,14 @@ public class HomePage extends javax.swing.JFrame {
 
         panel_BH.setBackground(new java.awt.Color(153, 0, 51));
         panel_BH.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panel_BH.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panel_BHMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panel_BHMouseExited(evt);
+            }
+        });
 
         label_home2.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         label_home2.setForeground(new java.awt.Color(255, 255, 255));
@@ -127,6 +137,14 @@ public class HomePage extends javax.swing.JFrame {
 
         panel_MH.setBackground(new java.awt.Color(153, 0, 51));
         panel_MH.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panel_MH.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panel_MHMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panel_MHMouseExited(evt);
+            }
+        });
 
         label_home3.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         label_home3.setForeground(new java.awt.Color(255, 255, 255));
@@ -151,6 +169,14 @@ public class HomePage extends javax.swing.JFrame {
 
         panel_BmH.setBackground(new java.awt.Color(153, 0, 51));
         panel_BmH.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panel_BmH.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panel_BmHMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panel_BmHMouseExited(evt);
+            }
+        });
 
         label_home4.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         label_home4.setForeground(new java.awt.Color(255, 255, 255));
@@ -229,6 +255,44 @@ public class HomePage extends javax.swing.JFrame {
     private void btn_SignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SignInActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_SignInActionPerformed
+
+    private void panel_BHMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_BHMouseEntered
+        // TODO add your handling code here:
+        Color clr = new Color(0, 153, 153);
+        panel_BH.setBackground(clr);
+//        panel_BH.setSize(365, 55);
+    }//GEN-LAST:event_panel_BHMouseEntered
+
+    private void panel_BHMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_BHMouseExited
+        // TODO add your handling code here:
+        Color clr = new Color(153, 0, 51);
+        panel_BH.setBackground(clr);
+//        panel_BH.setSize(362, 51);
+    }//GEN-LAST:event_panel_BHMouseExited
+
+    private void panel_MHMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_MHMouseEntered
+        // TODO add your handling code here:
+        Color clr = new Color(0, 153, 153);
+        panel_MH.setBackground(clr);
+    }//GEN-LAST:event_panel_MHMouseEntered
+
+    private void panel_BmHMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_BmHMouseEntered
+        // TODO add your handling code here:
+        Color clr = new Color(0, 153, 153);
+        panel_BmH.setBackground(clr);
+    }//GEN-LAST:event_panel_BmHMouseEntered
+
+    private void panel_MHMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_MHMouseExited
+        // TODO add your handling code here:
+        Color clr = new Color(153, 0, 51);
+        panel_MH.setBackground(clr);
+    }//GEN-LAST:event_panel_MHMouseExited
+
+    private void panel_BmHMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_BmHMouseExited
+        // TODO add your handling code here:'
+        Color clr = new Color(153, 0, 51);
+        panel_BmH.setBackground(clr);
+    }//GEN-LAST:event_panel_BmHMouseExited
 
     /**
      * @param args the command line arguments
