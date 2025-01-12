@@ -4,19 +4,106 @@
  */
 package hallconnect;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JFrame;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Lenovo
  */
 public class SignUp extends javax.swing.JFrame {
-
+   private CentralController controller = new CentralController();
     /**
      * Creates new form Registration
      */
+    public SignUp(CentralController controller) {
+        this.controller=controller;
+        initComponents();
+    }
     public SignUp() {
         initComponents();
     }
-
+//    boolean usernameValidation(String username){
+//       Connection con = DbConnection.getConnection();
+//       
+//    return false;
+//    }
+    boolean validUsername(String username){
+        try {
+            Connection con = DbConnection.getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM student where username=?");
+            pst.setString(1, username);
+            ResultSet rs_1=pst.executeQuery();
+             pst = con.prepareStatement("SELECT * FROM pending where username=?");
+            pst.setString(1, username);
+            ResultSet rs_2=pst.executeQuery();
+            if(rs_1.next() || rs_2.next()){
+               JOptionPane.showMessageDialog(this, "THIS USERNAME HAS TAKEN, PLEASE USE AN UNIQUE USERNAME");
+                return false;
+            }else{
+             return true;
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+      boolean validation(String name,String reg,int session,String dob,String blood,String contact,String email,String username,String pass,String con_pass){
+          if(name.equals("")){
+              JOptionPane.showMessageDialog(this, "PLEASE ENTER NAME");
+              return false;
+          }
+          if(reg.equals("")){
+              JOptionPane.showMessageDialog(this, "PLEASE ENTER REGISTRATION NUMBER");
+              return false;
+          }
+          if(session==0){
+              JOptionPane.showMessageDialog(this, "PLEASE ENTER SESSION");
+              return false;
+          }
+          if(dob.equals("")){
+              JOptionPane.showMessageDialog(this, "PLEASE ENTER DATE OF BIRTH");
+              return false;
+          }
+          if(blood.equals("")){
+              JOptionPane.showMessageDialog(this, "PLEASE ENTER BLOOD GROUP");
+              return false;
+          }
+          if(contact.equals("")){
+              JOptionPane.showMessageDialog(this, "PLEASE ENTER CONTACT NUMBER");
+              return false;
+          }
+          if(email.equals("")){
+              JOptionPane.showMessageDialog(this, "PLEASE ENTER EMAIL");
+              return false;
+          }
+          if(username.equals("")){
+              JOptionPane.showMessageDialog(this, "PLEASE ENTER USERNAME");
+              return false;
+          }
+          
+          if(pass.equals("")){
+              JOptionPane.showMessageDialog(this, "PLEASE ENTER PASSWORD");
+              return false;
+          }
+          if(con_pass.equals("")){
+              JOptionPane.showMessageDialog(this, "PLEASE ENTER CONFIRM PASSWORD");
+              return false;
+          }
+          if(!pass.equals(con_pass)){
+            JOptionPane.showMessageDialog(this, "PASSWORD DOES NOT MATCHED");
+            return false;
+          }
+          validUsername(username);
+      return true;
+      }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,13 +114,11 @@ public class SignUp extends javax.swing.JFrame {
     private void initComponents() {
 
         panel_parent = new javax.swing.JPanel();
-        btn_home3 = new javax.swing.JButton();
         label_signup = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         label_hallconnect = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         panel_parent1 = new javax.swing.JPanel();
-        btn_home4 = new javax.swing.JButton();
         label_signup1 = new javax.swing.JLabel();
         txt_username = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
@@ -47,7 +132,6 @@ public class SignUp extends javax.swing.JFrame {
         label_home6 = new javax.swing.JLabel();
         txt_reg = new javax.swing.JTextField();
         label_home4 = new javax.swing.JLabel();
-        txt_session = new javax.swing.JTextField();
         txt_pass = new javax.swing.JPasswordField();
         txt_ConPass = new javax.swing.JPasswordField();
         label_home10 = new javax.swing.JLabel();
@@ -65,6 +149,10 @@ public class SignUp extends javax.swing.JFrame {
         label_home17 = new javax.swing.JLabel();
         txt_dob = new com.toedter.calendar.JDateChooser();
         label_home18 = new javax.swing.JLabel();
+        btn_login = new javax.swing.JButton();
+        btn_signup = new javax.swing.JButton();
+        btn_back = new javax.swing.JButton();
+        txt_session = new com.toedter.calendar.JYearChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -74,18 +162,6 @@ public class SignUp extends javax.swing.JFrame {
         panel_parent.setForeground(new java.awt.Color(255, 255, 255));
         panel_parent.setPreferredSize(new java.awt.Dimension(1536, 800));
         panel_parent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btn_home3.setBackground(new java.awt.Color(102, 102, 102));
-        btn_home3.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        btn_home3.setForeground(new java.awt.Color(255, 255, 255));
-        btn_home3.setText("HOME");
-        btn_home3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
-        btn_home3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_home3ActionPerformed(evt);
-            }
-        });
-        panel_parent.add(btn_home3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 680, 131, 54));
 
         label_signup.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
         label_signup.setForeground(new java.awt.Color(255, 255, 255));
@@ -103,16 +179,16 @@ public class SignUp extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(564, 564, 564)
+                .addGap(584, 584, 584)
                 .addComponent(label_hallconnect, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(623, Short.MAX_VALUE))
+                .addContainerGap(603, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(34, 34, 34)
                 .addComponent(label_hallconnect, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         panel_parent.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, 130));
@@ -123,18 +199,6 @@ public class SignUp extends javax.swing.JFrame {
         panel_parent1.setForeground(new java.awt.Color(255, 255, 255));
         panel_parent1.setPreferredSize(new java.awt.Dimension(1536, 800));
         panel_parent1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btn_home4.setBackground(new java.awt.Color(102, 102, 102));
-        btn_home4.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        btn_home4.setForeground(new java.awt.Color(255, 255, 255));
-        btn_home4.setText("HOME");
-        btn_home4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
-        btn_home4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_home4ActionPerformed(evt);
-            }
-        });
-        panel_parent1.add(btn_home4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 680, 131, 54));
 
         label_signup1.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
         label_signup1.setForeground(new java.awt.Color(255, 255, 255));
@@ -201,7 +265,7 @@ public class SignUp extends javax.swing.JFrame {
         label_home6.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         label_home6.setForeground(new java.awt.Color(255, 255, 255));
         label_home6.setText("REG :");
-        panel_parent1.add(label_home6, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 250, -1, 30));
+        panel_parent1.add(label_home6, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 240, -1, 30));
 
         txt_reg.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         txt_reg.addActionListener(new java.awt.event.ActionListener() {
@@ -209,20 +273,12 @@ public class SignUp extends javax.swing.JFrame {
                 txt_regActionPerformed(evt);
             }
         });
-        panel_parent1.add(txt_reg, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 240, 280, 40));
+        panel_parent1.add(txt_reg, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 240, 280, 40));
 
         label_home4.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         label_home4.setForeground(new java.awt.Color(255, 255, 255));
         label_home4.setText("SESSION :");
         panel_parent1.add(label_home4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 240, -1, 30));
-
-        txt_session.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        txt_session.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_sessionActionPerformed(evt);
-            }
-        });
-        panel_parent1.add(txt_session, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 240, 280, 40));
 
         txt_pass.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         panel_parent1.add(txt_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 460, 280, 40));
@@ -263,7 +319,7 @@ public class SignUp extends javax.swing.JFrame {
         label_home13.setFont(new java.awt.Font("Colonna MT", 1, 18)); // NOI18N
         label_home13.setForeground(new java.awt.Color(0, 255, 102));
         label_home13.setText("(EXAMPLE: 2021-2022)");
-        panel_parent1.add(label_home13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 290, -1, 30));
+        panel_parent1.add(label_home13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 300, -1, 30));
 
         txt_localGuardianContact.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         panel_parent1.add(txt_localGuardianContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 530, 280, 40));
@@ -304,6 +360,49 @@ public class SignUp extends javax.swing.JFrame {
         label_home18.setText("(OPTIONAL)");
         panel_parent1.add(label_home18, new org.netbeans.lib.awtextra.AbsoluteConstraints(1270, 580, -1, 30));
 
+        btn_login.setBackground(new java.awt.Color(102, 102, 102));
+        btn_login.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        btn_login.setForeground(new java.awt.Color(255, 255, 255));
+        btn_login.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/login.png"))); // NOI18N
+        btn_login.setText("LOG IN");
+        btn_login.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
+        btn_login.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_loginActionPerformed(evt);
+            }
+        });
+        panel_parent1.add(btn_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 660, 150, 54));
+
+        btn_signup.setBackground(new java.awt.Color(102, 102, 102));
+        btn_signup.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        btn_signup.setForeground(new java.awt.Color(255, 255, 255));
+        btn_signup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/signup.png"))); // NOI18N
+        btn_signup.setText("SUBMIT");
+        btn_signup.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
+        btn_signup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_signupActionPerformed(evt);
+            }
+        });
+        panel_parent1.add(btn_signup, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 660, 170, 54));
+
+        btn_back.setBackground(new java.awt.Color(102, 102, 102));
+        btn_back.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        btn_back.setForeground(new java.awt.Color(255, 255, 255));
+        btn_back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/back1.png"))); // NOI18N
+        btn_back.setText("BACK");
+        btn_back.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
+        btn_back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_backActionPerformed(evt);
+            }
+        });
+        panel_parent1.add(btn_back, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 660, 140, 54));
+
+        txt_session.setMinimum(0);
+        txt_session.setValue(0);
+        panel_parent1.add(txt_session, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 240, 100, 40));
+
         panel_parent.add(panel_parent1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, 800));
 
         getContentPane().add(panel_parent, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, 800));
@@ -312,21 +411,9 @@ public class SignUp extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_home3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_home3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_home3ActionPerformed
-
     private void txt_regActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_regActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_regActionPerformed
-
-    private void txt_sessionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_sessionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_sessionActionPerformed
-
-    private void btn_home4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_home4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_home4ActionPerformed
 
     private void txt_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_usernameActionPerformed
         // TODO add your handling code here:
@@ -339,6 +426,48 @@ public class SignUp extends javax.swing.JFrame {
     private void txt_localGuardianRelationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_localGuardianRelationActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_localGuardianRelationActionPerformed
+
+    private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
+        // TODO add your handling code here:
+        controller.addFrame(this);
+        this.setVisible(false);
+        loginPage lg = new loginPage(controller);
+        lg.setVisible(true);
+    }//GEN-LAST:event_btn_loginActionPerformed
+
+    private void btn_signupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_signupActionPerformed
+        // TODO add your handling code here:
+        SimpleDateFormat formate = new SimpleDateFormat("dd-MM-yyyy");
+           String name = txt_name.getText();
+           String reg = txt_reg.getText();
+           int session = txt_session.getYear();
+           Date db = txt_dob.getDate();
+            String dob="";
+           if(db!=null){
+              dob = formate.format(txt_dob.getDate());
+           }
+
+           String blood=combo_blood.getSelectedItem().toString();
+           String contact = txt_contact.getText();
+           String email = txt_email.getText();
+           String username = txt_username.getText();
+           String pass = txt_pass.getText();
+           String con_pass = txt_ConPass.getText();
+           String local_guardian_contact=txt_localGuardianContact.getText();
+           String local_guardian_relation=txt_localGuardianRelation.getText();
+        if(validation(name, reg, session, dob, blood, contact, email, username, pass, con_pass)){
+          controller.addFrame(this);
+          SecuirityForm sf = new SecuirityForm(controller,name, reg, session, dob, blood, contact, email, username, pass,local_guardian_contact,local_guardian_relation);
+          sf.setVisible(true);
+        }
+    }//GEN-LAST:event_btn_signupActionPerformed
+
+    private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
+        // TODO add your handling code here:
+        JFrame prev = controller.prevFrame();
+        prev.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_backActionPerformed
 
     /**
      * @param args the command line arguments
@@ -379,8 +508,9 @@ public class SignUp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_home3;
-    private javax.swing.JButton btn_home4;
+    private javax.swing.JButton btn_back;
+    private javax.swing.JButton btn_login;
+    private javax.swing.JButton btn_signup;
     private javax.swing.JComboBox<String> combo_blood;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -416,7 +546,7 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JTextField txt_name;
     private javax.swing.JPasswordField txt_pass;
     private javax.swing.JTextField txt_reg;
-    private javax.swing.JTextField txt_session;
+    private com.toedter.calendar.JYearChooser txt_session;
     private javax.swing.JTextField txt_username;
     // End of variables declaration//GEN-END:variables
 }
