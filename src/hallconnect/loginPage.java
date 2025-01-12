@@ -4,10 +4,8 @@
  */
 package hallconnect;
 
-import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,14 +13,10 @@ import javax.swing.JOptionPane;
  * @author Lenovo
  */
 public class loginPage extends javax.swing.JFrame {
-  private CentralController controller = new CentralController();
+
     /**
      * Creates new form loginPage
      */
-    public loginPage(CentralController controller) {
-        this.controller=controller;
-        initComponents();
-    }
     public loginPage() {
         initComponents();
     }
@@ -36,189 +30,100 @@ public class loginPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panel_parent = new javax.swing.JPanel();
-        btn_signup = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        label_hallconnect = new javax.swing.JLabel();
-        txt_username = new javax.swing.JTextField();
-        label_home3 = new javax.swing.JLabel();
-        label_home4 = new javax.swing.JLabel();
-        txt_password = new javax.swing.JPasswordField();
-        label_home5 = new javax.swing.JLabel();
+        label_password = new javax.swing.JLabel();
         combo_role = new javax.swing.JComboBox<>();
+        label_username = new javax.swing.JLabel();
+        txt_username = new javax.swing.JTextField();
+        label_role = new javax.swing.JLabel();
         btn_login = new javax.swing.JButton();
-        btn_back = new javax.swing.JButton();
+        txt_password = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        panel_parent.setBackground(new java.awt.Color(0, 51, 51));
-        panel_parent.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        panel_parent.setForeground(new java.awt.Color(255, 255, 255));
-        panel_parent.setPreferredSize(new java.awt.Dimension(1536, 800));
-        panel_parent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btn_signup.setBackground(new java.awt.Color(102, 102, 102));
-        btn_signup.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        btn_signup.setForeground(new java.awt.Color(255, 255, 255));
-        btn_signup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/signup.png"))); // NOI18N
-        btn_signup.setText("SIGN UP");
-        btn_signup.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
-        btn_signup.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_signupActionPerformed(evt);
-            }
-        });
-        panel_parent.add(btn_signup, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 600, 170, 54));
-
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1543, 706));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        label_hallconnect.setFont(new java.awt.Font("Arial Black", 1, 48)); // NOI18N
-        label_hallconnect.setForeground(new java.awt.Color(255, 255, 255));
-        label_hallconnect.setText("Log In To HallConnect");
+        label_password.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        label_password.setText("Password:");
+        jPanel1.add(label_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 230, -1, 32));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(464, 464, 464)
-                .addComponent(label_hallconnect)
-                .addContainerGap(465, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(label_hallconnect, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
-        );
+        combo_role.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        combo_role.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PROVOST", "STUDENT" }));
+        jPanel1.add(combo_role, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 300, 209, 35));
 
-        panel_parent.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, 130));
+        label_username.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        label_username.setText("username:");
+        jPanel1.add(label_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, 150, -1));
 
-        txt_username.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        panel_parent.add(txt_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 290, 280, 40));
-
-        label_home3.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        label_home3.setForeground(new java.awt.Color(255, 255, 255));
-        label_home3.setText("USER-TYPE :");
-        panel_parent.add(label_home3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 450, -1, 30));
-
-        label_home4.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        label_home4.setForeground(new java.awt.Color(255, 255, 255));
-        label_home4.setText("USERNAME :");
-        panel_parent.add(label_home4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 290, -1, 30));
-
-        txt_password.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        panel_parent.add(txt_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 370, 280, 40));
-
-        label_home5.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        label_home5.setForeground(new java.awt.Color(255, 255, 255));
-        label_home5.setText("PASSWORD :");
-        panel_parent.add(label_home5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 370, -1, 30));
-
-        combo_role.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        combo_role.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "STUDENT", "PROVOST" }));
-        combo_role.addActionListener(new java.awt.event.ActionListener() {
+        txt_username.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        txt_username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                combo_roleActionPerformed(evt);
+                txt_usernameActionPerformed(evt);
             }
         });
-        panel_parent.add(combo_role, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 450, 280, 40));
+        jPanel1.add(txt_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 180, 209, -1));
 
-        btn_login.setBackground(new java.awt.Color(102, 102, 102));
+        label_role.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        label_role.setText("Role:");
+        jPanel1.add(label_role, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 300, -1, -1));
+
+        btn_login.setBackground(new java.awt.Color(153, 153, 153));
         btn_login.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        btn_login.setForeground(new java.awt.Color(255, 255, 255));
-        btn_login.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/login.png"))); // NOI18N
-        btn_login.setText("LOG IN");
-        btn_login.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
+        btn_login.setText("login");
         btn_login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_loginActionPerformed(evt);
             }
         });
-        panel_parent.add(btn_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 600, 150, 54));
-
-        btn_back.setBackground(new java.awt.Color(102, 102, 102));
-        btn_back.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        btn_back.setForeground(new java.awt.Color(255, 255, 255));
-        btn_back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/back1.png"))); // NOI18N
-        btn_back.setText("BACK");
-        btn_back.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
-        btn_back.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_backActionPerformed(evt);
-            }
-        });
-        panel_parent.add(btn_back, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 600, 140, 54));
+        jPanel1.add(btn_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 380, 110, 32));
+        jPanel1.add(txt_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 230, 209, 32));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1540, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(panel_parent, javax.swing.GroupLayout.PREFERRED_SIZE, 1540, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1066, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(panel_parent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_signupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_signupActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_signupActionPerformed
-
-    private void combo_roleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_roleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_combo_roleActionPerformed
-
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
         // TODO add your handling code here:
-        String username=txt_username.getText();
-        String pass=txt_password.getText();
-        String role = combo_role.getSelectedItem().toString();
         try {
-            Connection con = DbConnection.getConnection();
-            PreparedStatement pst ; 
-            if(role.equals("STUDENT")){
-             pst=  con.prepareStatement("SELECT * FROM student where username=? AND pass=?");
-            }else{
-            pst=  con.prepareStatement("SELECT * FROM provost where username=? AND pass=?");
-            }
+            String username = txt_username.getText();
+            String password = txt_password.getText();
+            String role = combo_role.getSelectedItem().toString();
+            Connection con = (Connection) DbConnection.getConnection();
+            PreparedStatement pst = con.prepareStatement("insert into login (username,password,role) values(?,?,?)");
             pst.setString(1, username);
-            pst.setString(2,pass);
-            ResultSet rs = pst.executeQuery();
-            if(rs.next()){
-              JOptionPane.showMessageDialog(this, "LOGIN SUCCESSFUL");
-              
+            pst.setString(2, password);
+            pst.setString(3, role);
+            int rs = pst.executeUpdate();
+            if(rs>0){
+                JOptionPane.showMessageDialog(this, "data inserted");
             }else{
-            JOptionPane.showMessageDialog(this, "INVALID USERNAME AND PASSWORD");
+                 JOptionPane.showMessageDialog(this, "Something wrong");
+
             }
-            
         } catch (Exception e) {
             e.printStackTrace();
         }
         
     }//GEN-LAST:event_btn_loginActionPerformed
 
-    private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
+    private void txt_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_usernameActionPerformed
         // TODO add your handling code here:
-        JFrame prev = controller.prevFrame();
-        prev.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btn_backActionPerformed
+    }//GEN-LAST:event_txt_usernameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -256,16 +161,12 @@ public class loginPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_back;
     private javax.swing.JButton btn_login;
-    private javax.swing.JButton btn_signup;
     private javax.swing.JComboBox<String> combo_role;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel label_hallconnect;
-    private javax.swing.JLabel label_home3;
-    private javax.swing.JLabel label_home4;
-    private javax.swing.JLabel label_home5;
-    private javax.swing.JPanel panel_parent;
+    private javax.swing.JLabel label_password;
+    private javax.swing.JLabel label_role;
+    private javax.swing.JLabel label_username;
     private javax.swing.JPasswordField txt_password;
     private javax.swing.JTextField txt_username;
     // End of variables declaration//GEN-END:variables
