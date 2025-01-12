@@ -3,17 +3,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package hallconnect;
-
+import javax.swing.JFrame;
 /**
  *
  * @author Lenovo
  */
 public class MuktijoddhaHall extends javax.swing.JFrame {
-
+CentralController controller = new CentralController();
     /**
      * Creates new form Registration
      */
     public MuktijoddhaHall() {
+        initComponents();
+    }
+    public MuktijoddhaHall(CentralController controller) {
+        this.controller=controller;
         initComponents();
     }
 
@@ -38,7 +42,9 @@ public class MuktijoddhaHall extends javax.swing.JFrame {
         label_home7 = new javax.swing.JLabel();
         label_home8 = new javax.swing.JLabel();
         label_home14 = new javax.swing.JLabel();
-        btn_home3 = new javax.swing.JButton();
+        btn_SignUp = new javax.swing.JButton();
+        btn_SignIn = new javax.swing.JButton();
+        btn_back = new javax.swing.JButton();
         label_image = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -107,14 +113,39 @@ public class MuktijoddhaHall extends javax.swing.JFrame {
         label_home14.setForeground(new java.awt.Color(255, 255, 255));
         label_home14.setText("Muktijoddha Hall");
 
-        btn_home3.setBackground(new java.awt.Color(0, 61, 139));
-        btn_home3.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        btn_home3.setForeground(new java.awt.Color(255, 255, 255));
-        btn_home3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/backward.png"))); // NOI18N
-        btn_home3.setBorder(null);
-        btn_home3.addActionListener(new java.awt.event.ActionListener() {
+        btn_SignUp.setBackground(new java.awt.Color(102, 102, 102));
+        btn_SignUp.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        btn_SignUp.setForeground(new java.awt.Color(255, 255, 255));
+        btn_SignUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/signup.png"))); // NOI18N
+        btn_SignUp.setText("SIGNUP");
+        btn_SignUp.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
+        btn_SignUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_home3ActionPerformed(evt);
+                btn_SignUpActionPerformed(evt);
+            }
+        });
+
+        btn_SignIn.setBackground(new java.awt.Color(102, 102, 102));
+        btn_SignIn.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        btn_SignIn.setForeground(new java.awt.Color(255, 255, 255));
+        btn_SignIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/login.png"))); // NOI18N
+        btn_SignIn.setText("SIGNIN");
+        btn_SignIn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
+        btn_SignIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SignInActionPerformed(evt);
+            }
+        });
+
+        btn_back.setBackground(new java.awt.Color(102, 102, 102));
+        btn_back.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        btn_back.setForeground(new java.awt.Color(255, 255, 255));
+        btn_back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/back1.png"))); // NOI18N
+        btn_back.setText("BACK");
+        btn_back.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
+        btn_back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_backActionPerformed(evt);
             }
         });
 
@@ -123,22 +154,27 @@ public class MuktijoddhaHall extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(label_home3)
-                        .addGap(18, 18, 18)
-                        .addComponent(label_home14))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label_home8)
                             .addComponent(label_home5)
                             .addComponent(label_home4)
+                            .addComponent(label_home6)
                             .addComponent(label_home7)
-                            .addComponent(label_home8)
-                            .addComponent(label_home6))
-                        .addGap(432, 432, 432)
-                        .addComponent(btn_home3)))
-                .addContainerGap(735, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(label_home3)
+                                .addGap(18, 18, 18)
+                                .addComponent(label_home14, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(564, 564, 564)
+                        .addComponent(btn_SignUp)
+                        .addGap(27, 27, 27)
+                        .addComponent(btn_SignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(469, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,22 +183,22 @@ public class MuktijoddhaHall extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_home3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label_home14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(94, 94, 94)
+                .addGap(18, 18, 18)
                 .addComponent(label_home4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(label_home5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(label_home7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(label_home6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(label_home8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_home3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(287, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(label_home6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(label_home8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_SignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_SignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(107, 107, 107))
         );
 
         jPanel3.add(jPanel2);
@@ -180,9 +216,28 @@ public class MuktijoddhaHall extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_home3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_home3ActionPerformed
+    private void btn_SignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SignUpActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_home3ActionPerformed
+        controller.addFrame(this);
+        SignUp sg = new SignUp(controller);
+        sg.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_SignUpActionPerformed
+
+    private void btn_SignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SignInActionPerformed
+        // TODO add your handling code here:
+        controller.addFrame(this);
+        loginPage lg = new loginPage(controller);
+        lg.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_SignInActionPerformed
+
+    private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
+        // TODO add your handling code here:
+        JFrame prev = controller.prevFrame();
+        prev.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_backActionPerformed
 
     /**
      * @param args the command line arguments
@@ -251,7 +306,9 @@ public class MuktijoddhaHall extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_home3;
+    private javax.swing.JButton btn_SignIn;
+    private javax.swing.JButton btn_SignUp;
+    private javax.swing.JButton btn_back;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

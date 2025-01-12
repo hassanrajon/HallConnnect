@@ -3,17 +3,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package hallconnect;
-
+import javax.swing.JFrame;
 /**
  *
  * @author Lenovo
  */
 public class BangamataHall extends javax.swing.JFrame {
-
+    CentralController controller = new CentralController();
     /**
      * Creates new form Registration
      */
     public BangamataHall() {
+        initComponents();
+    }
+    public BangamataHall(CentralController controller) {
+        this.controller=controller;
         initComponents();
     }
 
@@ -29,7 +33,6 @@ public class BangamataHall extends javax.swing.JFrame {
         panel_parent = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         label_hallconnect = new javax.swing.JLabel();
-        btn_home3 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         label_home3 = new javax.swing.JLabel();
@@ -39,6 +42,9 @@ public class BangamataHall extends javax.swing.JFrame {
         label_home7 = new javax.swing.JLabel();
         label_home8 = new javax.swing.JLabel();
         label_home14 = new javax.swing.JLabel();
+        btn_SignUp = new javax.swing.JButton();
+        btn_SignIn = new javax.swing.JButton();
+        btn_back = new javax.swing.JButton();
         label_image = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -56,39 +62,21 @@ public class BangamataHall extends javax.swing.JFrame {
         label_hallconnect.setForeground(new java.awt.Color(255, 255, 255));
         label_hallconnect.setText("HallConnect");
 
-        btn_home3.setBackground(new java.awt.Color(102, 102, 102));
-        btn_home3.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        btn_home3.setForeground(new java.awt.Color(255, 255, 255));
-        btn_home3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/back_arrow.png"))); // NOI18N
-        btn_home3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
-        btn_home3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_home3ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(btn_home3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(479, 479, 479)
+                .addGap(564, 564, 564)
                 .addComponent(label_hallconnect, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(623, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(label_hallconnect, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(btn_home3, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(label_hallconnect, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         panel_parent.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, 130));
@@ -125,23 +113,68 @@ public class BangamataHall extends javax.swing.JFrame {
         label_home14.setForeground(new java.awt.Color(255, 255, 255));
         label_home14.setText("Bangamata Hall");
 
+        btn_SignUp.setBackground(new java.awt.Color(102, 102, 102));
+        btn_SignUp.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        btn_SignUp.setForeground(new java.awt.Color(255, 255, 255));
+        btn_SignUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/signup.png"))); // NOI18N
+        btn_SignUp.setText("SIGNUP");
+        btn_SignUp.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
+        btn_SignUp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SignUpActionPerformed(evt);
+            }
+        });
+
+        btn_SignIn.setBackground(new java.awt.Color(102, 102, 102));
+        btn_SignIn.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        btn_SignIn.setForeground(new java.awt.Color(255, 255, 255));
+        btn_SignIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/login.png"))); // NOI18N
+        btn_SignIn.setText("SIGNIN");
+        btn_SignIn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
+        btn_SignIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SignInActionPerformed(evt);
+            }
+        });
+
+        btn_back.setBackground(new java.awt.Color(102, 102, 102));
+        btn_back.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        btn_back.setForeground(new java.awt.Color(255, 255, 255));
+        btn_back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/back1.png"))); // NOI18N
+        btn_back.setText("BACK");
+        btn_back.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
+        btn_back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_backActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label_home8)
-                    .addComponent(label_home5)
-                    .addComponent(label_home4)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(label_home3)
-                        .addGap(18, 18, 18)
-                        .addComponent(label_home14))
-                    .addComponent(label_home6)
-                    .addComponent(label_home7))
-                .addContainerGap(1017, Short.MAX_VALUE))
+                        .addGap(38, 38, 38)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label_home8)
+                            .addComponent(label_home5)
+                            .addComponent(label_home4)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(label_home3)
+                                .addGap(18, 18, 18)
+                                .addComponent(label_home14, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(label_home6)
+                            .addComponent(label_home7)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(403, 403, 403)
+                        .addComponent(btn_SignUp)
+                        .addGap(27, 27, 27)
+                        .addComponent(btn_SignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(630, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,7 +193,12 @@ public class BangamataHall extends javax.swing.JFrame {
                 .addComponent(label_home6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(label_home8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(363, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_SignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_SignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(132, 132, 132))
         );
 
         jPanel3.add(jPanel2);
@@ -178,9 +216,28 @@ public class BangamataHall extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_home3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_home3ActionPerformed
+    private void btn_SignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SignUpActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_home3ActionPerformed
+        controller.addFrame(this);
+        SignUp sg = new SignUp(controller);
+        sg.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_SignUpActionPerformed
+
+    private void btn_SignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SignInActionPerformed
+        // TODO add your handling code here:
+        controller.addFrame(this);
+        loginPage lg = new loginPage(controller);
+        lg.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_SignInActionPerformed
+
+    private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
+        // TODO add your handling code here:
+        JFrame prev = controller.prevFrame();
+        prev.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_backActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,7 +306,9 @@ public class BangamataHall extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_home3;
+    private javax.swing.JButton btn_SignIn;
+    private javax.swing.JButton btn_SignUp;
+    private javax.swing.JButton btn_back;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

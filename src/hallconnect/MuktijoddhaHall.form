@@ -125,26 +125,32 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="label_home3" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="label_home14" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="label_home5" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="label_home4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="label_home7" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="label_home8" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="label_home8" min="-2" max="-2" attributes="0"/>
+                                      <Component id="label_home5" min="-2" max="-2" attributes="0"/>
+                                      <Component id="label_home4" min="-2" max="-2" attributes="0"/>
                                       <Component id="label_home6" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="label_home7" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="label_home3" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="label_home14" min="-2" pref="261" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
-                                  <EmptySpace min="-2" pref="432" max="-2" attributes="0"/>
-                                  <Component id="btn_home3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="564" max="-2" attributes="0"/>
+                                  <Component id="btn_SignUp" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                  <Component id="btn_SignIn" min="-2" pref="155" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                                  <Component id="btn_back" min="-2" pref="140" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="735" max="32767" attributes="0"/>
+                          <EmptySpace pref="469" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -156,25 +162,23 @@
                               <Component id="label_home3" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="label_home14" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="label_home4" min="-2" pref="30" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="label_home5" min="-2" pref="30" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="label_home7" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                  <Component id="label_home6" min="-2" pref="30" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="label_home8" min="-2" pref="30" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="btn_home3" max="32767" attributes="0"/>
-                              </Group>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                          <Component id="label_home6" min="-2" pref="30" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="label_home8" min="-2" pref="30" max="-2" attributes="0"/>
+                          <EmptySpace pref="202" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="btn_SignIn" alignment="3" min="-2" pref="53" max="-2" attributes="0"/>
+                              <Component id="btn_SignUp" alignment="3" min="-2" pref="53" max="-2" attributes="0"/>
+                              <Component id="btn_back" alignment="3" min="-2" pref="54" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="287" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -257,10 +261,10 @@
                     <Property name="text" type="java.lang.String" value="Muktijoddha Hall"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="btn_home3">
+                <Component class="javax.swing.JButton" name="btn_SignUp">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="8b" green="3d" red="0" type="rgb"/>
+                      <Color blue="66" green="66" red="66" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Arial Black" size="24" style="1"/>
@@ -269,14 +273,73 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/hallconnect/icons/backward.png"/>
+                      <Image iconType="3" name="/hallconnect/icons/signup.png"/>
                     </Property>
+                    <Property name="text" type="java.lang.String" value="SIGNUP"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                      <Border info="null"/>
+                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                        <LineBorder roundedCorners="true" thickness="3">
+                          <Color PropertyName="color" blue="cc" green="99" red="0" type="rgb"/>
+                        </LineBorder>
+                      </Border>
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_home3ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_SignUpActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="btn_SignIn">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="66" green="66" red="66" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Arial Black" size="24" style="1"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/hallconnect/icons/login.png"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="SIGNIN"/>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                        <LineBorder roundedCorners="true" thickness="3">
+                          <Color PropertyName="color" blue="cc" green="99" red="0" type="rgb"/>
+                        </LineBorder>
+                      </Border>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_SignInActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="btn_back">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="66" green="66" red="66" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Arial Black" size="24" style="1"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/hallconnect/icons/back1.png"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="BACK"/>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                        <LineBorder roundedCorners="true" thickness="3">
+                          <Color PropertyName="color" blue="cc" green="99" red="0" type="rgb"/>
+                        </LineBorder>
+                      </Border>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_backActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>

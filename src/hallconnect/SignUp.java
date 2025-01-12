@@ -44,7 +44,7 @@ public class SignUp extends javax.swing.JFrame {
             pst.setString(1, username);
             ResultSet rs_2=pst.executeQuery();
             if(rs_1.next() || rs_2.next()){
-               JOptionPane.showMessageDialog(this, "THIS USERNAME HAS TAKEN, PLEASE USE AN UNIQUE USERNAME");
+               JOptionPane.showMessageDialog(this, "THIS USERNAME HAS BEEN TAKEN, PLEASE SELECT ANOTHER USERNAME");
                 return false;
             }else{
              return true;
@@ -101,7 +101,7 @@ public class SignUp extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "PASSWORD DOES NOT MATCHED");
             return false;
           }
-          validUsername(username);
+         
       return true;
       }
     /**
@@ -399,6 +399,7 @@ public class SignUp extends javax.swing.JFrame {
         });
         panel_parent1.add(btn_back, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 660, 140, 54));
 
+        txt_session.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         txt_session.setMinimum(0);
         txt_session.setValue(0);
         panel_parent1.add(txt_session, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 240, 100, 40));
@@ -456,9 +457,11 @@ public class SignUp extends javax.swing.JFrame {
            String local_guardian_contact=txt_localGuardianContact.getText();
            String local_guardian_relation=txt_localGuardianRelation.getText();
         if(validation(name, reg, session, dob, blood, contact, email, username, pass, con_pass)){
+          if(validUsername(username)){
           controller.addFrame(this);
           SecuirityForm sf = new SecuirityForm(controller,name, reg, session, dob, blood, contact, email, username, pass,local_guardian_contact,local_guardian_relation);
           sf.setVisible(true);
+          }
         }
     }//GEN-LAST:event_btn_signupActionPerformed
 

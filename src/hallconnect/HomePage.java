@@ -12,6 +12,8 @@ import java.awt.Color;
  */
 public class HomePage extends javax.swing.JFrame {
 
+    CentralController controller = new CentralController();
+
     /**
      * Creates new form Registration
      */
@@ -56,23 +58,23 @@ public class HomePage extends javax.swing.JFrame {
 
         label_hallconnect.setFont(new java.awt.Font("Arial Black", 1, 48)); // NOI18N
         label_hallconnect.setForeground(new java.awt.Color(255, 255, 255));
-        label_hallconnect.setText("HallConnect");
+        label_hallconnect.setText("Welcome To HallConnect");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(564, 564, 564)
-                .addComponent(label_hallconnect, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(623, Short.MAX_VALUE))
+                .addGap(418, 418, 418)
+                .addComponent(label_hallconnect)
+                .addContainerGap(430, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(30, 30, 30)
                 .addComponent(label_hallconnect, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         panel_parent.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, 130));
@@ -84,7 +86,8 @@ public class HomePage extends javax.swing.JFrame {
         btn_SignUp.setBackground(new java.awt.Color(102, 102, 102));
         btn_SignUp.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         btn_SignUp.setForeground(new java.awt.Color(255, 255, 255));
-        btn_SignUp.setText("Sign Up");
+        btn_SignUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/signup.png"))); // NOI18N
+        btn_SignUp.setText("SIGNUP");
         btn_SignUp.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
         btn_SignUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,7 +98,8 @@ public class HomePage extends javax.swing.JFrame {
         btn_SignIn.setBackground(new java.awt.Color(102, 102, 102));
         btn_SignIn.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         btn_SignIn.setForeground(new java.awt.Color(255, 255, 255));
-        btn_SignIn.setText("Sign In");
+        btn_SignIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/login.png"))); // NOI18N
+        btn_SignIn.setText("SIGNIN");
         btn_SignIn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
         btn_SignIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,6 +110,9 @@ public class HomePage extends javax.swing.JFrame {
         panel_BH.setBackground(new java.awt.Color(153, 0, 51));
         panel_BH.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         panel_BH.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_BHMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panel_BHMouseEntered(evt);
             }
@@ -138,6 +145,9 @@ public class HomePage extends javax.swing.JFrame {
         panel_MH.setBackground(new java.awt.Color(153, 0, 51));
         panel_MH.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         panel_MH.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_MHMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panel_MHMouseEntered(evt);
             }
@@ -170,6 +180,9 @@ public class HomePage extends javax.swing.JFrame {
         panel_BmH.setBackground(new java.awt.Color(153, 0, 51));
         panel_BmH.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         panel_BmH.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_BmHMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panel_BmHMouseEntered(evt);
             }
@@ -204,11 +217,11 @@ public class HomePage extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(629, Short.MAX_VALUE)
-                .addComponent(btn_SignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(btn_SignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(621, 621, 621))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_SignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(btn_SignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(580, 580, 580))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(193, 193, 193)
                 .addComponent(panel_BH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -216,7 +229,7 @@ public class HomePage extends javax.swing.JFrame {
                 .addComponent(panel_MH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(panel_BmH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(245, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,10 +239,10 @@ public class HomePage extends javax.swing.JFrame {
                     .addComponent(panel_BH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panel_MH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panel_BmH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 211, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_SignIn)
-                    .addComponent(btn_SignUp))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_SignUp, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                    .addComponent(btn_SignIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(159, 159, 159))
         );
 
@@ -250,10 +263,18 @@ public class HomePage extends javax.swing.JFrame {
 
     private void btn_SignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SignUpActionPerformed
         // TODO add your handling code here:
+        controller.addFrame(this);
+        SignUp sg = new SignUp(controller);
+        sg.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btn_SignUpActionPerformed
 
     private void btn_SignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SignInActionPerformed
         // TODO add your handling code here:
+        controller.addFrame(this);
+        loginPage lg = new loginPage(controller);
+        lg.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btn_SignInActionPerformed
 
     private void panel_BHMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_BHMouseEntered
@@ -293,6 +314,30 @@ public class HomePage extends javax.swing.JFrame {
         Color clr = new Color(153, 0, 51);
         panel_BmH.setBackground(clr);
     }//GEN-LAST:event_panel_BmHMouseExited
+
+    private void panel_BHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_BHMouseClicked
+        // TODO add your handling code here:
+        controller.addFrame(this);
+        BangabandhuHall bh = new BangabandhuHall(controller);
+        bh.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panel_BHMouseClicked
+
+    private void panel_MHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_MHMouseClicked
+        // TODO add your handling code here:
+        controller.addFrame(this);
+        MuktijoddhaHall mh = new MuktijoddhaHall(controller);
+        this.setVisible(false);
+        mh.setVisible(true);
+    }//GEN-LAST:event_panel_MHMouseClicked
+
+    private void panel_BmHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_BmHMouseClicked
+        // TODO add your handling code here:
+        controller.addFrame(this);
+        BangamataHall bmh = new BangamataHall(controller);
+        bmh.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panel_BmHMouseClicked
 
     /**
      * @param args the command line arguments
