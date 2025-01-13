@@ -179,16 +179,16 @@ public class SignUp extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(564, 564, 564)
+                .addGap(588, 588, 588)
                 .addComponent(label_hallconnect, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(623, Short.MAX_VALUE))
+                .addContainerGap(599, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(30, 30, 30)
                 .addComponent(label_hallconnect, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         panel_parent.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, 130));
@@ -399,7 +399,6 @@ public class SignUp extends javax.swing.JFrame {
         });
         panel_parent1.add(btn_back, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 660, 140, 54));
 
-        txt_session.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         txt_session.setMinimum(0);
         txt_session.setValue(0);
         panel_parent1.add(txt_session, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 240, 100, 40));

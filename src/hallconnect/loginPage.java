@@ -48,6 +48,8 @@ public class loginPage extends javax.swing.JFrame {
         combo_role = new javax.swing.JComboBox<>();
         btn_login = new javax.swing.JButton();
         btn_back = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        label_login = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,23 +76,23 @@ public class loginPage extends javax.swing.JFrame {
 
         label_hallconnect.setFont(new java.awt.Font("Arial Black", 1, 48)); // NOI18N
         label_hallconnect.setForeground(new java.awt.Color(255, 255, 255));
-        label_hallconnect.setText("Log In To HallConnect");
+        label_hallconnect.setText("HallConnect");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(464, 464, 464)
+                .addGap(586, 586, 586)
                 .addComponent(label_hallconnect)
-                .addContainerGap(465, Short.MAX_VALUE))
+                .addContainerGap(614, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(31, 31, 31)
                 .addComponent(label_hallconnect, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         panel_parent.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, 130));
@@ -150,6 +152,12 @@ public class loginPage extends javax.swing.JFrame {
             }
         });
         panel_parent.add(btn_back, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 600, 140, 54));
+        panel_parent.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 193, 260, 10));
+
+        label_login.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
+        label_login.setForeground(new java.awt.Color(255, 255, 255));
+        label_login.setText("Log In");
+        panel_parent.add(label_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 140, 160, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -269,10 +277,12 @@ public class loginPage extends javax.swing.JFrame {
     private javax.swing.JButton btn_signup;
     private javax.swing.JComboBox<String> combo_role;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel label_hallconnect;
     private javax.swing.JLabel label_home3;
     private javax.swing.JLabel label_home4;
     private javax.swing.JLabel label_home5;
+    private javax.swing.JLabel label_login;
     private javax.swing.JPanel panel_parent;
     private javax.swing.JPasswordField txt_password;
     private javax.swing.JTextField txt_username;
