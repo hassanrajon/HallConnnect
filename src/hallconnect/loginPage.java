@@ -209,7 +209,7 @@ public class loginPage extends javax.swing.JFrame {
               JOptionPane.showMessageDialog(this, "LOGIN SUCCESSFUL");
               
             }else{
-            JOptionPane.showMessageDialog(this, "INVALID USERNAME AND PASSWORD");
+            JOptionPane.showMessageDialog(this, "INVALID USERNAME ,PASSWORD OR ROLE");
             }
             
         } catch (Exception e) {
