@@ -35,16 +35,22 @@ CentralController controller = new CentralController();
         label_hallconnect = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        label_home3 = new javax.swing.JLabel();
-        label_home4 = new javax.swing.JLabel();
-        label_home5 = new javax.swing.JLabel();
-        label_home6 = new javax.swing.JLabel();
-        label_home7 = new javax.swing.JLabel();
-        label_home8 = new javax.swing.JLabel();
-        label_home14 = new javax.swing.JLabel();
         btn_SignUp = new javax.swing.JButton();
         btn_SignIn = new javax.swing.JButton();
         btn_back = new javax.swing.JButton();
+        label_home3 = new javax.swing.JLabel();
+        label_home4 = new javax.swing.JLabel();
+        label_home5 = new javax.swing.JLabel();
+        label_home7 = new javax.swing.JLabel();
+        label_home6 = new javax.swing.JLabel();
+        label_home8 = new javax.swing.JLabel();
+        label_home19 = new javax.swing.JLabel();
+        label_home18 = new javax.swing.JLabel();
+        label_home17 = new javax.swing.JLabel();
+        label_home16 = new javax.swing.JLabel();
+        label_home15 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
         label_image = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -84,34 +90,7 @@ CentralController controller = new CentralController();
         jPanel3.setLayout(null);
 
         jPanel2.setBackground(new java.awt.Color(0, 51, 51, 150));
-
-        label_home3.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        label_home3.setForeground(new java.awt.Color(255, 255, 255));
-        label_home3.setText("Hall                       :");
-
-        label_home4.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        label_home4.setForeground(new java.awt.Color(255, 255, 255));
-        label_home4.setText("Provost                 :");
-
-        label_home5.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        label_home5.setForeground(new java.awt.Color(255, 255, 255));
-        label_home5.setText("Current Students :");
-
-        label_home6.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        label_home6.setForeground(new java.awt.Color(255, 255, 255));
-        label_home6.setText("Vacant Seats       :");
-
-        label_home7.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        label_home7.setForeground(new java.awt.Color(255, 255, 255));
-        label_home7.setText("Total Seats           :");
-
-        label_home8.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        label_home8.setForeground(new java.awt.Color(255, 255, 255));
-        label_home8.setText("Events                   :");
-
-        label_home14.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        label_home14.setForeground(new java.awt.Color(255, 255, 255));
-        label_home14.setText("Muktijoddha Hall");
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btn_SignUp.setBackground(new java.awt.Color(102, 102, 102));
         btn_SignUp.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
@@ -124,6 +103,7 @@ CentralController controller = new CentralController();
                 btn_SignUpActionPerformed(evt);
             }
         });
+        jPanel2.add(btn_SignUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 520, -1, 53));
 
         btn_SignIn.setBackground(new java.awt.Color(102, 102, 102));
         btn_SignIn.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
@@ -136,6 +116,7 @@ CentralController controller = new CentralController();
                 btn_SignInActionPerformed(evt);
             }
         });
+        jPanel2.add(btn_SignIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 520, 155, 53));
 
         btn_back.setBackground(new java.awt.Color(102, 102, 102));
         btn_back.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
@@ -148,58 +129,75 @@ CentralController controller = new CentralController();
                 btn_backActionPerformed(evt);
             }
         });
+        jPanel2.add(btn_back, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 520, 140, 54));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label_home8)
-                            .addComponent(label_home5)
-                            .addComponent(label_home4)
-                            .addComponent(label_home6)
-                            .addComponent(label_home7)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(label_home3)
-                                .addGap(18, 18, 18)
-                                .addComponent(label_home14, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(564, 564, 564)
-                        .addComponent(btn_SignUp)
-                        .addGap(27, 27, 27)
-                        .addComponent(btn_SignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(469, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label_home3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label_home14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(label_home4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(label_home5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(label_home7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(label_home6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(label_home8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_SignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_SignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(107, 107, 107))
-        );
+        label_home3.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        label_home3.setForeground(new java.awt.Color(255, 255, 255));
+        label_home3.setText("Hall                       :");
+        jPanel2.add(label_home3, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 37, -1, 30));
+
+        label_home4.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        label_home4.setForeground(new java.awt.Color(255, 255, 255));
+        label_home4.setText("Provost                  :");
+        jPanel2.add(label_home4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, 30));
+
+        label_home5.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        label_home5.setForeground(new java.awt.Color(255, 255, 255));
+        label_home5.setText("Current Students  :");
+        jPanel2.add(label_home5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, 30));
+
+        label_home7.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        label_home7.setForeground(new java.awt.Color(255, 255, 255));
+        label_home7.setText("Total Seats           :");
+        jPanel2.add(label_home7, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 181, -1, 30));
+
+        label_home6.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        label_home6.setForeground(new java.awt.Color(255, 255, 255));
+        label_home6.setText("Vacant Seats        :");
+        jPanel2.add(label_home6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, 30));
+
+        label_home8.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        label_home8.setForeground(new java.awt.Color(255, 255, 255));
+        label_home8.setText("Facilities               :");
+        jPanel2.add(label_home8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, 30));
+
+        label_home19.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        label_home19.setForeground(new java.awt.Color(255, 255, 255));
+        label_home19.setText("placeholder");
+        jPanel2.add(label_home19, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, -1, 30));
+
+        label_home18.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        label_home18.setForeground(new java.awt.Color(255, 255, 255));
+        label_home18.setText("210 ( including 30 seats in a shared room)  ");
+        jPanel2.add(label_home18, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, -1, 30));
+
+        label_home17.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        label_home17.setForeground(new java.awt.Color(255, 255, 255));
+        label_home17.setText("placeholder");
+        jPanel2.add(label_home17, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, -1, 30));
+
+        label_home16.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        label_home16.setForeground(new java.awt.Color(255, 255, 255));
+        label_home16.setText("MD. SHAHID IQBAL");
+        jPanel2.add(label_home16, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, -1, 30));
+
+        label_home15.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        label_home15.setForeground(new java.awt.Color(255, 255, 255));
+        label_home15.setText("Muktijoddha Hall");
+        jPanel2.add(label_home15, new org.netbeans.lib.awtextra.AbsoluteConstraints(304, 37, -1, 30));
+
+        jList1.setBackground(new java.awt.Color(0,153,153,90));
+        jList1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jList1.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        jList1.setForeground(new java.awt.Color(255, 255, 255));
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "One large dining room", "One TV room with internet connection", "Indoor game facilities", "Table & Locker for each students", "Appropriate arrangements for the practice of religions" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jList1);
+
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 270, 800, 210));
 
         jPanel3.add(jPanel2);
         jPanel2.setBounds(0, 0, 1540, 670);
@@ -309,11 +307,17 @@ CentralController controller = new CentralController();
     private javax.swing.JButton btn_SignIn;
     private javax.swing.JButton btn_SignUp;
     private javax.swing.JButton btn_back;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label_hallconnect;
-    private javax.swing.JLabel label_home14;
+    private javax.swing.JLabel label_home15;
+    private javax.swing.JLabel label_home16;
+    private javax.swing.JLabel label_home17;
+    private javax.swing.JLabel label_home18;
+    private javax.swing.JLabel label_home19;
     private javax.swing.JLabel label_home3;
     private javax.swing.JLabel label_home4;
     private javax.swing.JLabel label_home5;
