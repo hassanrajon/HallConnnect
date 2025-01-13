@@ -4,6 +4,7 @@
  */
 package hallconnect;
 
+import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,17 +16,54 @@ import javax.swing.JOptionPane;
  * @author Lenovo
  */
 public class provostDashboard extends javax.swing.JFrame {
-  private CentralController controller = new CentralController();
+
+    private CentralController controller = new CentralController();
+    String username = "";
+
     /**
      * Creates new form loginPage
      */
-    public provostDashboard(CentralController controller) {
-        this.controller=controller;
+    public provostDashboard(CentralController controller, String username) {
+        this.controller = controller;
+        this.username = username;
+        fillInfo();
         initComponents();
     }
+
+    public provostDashboard(String username) {
+        this.username = username;
+        
+        initComponents();
+        fillInfo();
+    }
+
     public provostDashboard() {
         initComponents();
     }
+
+   void fillInfo() {
+    try {
+        Connection con = DbConnection.getConnection();
+        PreparedStatement pst = con.prepareStatement("SELECT * FROM provost WHERE username=?");
+        pst.setString(1, username);
+        ResultSet rs = pst.executeQuery();
+
+        // Check if the ResultSet contains data
+        if (rs.next()) {
+            label_name.setText(rs.getString("name"));
+            label_blood.setText(rs.getString("blood"));
+            label_contact.setText(rs.getString("contact"));
+            label_email.setText(rs.getString("email"));
+            label_post.setText(rs.getString("profile"));
+        } else {
+            // Handle the case when no rows are found
+            System.out.println("No data found for username: " + username);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -40,26 +78,32 @@ public class provostDashboard extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         label_hallconnect = new javax.swing.JLabel();
         btn_logout = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
         panel_profile = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        label_blood = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        panel_home1 = new javax.swing.JPanel();
+        label_name = new javax.swing.JLabel();
+        label_post = new javax.swing.JLabel();
+        label_contact = new javax.swing.JLabel();
+        label_email = new javax.swing.JLabel();
+        label_blood1 = new javax.swing.JLabel();
+        label_blood2 = new javax.swing.JLabel();
+        label_blood3 = new javax.swing.JLabel();
+        panel_signupRequest = new javax.swing.JPanel();
         label_home2 = new javax.swing.JLabel();
         label_home8 = new javax.swing.JLabel();
-        panel_home2 = new javax.swing.JPanel();
+        panel_complainBox = new javax.swing.JPanel();
         label_home3 = new javax.swing.JLabel();
         label_home14 = new javax.swing.JLabel();
-        panel_home3 = new javax.swing.JPanel();
+        panel_hallFee = new javax.swing.JPanel();
         label_home12 = new javax.swing.JLabel();
         label_home13 = new javax.swing.JLabel();
-        panel_home4 = new javax.swing.JPanel();
+        panel_addNotice = new javax.swing.JPanel();
         label_home5 = new javax.swing.JLabel();
         label_home9 = new javax.swing.JLabel();
-        panel_home5 = new javax.swing.JPanel();
+        panel_hallAsso = new javax.swing.JPanel();
         label_home6 = new javax.swing.JLabel();
         label_home10 = new javax.swing.JLabel();
-        panel_home6 = new javax.swing.JPanel();
+        panel_clearance = new javax.swing.JPanel();
         label_home7 = new javax.swing.JLabel();
         label_home11 = new javax.swing.JLabel();
         btn_exit = new javax.swing.JButton();
@@ -108,122 +152,208 @@ public class provostDashboard extends javax.swing.JFrame {
                 btn_logoutActionPerformed(evt);
             }
         });
-        panel_parent.add(btn_logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 660, 200, 70));
-
-        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jSeparator1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
-        panel_parent.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 150, 10, 570));
+        panel_parent.add(btn_logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 630, 200, 70));
 
         panel_profile.setBackground(new java.awt.Color(0, 102, 102));
         panel_profile.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
         panel_profile.setForeground(new java.awt.Color(255, 255, 255));
         panel_profile.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Kristen ITC", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("ABU NASER MOJUMDER");
-        panel_profile.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 350, 40));
+        label_blood.setBackground(new java.awt.Color(51, 255, 0));
+        label_blood.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        label_blood.setForeground(new java.awt.Color(255, 255, 255));
+        label_blood.setText("AB-");
+        panel_profile.add(label_blood, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 330, 90, 40));
 
         jSeparator2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
         panel_profile.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, 70, 990, 10));
 
-        panel_parent.add(panel_profile, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 150, 420, 560));
+        label_name.setFont(new java.awt.Font("Kristen ITC", 1, 24)); // NOI18N
+        label_name.setForeground(new java.awt.Color(255, 255, 255));
+        label_name.setText("ABU NASER MOJUMDER");
+        panel_profile.add(label_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 350, 40));
 
-        panel_home1.setBackground(new java.awt.Color(153, 0, 51));
-        panel_home1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        panel_home1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        label_post.setBackground(new java.awt.Color(51, 255, 0));
+        label_post.setFont(new java.awt.Font("Kristen ITC", 1, 24)); // NOI18N
+        label_post.setForeground(new java.awt.Color(255, 255, 255));
+        label_post.setText("department head of cse");
+        panel_profile.add(label_post, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 350, 40));
+
+        label_contact.setBackground(new java.awt.Color(51, 255, 0));
+        label_contact.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        label_contact.setForeground(new java.awt.Color(255, 255, 255));
+        label_contact.setText("01788888888");
+        panel_profile.add(label_contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 170, 40));
+
+        label_email.setBackground(new java.awt.Color(51, 255, 0));
+        label_email.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        label_email.setForeground(new java.awt.Color(255, 255, 255));
+        label_email.setText("cse@gmail.com");
+        panel_profile.add(label_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, 280, 40));
+
+        label_blood1.setBackground(new java.awt.Color(51, 255, 0));
+        label_blood1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        label_blood1.setForeground(new java.awt.Color(255, 255, 255));
+        label_blood1.setText("CONTACT:");
+        panel_profile.add(label_blood1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 160, 40));
+
+        label_blood2.setBackground(new java.awt.Color(51, 255, 0));
+        label_blood2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        label_blood2.setForeground(new java.awt.Color(255, 255, 255));
+        label_blood2.setText("BLOOD GROUP:");
+        panel_profile.add(label_blood2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 230, 40));
+
+        label_blood3.setBackground(new java.awt.Color(51, 255, 0));
+        label_blood3.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        label_blood3.setForeground(new java.awt.Color(255, 255, 255));
+        label_blood3.setText("E-MAIL:");
+        panel_profile.add(label_blood3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 120, 40));
+
+        panel_parent.add(panel_profile, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 220, 420, 420));
+
+        panel_signupRequest.setBackground(new java.awt.Color(153, 0, 51));
+        panel_signupRequest.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panel_signupRequest.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panel_signupRequestMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panel_signupRequestMouseExited(evt);
+            }
+        });
+        panel_signupRequest.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label_home2.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
         label_home2.setForeground(new java.awt.Color(255, 255, 255));
         label_home2.setText("SIGNUP");
-        panel_home1.add(label_home2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+        panel_signupRequest.add(label_home2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
         label_home8.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
         label_home8.setForeground(new java.awt.Color(255, 255, 255));
         label_home8.setText("REQUEST");
-        panel_home1.add(label_home8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
+        panel_signupRequest.add(label_home8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
 
-        panel_parent.add(panel_home1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 310, 150));
+        panel_parent.add(panel_signupRequest, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 310, 150));
 
-        panel_home2.setBackground(new java.awt.Color(153, 0, 51));
-        panel_home2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        panel_home2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panel_complainBox.setBackground(new java.awt.Color(153, 0, 51));
+        panel_complainBox.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panel_complainBox.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panel_complainBoxMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panel_complainBoxMouseExited(evt);
+            }
+        });
+        panel_complainBox.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label_home3.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
         label_home3.setForeground(new java.awt.Color(255, 255, 255));
         label_home3.setText("COMPLAIN");
-        panel_home2.add(label_home3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 230, -1));
+        panel_complainBox.add(label_home3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 230, -1));
 
         label_home14.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
         label_home14.setForeground(new java.awt.Color(255, 255, 255));
         label_home14.setText("BOX");
-        panel_home2.add(label_home14, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, -1, -1));
+        panel_complainBox.add(label_home14, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, -1, -1));
 
-        panel_parent.add(panel_home2, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 180, 310, 150));
+        panel_parent.add(panel_complainBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 180, 310, 150));
 
-        panel_home3.setBackground(new java.awt.Color(153, 0, 51));
-        panel_home3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        panel_home3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panel_hallFee.setBackground(new java.awt.Color(153, 0, 51));
+        panel_hallFee.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panel_hallFee.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panel_hallFeeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panel_hallFeeMouseExited(evt);
+            }
+        });
+        panel_hallFee.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label_home12.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
         label_home12.setForeground(new java.awt.Color(255, 255, 255));
         label_home12.setText("HALL FEE ");
-        panel_home3.add(label_home12, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
+        panel_hallFee.add(label_home12, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
 
         label_home13.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
         label_home13.setForeground(new java.awt.Color(255, 255, 255));
         label_home13.setText("REQUEST");
-        panel_home3.add(label_home13, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
+        panel_hallFee.add(label_home13, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
 
-        panel_parent.add(panel_home3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 180, 310, 150));
+        panel_parent.add(panel_hallFee, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 180, 310, 150));
 
-        panel_home4.setBackground(new java.awt.Color(153, 0, 51));
-        panel_home4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        panel_home4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panel_addNotice.setBackground(new java.awt.Color(153, 0, 51));
+        panel_addNotice.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panel_addNotice.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panel_addNoticeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panel_addNoticeMouseExited(evt);
+            }
+        });
+        panel_addNotice.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label_home5.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
         label_home5.setForeground(new java.awt.Color(255, 255, 255));
         label_home5.setText("NOTICE");
-        panel_home4.add(label_home5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, -1, -1));
+        panel_addNotice.add(label_home5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, -1, -1));
 
         label_home9.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
         label_home9.setForeground(new java.awt.Color(255, 255, 255));
         label_home9.setText("ADD");
-        panel_home4.add(label_home9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, -1, -1));
+        panel_addNotice.add(label_home9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, -1, -1));
 
-        panel_parent.add(panel_home4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 310, 150));
+        panel_parent.add(panel_addNotice, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 310, 150));
 
-        panel_home5.setBackground(new java.awt.Color(153, 0, 51));
-        panel_home5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        panel_home5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panel_hallAsso.setBackground(new java.awt.Color(153, 0, 51));
+        panel_hallAsso.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panel_hallAsso.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panel_hallAssoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panel_hallAssoMouseExited(evt);
+            }
+        });
+        panel_hallAsso.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label_home6.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
         label_home6.setForeground(new java.awt.Color(255, 255, 255));
         label_home6.setText("ASSOCIATES");
-        panel_home5.add(label_home6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 280, -1));
+        panel_hallAsso.add(label_home6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 280, -1));
 
         label_home10.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
         label_home10.setForeground(new java.awt.Color(255, 255, 255));
         label_home10.setText("HALL");
-        panel_home5.add(label_home10, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 150, -1));
+        panel_hallAsso.add(label_home10, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 150, -1));
 
-        panel_parent.add(panel_home5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 380, 310, 150));
+        panel_parent.add(panel_hallAsso, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 380, 310, 150));
 
-        panel_home6.setBackground(new java.awt.Color(153, 0, 51));
-        panel_home6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        panel_home6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panel_clearance.setBackground(new java.awt.Color(153, 0, 51));
+        panel_clearance.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panel_clearance.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panel_clearanceMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panel_clearanceMouseExited(evt);
+            }
+        });
+        panel_clearance.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label_home7.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
         label_home7.setForeground(new java.awt.Color(255, 255, 255));
         label_home7.setText("CLEARANCE");
-        panel_home6.add(label_home7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 260, -1));
+        panel_clearance.add(label_home7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 260, -1));
 
         label_home11.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
         label_home11.setForeground(new java.awt.Color(255, 255, 255));
         label_home11.setText("REQUEST");
-        panel_home6.add(label_home11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
+        panel_clearance.add(label_home11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
 
-        panel_parent.add(panel_home6, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 380, 310, 150));
+        panel_parent.add(panel_clearance, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 380, 310, 150));
 
         btn_exit.setBackground(new java.awt.Color(102, 102, 102));
         btn_exit.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
@@ -236,7 +366,7 @@ public class provostDashboard extends javax.swing.JFrame {
                 btn_exitActionPerformed(evt);
             }
         });
-        panel_parent.add(btn_exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 660, 200, 70));
+        panel_parent.add(btn_exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 630, 200, 70));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -265,7 +395,7 @@ public class provostDashboard extends javax.swing.JFrame {
 
     private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
         // TODO add your handling code here:
-        
+
         loginPage lg = new loginPage();
         lg.setVisible(true);
         this.dispose();
@@ -273,7 +403,83 @@ public class provostDashboard extends javax.swing.JFrame {
 
     private void btn_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_exitActionPerformed
         // TODO add your handling code here:
+
+        System.exit(0);
     }//GEN-LAST:event_btn_exitActionPerformed
+
+    private void panel_signupRequestMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_signupRequestMouseEntered
+        // TODO add your handling code here:
+        Color clr = new Color(0, 153, 153);
+        panel_signupRequest.setBackground(clr);
+    }//GEN-LAST:event_panel_signupRequestMouseEntered
+
+    private void panel_hallFeeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_hallFeeMouseEntered
+        // TODO add your handling code here:
+        Color clr = new Color(0, 153, 153);
+        panel_hallFee.setBackground(clr);
+
+    }//GEN-LAST:event_panel_hallFeeMouseEntered
+
+    private void panel_complainBoxMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_complainBoxMouseEntered
+        // TODO add your handling code here:
+        Color clr = new Color(0, 153, 153);
+        panel_complainBox.setBackground(clr);
+    }//GEN-LAST:event_panel_complainBoxMouseEntered
+
+    private void panel_addNoticeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_addNoticeMouseEntered
+        // TODO add your handling code here:
+        Color clr = new Color(0, 153, 153);
+        panel_addNotice.setBackground(clr);
+    }//GEN-LAST:event_panel_addNoticeMouseEntered
+
+    private void panel_hallAssoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_hallAssoMouseEntered
+        // TODO add your handling code here:
+
+        Color clr = new Color(0, 153, 153);
+        panel_hallAsso.setBackground(clr);
+    }//GEN-LAST:event_panel_hallAssoMouseEntered
+
+    private void panel_clearanceMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_clearanceMouseEntered
+        // TODO add your handling code here:
+        Color clr = new Color(0, 153, 153);
+        panel_clearance.setBackground(clr);
+    }//GEN-LAST:event_panel_clearanceMouseEntered
+
+    private void panel_signupRequestMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_signupRequestMouseExited
+        // TODO add your handling code here:
+        Color clr = new Color(153, 0, 51);
+        panel_signupRequest.setBackground(clr);
+    }//GEN-LAST:event_panel_signupRequestMouseExited
+
+    private void panel_addNoticeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_addNoticeMouseExited
+        // TODO add your handling code here:
+        Color clr = new Color(153, 0, 51);
+        panel_addNotice.setBackground(clr);
+    }//GEN-LAST:event_panel_addNoticeMouseExited
+
+    private void panel_hallFeeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_hallFeeMouseExited
+        // TODO add your handling code here:
+        Color clr = new Color(153, 0, 51);
+        panel_hallFee.setBackground(clr);
+    }//GEN-LAST:event_panel_hallFeeMouseExited
+
+    private void panel_hallAssoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_hallAssoMouseExited
+        // TODO add your handling code here:
+        Color clr = new Color(153, 0, 51);
+        panel_hallAsso.setBackground(clr);
+    }//GEN-LAST:event_panel_hallAssoMouseExited
+
+    private void panel_complainBoxMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_complainBoxMouseExited
+        // TODO add your handling code here:
+        Color clr = new Color(153, 0, 51);
+        panel_complainBox.setBackground(clr);
+    }//GEN-LAST:event_panel_complainBoxMouseExited
+
+    private void panel_clearanceMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_clearanceMouseExited
+        // TODO add your handling code here:
+        Color clr = new Color(153, 0, 51);
+        panel_clearance.setBackground(clr);
+    }//GEN-LAST:event_panel_clearanceMouseExited
 
     /**
      * @param args the command line arguments
@@ -320,10 +526,14 @@ public class provostDashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_exit;
     private javax.swing.JButton btn_logout;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel label_blood;
+    private javax.swing.JLabel label_blood1;
+    private javax.swing.JLabel label_blood2;
+    private javax.swing.JLabel label_blood3;
+    private javax.swing.JLabel label_contact;
+    private javax.swing.JLabel label_email;
     private javax.swing.JLabel label_hallconnect;
     private javax.swing.JLabel label_home10;
     private javax.swing.JLabel label_home11;
@@ -337,13 +547,15 @@ public class provostDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel label_home7;
     private javax.swing.JLabel label_home8;
     private javax.swing.JLabel label_home9;
-    private javax.swing.JPanel panel_home1;
-    private javax.swing.JPanel panel_home2;
-    private javax.swing.JPanel panel_home3;
-    private javax.swing.JPanel panel_home4;
-    private javax.swing.JPanel panel_home5;
-    private javax.swing.JPanel panel_home6;
+    private javax.swing.JLabel label_name;
+    private javax.swing.JLabel label_post;
+    private javax.swing.JPanel panel_addNotice;
+    private javax.swing.JPanel panel_clearance;
+    private javax.swing.JPanel panel_complainBox;
+    private javax.swing.JPanel panel_hallAsso;
+    private javax.swing.JPanel panel_hallFee;
     private javax.swing.JPanel panel_parent;
     private javax.swing.JPanel panel_profile;
+    private javax.swing.JPanel panel_signupRequest;
     // End of variables declaration//GEN-END:variables
 }
