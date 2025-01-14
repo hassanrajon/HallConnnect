@@ -152,11 +152,11 @@ public class StudentDashboard extends javax.swing.JFrame {
             }
         });
 
-        label_home2.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        label_home2.setFont(new java.awt.Font("Arial Black", 1, 28)); // NOI18N
         label_home2.setForeground(new java.awt.Color(255, 255, 255));
         label_home2.setText("Clearnece");
 
-        label_home3.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        label_home3.setFont(new java.awt.Font("Arial Black", 1, 28)); // NOI18N
         label_home3.setForeground(new java.awt.Color(255, 255, 255));
         label_home3.setText("Application");
 
@@ -165,26 +165,25 @@ public class StudentDashboard extends javax.swing.JFrame {
         panel_clearenceLayout.setHorizontalGroup(
             panel_clearenceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_clearenceLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
                 .addGroup(panel_clearenceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_clearenceLayout.createSequentialGroup()
-                        .addGap(33, 33, 33)
+                        .addGap(8, 8, 8)
                         .addComponent(label_home2))
-                    .addGroup(panel_clearenceLayout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(label_home3)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                    .addComponent(label_home3))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         panel_clearenceLayout.setVerticalGroup(
             panel_clearenceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_clearenceLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_clearenceLayout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addComponent(label_home2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(label_home3)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addGap(21, 21, 21))
         );
 
-        panel_parent.add(panel_clearence, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 550, 210, 120));
+        panel_parent.add(panel_clearence, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 590, 260, 140));
 
         panel_fee.setBackground(new java.awt.Color(153, 0, 51));
         panel_fee.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -197,11 +196,11 @@ public class StudentDashboard extends javax.swing.JFrame {
             }
         });
 
-        label_home4.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        label_home4.setFont(new java.awt.Font("Arial Black", 1, 28)); // NOI18N
         label_home4.setForeground(new java.awt.Color(255, 255, 255));
         label_home4.setText("Hall Fee");
 
-        label_home5.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        label_home5.setFont(new java.awt.Font("Arial Black", 1, 28)); // NOI18N
         label_home5.setForeground(new java.awt.Color(255, 255, 255));
         label_home5.setText("Payment");
 
@@ -209,24 +208,24 @@ public class StudentDashboard extends javax.swing.JFrame {
         panel_fee.setLayout(panel_feeLayout);
         panel_feeLayout.setHorizontalGroup(
             panel_feeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_feeLayout.createSequentialGroup()
-                .addGap(41, 41, 41)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_feeLayout.createSequentialGroup()
+                .addContainerGap(55, Short.MAX_VALUE)
                 .addGroup(panel_feeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(label_home4)
                     .addComponent(label_home5))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addGap(62, 62, 62))
         );
         panel_feeLayout.setVerticalGroup(
             panel_feeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_feeLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(28, 28, 28)
                 .addComponent(label_home4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(label_home5)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        panel_parent.add(panel_fee, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 210, 120));
+        panel_parent.add(panel_fee, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, 260, 140));
 
         panel_room.setBackground(new java.awt.Color(153, 0, 51));
         panel_room.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -239,7 +238,7 @@ public class StudentDashboard extends javax.swing.JFrame {
             }
         });
 
-        label_home6.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        label_home6.setFont(new java.awt.Font("Arial Black", 1, 28)); // NOI18N
         label_home6.setForeground(new java.awt.Color(255, 255, 255));
         label_home6.setText("Room");
 
@@ -247,20 +246,20 @@ public class StudentDashboard extends javax.swing.JFrame {
         panel_room.setLayout(panel_roomLayout);
         panel_roomLayout.setHorizontalGroup(
             panel_roomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_roomLayout.createSequentialGroup()
-                .addGap(62, 62, 62)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_roomLayout.createSequentialGroup()
+                .addContainerGap(81, Short.MAX_VALUE)
                 .addComponent(label_home6)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addGap(85, 85, 85))
         );
         panel_roomLayout.setVerticalGroup(
             panel_roomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_roomLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_roomLayout.createSequentialGroup()
+                .addContainerGap(49, Short.MAX_VALUE)
                 .addComponent(label_home6)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addGap(47, 47, 47))
         );
 
-        panel_parent.add(panel_room, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 250, 210, 120));
+        panel_parent.add(panel_room, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 270, 260, 140));
 
         panel_notice.setBackground(new java.awt.Color(153, 0, 51));
         panel_notice.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -273,11 +272,11 @@ public class StudentDashboard extends javax.swing.JFrame {
             }
         });
 
-        label_home8.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        label_home8.setFont(new java.awt.Font("Arial Black", 1, 28)); // NOI18N
         label_home8.setForeground(new java.awt.Color(255, 255, 255));
         label_home8.setText("Notice");
 
-        label_home9.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        label_home9.setFont(new java.awt.Font("Arial Black", 1, 28)); // NOI18N
         label_home9.setForeground(new java.awt.Color(255, 255, 255));
         label_home9.setText("Board");
 
@@ -285,24 +284,24 @@ public class StudentDashboard extends javax.swing.JFrame {
         panel_notice.setLayout(panel_noticeLayout);
         panel_noticeLayout.setHorizontalGroup(
             panel_noticeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_noticeLayout.createSequentialGroup()
-                .addGap(62, 62, 62)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_noticeLayout.createSequentialGroup()
+                .addContainerGap(74, Short.MAX_VALUE)
                 .addGroup(panel_noticeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label_home8)
                     .addComponent(label_home9))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addGap(76, 76, 76))
         );
         panel_noticeLayout.setVerticalGroup(
             panel_noticeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_noticeLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(29, 29, 29)
                 .addComponent(label_home8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(label_home9)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
-        panel_parent.add(panel_notice, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 400, 210, 120));
+        panel_parent.add(panel_notice, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 430, 260, 140));
 
         panel_complain.setBackground(new java.awt.Color(153, 0, 51));
         panel_complain.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -315,7 +314,7 @@ public class StudentDashboard extends javax.swing.JFrame {
             }
         });
 
-        label_home10.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        label_home10.setFont(new java.awt.Font("Arial Black", 1, 28)); // NOI18N
         label_home10.setForeground(new java.awt.Color(255, 255, 255));
         label_home10.setText("Complain");
 
@@ -323,20 +322,20 @@ public class StudentDashboard extends javax.swing.JFrame {
         panel_complain.setLayout(panel_complainLayout);
         panel_complainLayout.setHorizontalGroup(
             panel_complainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_complainLayout.createSequentialGroup()
-                .addContainerGap(39, Short.MAX_VALUE)
+            .addGroup(panel_complainLayout.createSequentialGroup()
+                .addGap(63, 63, 63)
                 .addComponent(label_home10)
-                .addGap(39, 39, 39))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         panel_complainLayout.setVerticalGroup(
             panel_complainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_complainLayout.createSequentialGroup()
-                .addGap(39, 39, 39)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_complainLayout.createSequentialGroup()
+                .addContainerGap(47, Short.MAX_VALUE)
                 .addComponent(label_home10)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addGap(49, 49, 49))
         );
 
-        panel_parent.add(panel_complain, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 400, 210, 120));
+        panel_parent.add(panel_complain, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 430, 260, 140));
 
         panel_associates.setBackground(new java.awt.Color(153, 0, 51));
         panel_associates.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -349,11 +348,11 @@ public class StudentDashboard extends javax.swing.JFrame {
             }
         });
 
-        label_home12.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        label_home12.setFont(new java.awt.Font("Arial Black", 1, 28)); // NOI18N
         label_home12.setForeground(new java.awt.Color(255, 255, 255));
         label_home12.setText("Hall");
 
-        label_home13.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        label_home13.setFont(new java.awt.Font("Arial Black", 1, 28)); // NOI18N
         label_home13.setForeground(new java.awt.Color(255, 255, 255));
         label_home13.setText("Associates");
 
@@ -361,27 +360,26 @@ public class StudentDashboard extends javax.swing.JFrame {
         panel_associates.setLayout(panel_associatesLayout);
         panel_associatesLayout.setHorizontalGroup(
             panel_associatesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_associatesLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_associatesLayout.createSequentialGroup()
+                .addContainerGap(42, Short.MAX_VALUE)
                 .addGroup(panel_associatesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_associatesLayout.createSequentialGroup()
-                        .addGap(73, 73, 73)
+                        .addGap(49, 49, 49)
                         .addComponent(label_home12))
-                    .addGroup(panel_associatesLayout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(label_home13)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                    .addComponent(label_home13))
+                .addGap(37, 37, 37))
         );
         panel_associatesLayout.setVerticalGroup(
             panel_associatesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_associatesLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(23, 23, 23)
                 .addComponent(label_home12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(label_home13)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
-        panel_parent.add(panel_associates, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 550, 210, 120));
+        panel_parent.add(panel_associates, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 590, 260, 140));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
