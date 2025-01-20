@@ -55,8 +55,9 @@ public class StudentDashboard extends javax.swing.JFrame {
         panel_fee = new javax.swing.JPanel();
         label_home4 = new javax.swing.JLabel();
         label_home5 = new javax.swing.JLabel();
-        panel_room = new javax.swing.JPanel();
+        panel_update_info = new javax.swing.JPanel();
         label_home6 = new javax.swing.JLabel();
+        label_home11 = new javax.swing.JLabel();
         panel_notice = new javax.swing.JPanel();
         label_home8 = new javax.swing.JLabel();
         label_home9 = new javax.swing.JLabel();
@@ -65,6 +66,8 @@ public class StudentDashboard extends javax.swing.JFrame {
         panel_associates = new javax.swing.JPanel();
         label_home12 = new javax.swing.JLabel();
         label_home13 = new javax.swing.JLabel();
+        panel_room = new javax.swing.JPanel();
+        label_home7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -183,7 +186,7 @@ public class StudentDashboard extends javax.swing.JFrame {
                 .addGap(21, 21, 21))
         );
 
-        panel_parent.add(panel_clearence, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 590, 260, 140));
+        panel_parent.add(panel_clearence, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 550, 260, 140));
 
         panel_fee.setBackground(new java.awt.Color(153, 0, 51));
         panel_fee.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -225,41 +228,52 @@ public class StudentDashboard extends javax.swing.JFrame {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        panel_parent.add(panel_fee, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, 260, 140));
+        panel_parent.add(panel_fee, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, 260, 140));
 
-        panel_room.setBackground(new java.awt.Color(153, 0, 51));
-        panel_room.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        panel_room.addMouseListener(new java.awt.event.MouseAdapter() {
+        panel_update_info.setBackground(new java.awt.Color(153, 0, 51));
+        panel_update_info.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panel_update_info.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                panel_roomMouseEntered(evt);
+                panel_update_infoMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                panel_roomMouseExited(evt);
+                panel_update_infoMouseExited(evt);
             }
         });
 
         label_home6.setFont(new java.awt.Font("Arial Black", 1, 28)); // NOI18N
         label_home6.setForeground(new java.awt.Color(255, 255, 255));
-        label_home6.setText("Room");
+        label_home6.setText("Update");
 
-        javax.swing.GroupLayout panel_roomLayout = new javax.swing.GroupLayout(panel_room);
-        panel_room.setLayout(panel_roomLayout);
-        panel_roomLayout.setHorizontalGroup(
-            panel_roomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_roomLayout.createSequentialGroup()
-                .addContainerGap(81, Short.MAX_VALUE)
-                .addComponent(label_home6)
-                .addGap(85, 85, 85))
+        label_home11.setFont(new java.awt.Font("Arial Black", 1, 28)); // NOI18N
+        label_home11.setForeground(new java.awt.Color(255, 255, 255));
+        label_home11.setText("Information");
+
+        javax.swing.GroupLayout panel_update_infoLayout = new javax.swing.GroupLayout(panel_update_info);
+        panel_update_info.setLayout(panel_update_infoLayout);
+        panel_update_infoLayout.setHorizontalGroup(
+            panel_update_infoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_update_infoLayout.createSequentialGroup()
+                .addGroup(panel_update_infoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_update_infoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(label_home11))
+                    .addGroup(panel_update_infoLayout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(label_home6)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        panel_roomLayout.setVerticalGroup(
-            panel_roomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_roomLayout.createSequentialGroup()
-                .addContainerGap(49, Short.MAX_VALUE)
+        panel_update_infoLayout.setVerticalGroup(
+            panel_update_infoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_update_infoLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(label_home6)
-                .addGap(47, 47, 47))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(label_home11)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        panel_parent.add(panel_room, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 270, 260, 140));
+        panel_parent.add(panel_update_info, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 570, 200, 100));
 
         panel_notice.setBackground(new java.awt.Color(153, 0, 51));
         panel_notice.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -301,7 +315,7 @@ public class StudentDashboard extends javax.swing.JFrame {
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
-        panel_parent.add(panel_notice, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 430, 260, 140));
+        panel_parent.add(panel_notice, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 390, 260, 140));
 
         panel_complain.setBackground(new java.awt.Color(153, 0, 51));
         panel_complain.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -335,7 +349,7 @@ public class StudentDashboard extends javax.swing.JFrame {
                 .addGap(49, 49, 49))
         );
 
-        panel_parent.add(panel_complain, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 430, 260, 140));
+        panel_parent.add(panel_complain, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 390, 260, 140));
 
         panel_associates.setBackground(new java.awt.Color(153, 0, 51));
         panel_associates.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -379,7 +393,41 @@ public class StudentDashboard extends javax.swing.JFrame {
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
-        panel_parent.add(panel_associates, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 590, 260, 140));
+        panel_parent.add(panel_associates, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 550, 260, 140));
+
+        panel_room.setBackground(new java.awt.Color(153, 0, 51));
+        panel_room.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panel_room.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panel_roomMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panel_roomMouseExited(evt);
+            }
+        });
+
+        label_home7.setFont(new java.awt.Font("Arial Black", 1, 28)); // NOI18N
+        label_home7.setForeground(new java.awt.Color(255, 255, 255));
+        label_home7.setText("Room");
+
+        javax.swing.GroupLayout panel_roomLayout = new javax.swing.GroupLayout(panel_room);
+        panel_room.setLayout(panel_roomLayout);
+        panel_roomLayout.setHorizontalGroup(
+            panel_roomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_roomLayout.createSequentialGroup()
+                .addContainerGap(81, Short.MAX_VALUE)
+                .addComponent(label_home7)
+                .addGap(85, 85, 85))
+        );
+        panel_roomLayout.setVerticalGroup(
+            panel_roomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_roomLayout.createSequentialGroup()
+                .addContainerGap(49, Short.MAX_VALUE)
+                .addComponent(label_home7)
+                .addGap(47, 47, 47))
+        );
+
+        panel_parent.add(panel_room, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 230, 260, 140));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -412,11 +460,11 @@ public class StudentDashboard extends javax.swing.JFrame {
         panel_fee.setBackground(clr);
     }//GEN-LAST:event_panel_feeMouseEntered
 
-    private void panel_roomMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_roomMouseEntered
+    private void panel_update_infoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_update_infoMouseEntered
         // TODO add your handling code here:
         Color clr = new Color(0, 153, 153);
-        panel_room.setBackground(clr);
-    }//GEN-LAST:event_panel_roomMouseEntered
+        panel_update_info.setBackground(clr);
+    }//GEN-LAST:event_panel_update_infoMouseEntered
 
     private void panel_noticeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_noticeMouseEntered
         // TODO add your handling code here:
@@ -448,11 +496,11 @@ public class StudentDashboard extends javax.swing.JFrame {
         panel_fee.setBackground(clr);
     }//GEN-LAST:event_panel_feeMouseExited
 
-    private void panel_roomMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_roomMouseExited
+    private void panel_update_infoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_update_infoMouseExited
         // TODO add your handling code here:
         Color clr = new Color(153, 0, 51);
-        panel_room.setBackground(clr);
-    }//GEN-LAST:event_panel_roomMouseExited
+        panel_update_info.setBackground(clr);
+    }//GEN-LAST:event_panel_update_infoMouseExited
 
     private void panel_noticeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_noticeMouseExited
         // TODO add your handling code here:
@@ -477,6 +525,14 @@ public class StudentDashboard extends javax.swing.JFrame {
         Color clr = new Color(153, 0, 51);
         panel_clearence.setBackground(clr);
     }//GEN-LAST:event_panel_clearenceMouseExited
+
+    private void panel_roomMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_roomMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panel_roomMouseEntered
+
+    private void panel_roomMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_roomMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panel_roomMouseExited
 
     /**
      * @param args the command line arguments
@@ -526,6 +582,7 @@ public class StudentDashboard extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel label_hallconnect;
     private javax.swing.JLabel label_home10;
+    private javax.swing.JLabel label_home11;
     private javax.swing.JLabel label_home12;
     private javax.swing.JLabel label_home13;
     private javax.swing.JLabel label_home18;
@@ -539,6 +596,7 @@ public class StudentDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel label_home4;
     private javax.swing.JLabel label_home5;
     private javax.swing.JLabel label_home6;
+    private javax.swing.JLabel label_home7;
     private javax.swing.JLabel label_home8;
     private javax.swing.JLabel label_home9;
     private javax.swing.JLabel label_welcome;
@@ -549,5 +607,6 @@ public class StudentDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel panel_notice;
     private javax.swing.JPanel panel_parent;
     private javax.swing.JPanel panel_room;
+    private javax.swing.JPanel panel_update_info;
     // End of variables declaration//GEN-END:variables
 }

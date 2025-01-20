@@ -150,7 +150,7 @@ public class SignUp extends javax.swing.JFrame {
         txt_dob = new com.toedter.calendar.JDateChooser();
         label_home18 = new javax.swing.JLabel();
         btn_login = new javax.swing.JButton();
-        btn_signup = new javax.swing.JButton();
+        btn_submit = new javax.swing.JButton();
         btn_back = new javax.swing.JButton();
         txt_session = new com.toedter.calendar.JYearChooser();
 
@@ -373,18 +373,18 @@ public class SignUp extends javax.swing.JFrame {
         });
         panel_parent1.add(btn_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 660, 150, 54));
 
-        btn_signup.setBackground(new java.awt.Color(102, 102, 102));
-        btn_signup.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        btn_signup.setForeground(new java.awt.Color(255, 255, 255));
-        btn_signup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/signup.png"))); // NOI18N
-        btn_signup.setText("SUBMIT");
-        btn_signup.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
-        btn_signup.addActionListener(new java.awt.event.ActionListener() {
+        btn_submit.setBackground(new java.awt.Color(102, 102, 102));
+        btn_submit.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        btn_submit.setForeground(new java.awt.Color(255, 255, 255));
+        btn_submit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/signup.png"))); // NOI18N
+        btn_submit.setText("SUBMIT");
+        btn_submit.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
+        btn_submit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_signupActionPerformed(evt);
+                btn_submitActionPerformed(evt);
             }
         });
-        panel_parent1.add(btn_signup, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 660, 170, 54));
+        panel_parent1.add(btn_submit, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 660, 170, 54));
 
         btn_back.setBackground(new java.awt.Color(102, 102, 102));
         btn_back.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
@@ -435,7 +435,7 @@ public class SignUp extends javax.swing.JFrame {
         lg.setVisible(true);
     }//GEN-LAST:event_btn_loginActionPerformed
 
-    private void btn_signupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_signupActionPerformed
+    private void btn_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_submitActionPerformed
         // TODO add your handling code here:
         SimpleDateFormat formate = new SimpleDateFormat("dd-MM-yyyy");
            String name = txt_name.getText();
@@ -462,7 +462,7 @@ public class SignUp extends javax.swing.JFrame {
           sf.setVisible(true);
           }
         }
-    }//GEN-LAST:event_btn_signupActionPerformed
+    }//GEN-LAST:event_btn_submitActionPerformed
 
     private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
         // TODO add your handling code here:
@@ -512,7 +512,7 @@ public class SignUp extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_back;
     private javax.swing.JButton btn_login;
-    private javax.swing.JButton btn_signup;
+    private javax.swing.JButton btn_submit;
     private javax.swing.JComboBox<String> combo_blood;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
