@@ -256,12 +256,12 @@ public class StudentDashboard extends javax.swing.JFrame {
             .addGroup(panel_update_infoLayout.createSequentialGroup()
                 .addGroup(panel_update_infoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_update_infoLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addContainerGap()
                         .addComponent(label_home11))
                     .addGroup(panel_update_infoLayout.createSequentialGroup()
-                        .addGap(50, 50, 50)
+                        .addGap(38, 38, 38)
                         .addComponent(label_home6)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel_update_infoLayout.setVerticalGroup(
             panel_update_infoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,10 +270,10 @@ public class StudentDashboard extends javax.swing.JFrame {
                 .addComponent(label_home6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(label_home11)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        panel_parent.add(panel_update_info, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 560, 230, 110));
+        panel_parent.add(panel_update_info, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 570, 200, 100));
 
         panel_notice.setBackground(new java.awt.Color(153, 0, 51));
         panel_notice.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
