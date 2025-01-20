@@ -209,7 +209,7 @@ public class provostDashboard extends javax.swing.JFrame {
         label_blood3.setText("E-MAIL:");
         panel_profile.add(label_blood3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 120, 40));
 
-        panel_parent.add(panel_profile, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 220, 420, 420));
+        panel_parent.add(panel_profile, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 170, 420, 420));
 
         panel_signupRequest.setBackground(new java.awt.Color(153, 0, 51));
         panel_signupRequest.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -233,7 +233,7 @@ public class provostDashboard extends javax.swing.JFrame {
         label_home8.setText("REQUEST");
         panel_signupRequest.add(label_home8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
 
-        panel_parent.add(panel_signupRequest, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 310, 150));
+        panel_parent.add(panel_signupRequest, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 310, 150));
 
         panel_complainBox.setBackground(new java.awt.Color(153, 0, 51));
         panel_complainBox.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -257,7 +257,7 @@ public class provostDashboard extends javax.swing.JFrame {
         label_home14.setText("BOX");
         panel_complainBox.add(label_home14, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, -1, -1));
 
-        panel_parent.add(panel_complainBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 180, 310, 150));
+        panel_parent.add(panel_complainBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 220, 310, 150));
 
         panel_hallFee.setBackground(new java.awt.Color(153, 0, 51));
         panel_hallFee.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -281,7 +281,7 @@ public class provostDashboard extends javax.swing.JFrame {
         label_home13.setText("REQUEST");
         panel_hallFee.add(label_home13, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
 
-        panel_parent.add(panel_hallFee, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 180, 310, 150));
+        panel_parent.add(panel_hallFee, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 220, 310, 150));
 
         panel_addNotice.setBackground(new java.awt.Color(153, 0, 51));
         panel_addNotice.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -305,7 +305,7 @@ public class provostDashboard extends javax.swing.JFrame {
         label_home9.setText("ADD");
         panel_addNotice.add(label_home9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, -1, -1));
 
-        panel_parent.add(panel_addNotice, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 310, 150));
+        panel_parent.add(panel_addNotice, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 310, 150));
 
         panel_hallAsso.setBackground(new java.awt.Color(153, 0, 51));
         panel_hallAsso.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -329,7 +329,7 @@ public class provostDashboard extends javax.swing.JFrame {
         label_home10.setText("HALL");
         panel_hallAsso.add(label_home10, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 150, -1));
 
-        panel_parent.add(panel_hallAsso, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 380, 310, 150));
+        panel_parent.add(panel_hallAsso, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 420, 310, 150));
 
         panel_clearance.setBackground(new java.awt.Color(153, 0, 51));
         panel_clearance.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -353,7 +353,7 @@ public class provostDashboard extends javax.swing.JFrame {
         label_home11.setText("REQUEST");
         panel_clearance.add(label_home11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
 
-        panel_parent.add(panel_clearance, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 380, 310, 150));
+        panel_parent.add(panel_clearance, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 420, 310, 150));
 
         btn_exit.setBackground(new java.awt.Color(102, 102, 102));
         btn_exit.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
