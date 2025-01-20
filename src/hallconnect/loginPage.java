@@ -15,14 +15,17 @@ import javax.swing.JOptionPane;
  * @author Lenovo
  */
 public class loginPage extends javax.swing.JFrame {
-  private CentralController controller = new CentralController();
+
+    private CentralController controller = new CentralController();
+
     /**
      * Creates new form loginPage
      */
     public loginPage(CentralController controller) {
-        this.controller=controller;
+        this.controller = controller;
         initComponents();
     }
+
     public loginPage() {
         initComponents();
     }
@@ -190,7 +193,7 @@ public class loginPage extends javax.swing.JFrame {
         SignUp sg = new SignUp(controller);
         sg.setVisible(true);
         this.setVisible(false);
-        
+
     }//GEN-LAST:event_btn_signupActionPerformed
 
     private void combo_roleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_roleActionPerformed
@@ -199,31 +202,36 @@ public class loginPage extends javax.swing.JFrame {
 
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
         // TODO add your handling code here:
-        String username=txt_username.getText();
-        String pass=txt_password.getText();
+        String username = txt_username.getText();
+        String pass = txt_password.getText();
         String role = combo_role.getSelectedItem().toString();
         try {
             Connection con = DbConnection.getConnection();
-            PreparedStatement pst ; 
-            if(role.equals("STUDENT")){
-             pst=  con.prepareStatement("SELECT * FROM student where username=? AND pass=?");
-            }else{
-            pst=  con.prepareStatement("SELECT * FROM provost where username=? AND pass=?");
+            PreparedStatement pst;
+            if (role.equals("STUDENT")) {
+                pst = con.prepareStatement("SELECT * FROM student where username=? AND pass=?");
+            } else {
+                pst = con.prepareStatement("SELECT * FROM provost where username=? AND pass=?");
             }
             pst.setString(1, username);
-            pst.setString(2,pass);
+            pst.setString(2, pass);
             ResultSet rs = pst.executeQuery();
-            if(rs.next()){
-              JOptionPane.showMessageDialog(this, "LOGIN SUCCESSFUL");
-              
-            }else{
-            JOptionPane.showMessageDialog(this, "INVALID USERNAME AND PASSWORD");
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(this, "LOGIN SUCCESSFUL");
+                if (role.equals("PROVOST")) {
+                    provostDashboard pv = new provostDashboard(username);
+                    pv.setVisible(true);
+                    this.dispose();
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(this, "INVALID USERNAME ,PASSWORD OR ROLE");
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }//GEN-LAST:event_btn_loginActionPerformed
 
     private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed

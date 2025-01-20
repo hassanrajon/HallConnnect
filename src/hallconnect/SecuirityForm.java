@@ -161,7 +161,7 @@ public class SecuirityForm extends javax.swing.JFrame {
         label_home5.setText("ANSWER :");
         panel_parent.add(label_home5, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 500, 150, 30));
 
-        getContentPane().add(panel_parent, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 1550, 800));
+        getContentPane().add(panel_parent, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1550, 800));
 
         pack();
         setLocationRelativeTo(null);
