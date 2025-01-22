@@ -2,8 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package hallconnect;
+package hallconnect.student;
 
+import hallconnect.Associates;
+import hallconnect.database.CentralController;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.Connection;
@@ -147,6 +149,9 @@ public class StudentDashboard extends javax.swing.JFrame {
         panel_clearence.setBackground(new java.awt.Color(153, 0, 51));
         panel_clearence.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         panel_clearence.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_clearenceMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panel_clearenceMouseEntered(evt);
             }
@@ -191,6 +196,9 @@ public class StudentDashboard extends javax.swing.JFrame {
         panel_fee.setBackground(new java.awt.Color(153, 0, 51));
         panel_fee.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         panel_fee.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_feeMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panel_feeMouseEntered(evt);
             }
@@ -320,6 +328,9 @@ public class StudentDashboard extends javax.swing.JFrame {
         panel_complain.setBackground(new java.awt.Color(153, 0, 51));
         panel_complain.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         panel_complain.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_complainMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panel_complainMouseEntered(evt);
             }
@@ -354,6 +365,9 @@ public class StudentDashboard extends javax.swing.JFrame {
         panel_associates.setBackground(new java.awt.Color(153, 0, 51));
         panel_associates.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         panel_associates.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_associatesMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panel_associatesMouseEntered(evt);
             }
@@ -398,6 +412,9 @@ public class StudentDashboard extends javax.swing.JFrame {
         panel_room.setBackground(new java.awt.Color(153, 0, 51));
         panel_room.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         panel_room.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_roomMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panel_roomMouseEntered(evt);
             }
@@ -528,11 +545,60 @@ public class StudentDashboard extends javax.swing.JFrame {
 
     private void panel_roomMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_roomMouseEntered
         // TODO add your handling code here:
+        Color clr = new Color(0, 153, 153);
+        panel_room.setBackground(clr);
+        
     }//GEN-LAST:event_panel_roomMouseEntered
 
     private void panel_roomMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_roomMouseExited
         // TODO add your handling code here:
+         Color clr = new Color(153, 0, 51);
+        panel_room.setBackground(clr);
     }//GEN-LAST:event_panel_roomMouseExited
+
+    private void panel_feeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_feeMouseClicked
+        // TODO add your handling code here:
+        controller.addFrame(this);
+        StudentFeeConfirmation  StudentFeeConfirmation = new StudentFeeConfirmation(controller);
+        StudentFeeConfirmation.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panel_feeMouseClicked
+
+    private void panel_roomMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_roomMouseClicked
+        // TODO add your handling code here:
+        controller.addFrame(this);
+        StudentRoomDetails StudentRoomDetails = new StudentRoomDetails(controller);
+        StudentRoomDetails.setVisible(true);
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_panel_roomMouseClicked
+
+    private void panel_complainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_complainMouseClicked
+        // TODO add your handling code here:
+        
+        controller.addFrame(this);
+        StudentComplain StudentComplain = new StudentComplain(controller);
+        StudentComplain.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panel_complainMouseClicked
+
+    private void panel_associatesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_associatesMouseClicked
+        // TODO add your handling code here:
+        
+        controller.addFrame(this);
+        Associates Associates = new Associates(controller);
+        Associates.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panel_associatesMouseClicked
+
+    private void panel_clearenceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_clearenceMouseClicked
+        // TODO add your handling code here:
+        controller.addFrame(this);
+        StudentClearence StudentClearence = new StudentClearence(controller);
+        StudentClearence.setVisible(true);
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_panel_clearenceMouseClicked
 
     /**
      * @param args the command line arguments

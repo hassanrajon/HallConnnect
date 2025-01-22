@@ -2,8 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package hallconnect;
+package hallconnect.signup;
 
+import hallconnect.database.CentralController;
+import hallconnect.database.DbConnection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -139,7 +141,7 @@ public class SignUp extends javax.swing.JFrame {
         txt_email = new javax.swing.JTextField();
         label_home11 = new javax.swing.JLabel();
         label_home12 = new javax.swing.JLabel();
-        combo_blood = new javax.swing.JComboBox<>();
+        combo_hall = new javax.swing.JComboBox<>();
         label_home13 = new javax.swing.JLabel();
         txt_localGuardianContact = new javax.swing.JTextField();
         label_home14 = new javax.swing.JLabel();
@@ -153,6 +155,8 @@ public class SignUp extends javax.swing.JFrame {
         btn_submit = new javax.swing.JButton();
         btn_back = new javax.swing.JButton();
         txt_session = new com.toedter.calendar.JYearChooser();
+        combo_blood = new javax.swing.JComboBox<>();
+        label_home19 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -273,7 +277,7 @@ public class SignUp extends javax.swing.JFrame {
                 txt_regActionPerformed(evt);
             }
         });
-        panel_parent1.add(txt_reg, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 240, 280, 40));
+        panel_parent1.add(txt_reg, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 240, 280, 40));
 
         label_home4.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         label_home4.setForeground(new java.awt.Color(255, 255, 255));
@@ -309,12 +313,12 @@ public class SignUp extends javax.swing.JFrame {
 
         label_home12.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         label_home12.setForeground(new java.awt.Color(255, 255, 255));
-        label_home12.setText("CONFIRM PASS :");
-        panel_parent1.add(label_home12, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 460, -1, 30));
+        label_home12.setText("SELECT HALL:");
+        panel_parent1.add(label_home12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 390, -1, 30));
 
-        combo_blood.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        combo_blood.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AB+", "AB-", "A+", "A-", "B+", "B-", "O+", "O-" }));
-        panel_parent1.add(combo_blood, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 310, 280, 40));
+        combo_hall.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        combo_hall.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BANGABONDHU HALL", "MUKTIJODDHA HALL", "BANGAMATA HALL", " " }));
+        panel_parent1.add(combo_hall, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 380, 280, 40));
 
         label_home13.setFont(new java.awt.Font("Colonna MT", 1, 18)); // NOI18N
         label_home13.setForeground(new java.awt.Color(0, 255, 102));
@@ -403,6 +407,15 @@ public class SignUp extends javax.swing.JFrame {
         txt_session.setValue(0);
         panel_parent1.add(txt_session, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 240, 100, 40));
 
+        combo_blood.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        combo_blood.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AB+", "AB-", "A+", "A-", "B+", "B-", "O+", "O-" }));
+        panel_parent1.add(combo_blood, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 310, 280, 40));
+
+        label_home19.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        label_home19.setForeground(new java.awt.Color(255, 255, 255));
+        label_home19.setText("CONFIRM PASS :");
+        panel_parent1.add(label_home19, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 460, -1, 30));
+
         panel_parent.add(panel_parent1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, 800));
 
         getContentPane().add(panel_parent, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, 800));
@@ -447,7 +460,7 @@ public class SignUp extends javax.swing.JFrame {
               dob = formate.format(txt_dob.getDate());
            }
 
-           String blood=combo_blood.getSelectedItem().toString();
+           String blood=combo_hall.getSelectedItem().toString();
            String contact = txt_contact.getText();
            String email = txt_email.getText();
            String username = txt_username.getText();
@@ -455,10 +468,11 @@ public class SignUp extends javax.swing.JFrame {
            String con_pass = txt_ConPass.getText();
            String local_guardian_contact=txt_localGuardianContact.getText();
            String local_guardian_relation=txt_localGuardianRelation.getText();
+           String hall=combo_hall.getSelectedItem().toString();
         if(validation(name, reg, session, dob, blood, contact, email, username, pass, con_pass)){
           if(validUsername(username)){
           controller.addFrame(this);
-          SecuirityForm sf = new SecuirityForm(controller,name, reg, session, dob, blood, contact, email, username, pass,local_guardian_contact,local_guardian_relation);
+          SecuirityForm sf = new SecuirityForm(controller,hall,name, reg, session, dob, blood, contact, email, username, pass,local_guardian_contact,local_guardian_relation);
           sf.setVisible(true);
           }
         }
@@ -514,6 +528,7 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JButton btn_login;
     private javax.swing.JButton btn_submit;
     private javax.swing.JComboBox<String> combo_blood;
+    private javax.swing.JComboBox<String> combo_hall;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
@@ -529,6 +544,7 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JLabel label_home16;
     private javax.swing.JLabel label_home17;
     private javax.swing.JLabel label_home18;
+    private javax.swing.JLabel label_home19;
     private javax.swing.JLabel label_home4;
     private javax.swing.JLabel label_home5;
     private javax.swing.JLabel label_home6;

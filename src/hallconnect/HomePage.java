@@ -4,6 +4,9 @@
  */
 package hallconnect;
 
+import hallconnect.database.CentralController;
+import hallconnect.signup.loginPage;
+import hallconnect.signup.SignUp;
 import java.awt.Color;
 
 /**

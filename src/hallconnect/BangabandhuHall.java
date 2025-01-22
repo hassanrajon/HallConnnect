@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package hallconnect;
+import hallconnect.database.CentralController;
+import hallconnect.signup.loginPage;
+import hallconnect.signup.SignUp;
 import javax.swing.JFrame;
 /**
  *

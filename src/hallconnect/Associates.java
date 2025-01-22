@@ -4,6 +4,7 @@
  */
 package hallconnect;
 
+import hallconnect.database.CentralController;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

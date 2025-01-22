@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package hallconnect;
+package hallconnect.student;
 
+import hallconnect.database.CentralController;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
