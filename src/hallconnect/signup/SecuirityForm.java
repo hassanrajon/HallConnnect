@@ -33,8 +33,8 @@ public class SecuirityForm extends javax.swing.JFrame {
     private String username;
     private String pass;
     
-    private String local_guardian_contact;
-    private String local_guardian_relation;
+    private String dept;
+   
 
     /**
      * Creates new form Registration
@@ -43,9 +43,9 @@ public class SecuirityForm extends javax.swing.JFrame {
         initComponents();
     }
 
-    public SecuirityForm(CentralController controller,String hall, String name, String reg, int session, String dob, String blood, String contact, String email, String username, String pass, String local_guardian_contact, String local_guardian_relation) {
+    public SecuirityForm(CentralController controller, String hall,String dept, String name, String reg, int session, String dob, String blood, String contact, String email, String username, String pass) {
         this.controller = controller;
-        this.hall=hall;
+        this.hall = hall;
         this.name = name;
         this.reg = reg;
         this.session = session;
@@ -55,8 +55,7 @@ public class SecuirityForm extends javax.swing.JFrame {
         this.email = email;
         this.username = username;
         this.pass = pass;
-        this.local_guardian_contact = local_guardian_contact;
-        this.local_guardian_relation = local_guardian_relation;
+        this.dept=dept;
         initComponents();
 
     }
@@ -154,6 +153,7 @@ public class SecuirityForm extends javax.swing.JFrame {
         btn_room.setBackground(new java.awt.Color(102, 102, 102));
         btn_room.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         btn_room.setForeground(new java.awt.Color(255, 255, 255));
+        btn_room.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/icons8-eye.gif"))); // NOI18N
         btn_room.setText("SEE ROOM");
         btn_room.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
         btn_room.addActionListener(new java.awt.event.ActionListener() {
@@ -161,7 +161,7 @@ public class SecuirityForm extends javax.swing.JFrame {
                 btn_roomActionPerformed(evt);
             }
         });
-        panel_parent.add(btn_room, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 660, 180, 54));
+        panel_parent.add(btn_room, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 660, 190, 54));
 
         jPanel3.setBackground(new java.awt.Color(0, 51, 51));
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -346,15 +346,25 @@ public class SecuirityForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         String question = combo_question.getSelectedItem().toString();
         String ans = txt_answer.getText();
+        String room1=combo_room_1.getSelectedItem().toString();
+        String room2 = combo_room_2.getSelectedItem().toString();
+        String room3=combo_room_3.getSelectedItem().toString();
         if (ans.equals("")) {
             JOptionPane.showMessageDialog(this, "PLEASE ENTER QUESTION AND ANSWER");
         } else {
 
             try {
                 Connection con = DbConnection.getConnection();
-                PreparedStatement pst = con.prepareStatement("INSERT INTO pending (name, reg, session, dob, blood, contact, email, username, pass, local_guardian_contact, local_guardian_relation, question, ans) "
-                        + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-
+                PreparedStatement pst = con.prepareStatement("INSERT INTO pending (name, reg, session, dob, blood, contact, email, username,pass,question, ans) "
+                        + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                PreparedStatement pst2 = con.prepareStatement("INSERT INTO pending_room (hall_name,username,room1,room2,room3,dept) VALUES(?,?,?,?,?,?)");
+                pst2.setString(1, hall);
+                pst2.setString(2, username);
+                pst2.setString(3, room1);
+                pst2.setString(4, room2);
+                pst2.setString(5, room3);
+                pst2.setString(6, dept);
+                
                 pst.setString(1, name);
                 pst.setString(2, reg);
                 pst.setInt(3, session);
@@ -364,15 +374,13 @@ public class SecuirityForm extends javax.swing.JFrame {
                 pst.setString(7, email);
                 pst.setString(8, username);
                 pst.setString(9, pass);
-                pst.setString(10, local_guardian_contact);
-                pst.setString(11, local_guardian_relation);
-                pst.setString(12, question);
-                pst.setString(13, ans);
+                pst.setString(10, question);
+                pst.setString(11, ans);
 
 // Execute the query
                 int rowCount = pst.executeUpdate();
-
-                if (rowCount > 0) {
+                int rowcount2=pst2.executeUpdate();
+                if (rowCount > 0 && rowcount2>0) {
                     JOptionPane.showMessageDialog(this, "SIGNUP SUCCESSFULL");
                     loginPage lg = new loginPage(controller);
                     lg.setVisible(true);
@@ -381,6 +389,7 @@ public class SecuirityForm extends javax.swing.JFrame {
                 } else {
                     JOptionPane.showMessageDialog(this, "SIGNUP FAILED");
                 }
+                
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -392,9 +401,9 @@ public class SecuirityForm extends javax.swing.JFrame {
     private void btn_roomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_roomActionPerformed
         // TODO add your handling code here:
         controller.addFrame(this);
-       RoomSelection roomselection = new RoomSelection(controller,hall);
-       roomselection.setVisible(true);
-       this.setVisible(false);
+        RoomSelection roomselection = new RoomSelection(controller, hall);
+        roomselection.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btn_roomActionPerformed
 
     private void combo_floor_1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_combo_floor_1PropertyChange
@@ -404,7 +413,7 @@ public class SecuirityForm extends javax.swing.JFrame {
 
     private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
         // TODO add your handling code here:
-        
+
         JFrame prev = controller.prevFrame();
         prev.setVisible(true);
         this.setVisible(false);
@@ -413,13 +422,13 @@ public class SecuirityForm extends javax.swing.JFrame {
     private void combo_floor_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_floor_1ActionPerformed
         // TODO add your handling code here:
         if (combo_floor_1.getSelectedItem().toString().equals("1st")) {
-            
+
             combo_room_1.removeAllItems();
-            
+
             combo_room_1.addItem("101");
             combo_room_1.addItem("102");
             combo_room_1.addItem("103");
-            
+
             combo_room_1.addItem("107");
             combo_room_1.addItem("108");
             combo_room_1.addItem("109");
@@ -427,28 +436,28 @@ public class SecuirityForm extends javax.swing.JFrame {
         } else if (combo_floor_1.getSelectedItem().toString().equals("2nd")) {
 
             combo_room_1.removeAllItems();
-            
+
             combo_room_1.addItem("201");
             combo_room_1.addItem("202");
             combo_room_1.addItem("203");
-            
+
             combo_room_1.addItem("204");
             combo_room_1.addItem("205");
             combo_room_1.addItem("206");
-            
+
             combo_room_1.addItem("shared");
-            
+
             combo_room_1.addItem("207");
             combo_room_1.addItem("208");
             combo_room_1.addItem("209");
         } else if (combo_floor_1.getSelectedItem().toString().equals("3rd")) {
 
             combo_room_1.removeAllItems();
-            
+
             combo_room_1.addItem("301");
             combo_room_1.addItem("302");
             combo_room_1.addItem("303");
-            
+
             combo_room_1.addItem("304");
             combo_room_1.addItem("305");
             combo_room_1.addItem("306");
@@ -459,7 +468,7 @@ public class SecuirityForm extends javax.swing.JFrame {
         } else if (combo_floor_1.getSelectedItem().toString().equals("4th")) {
 
             combo_room_1.removeAllItems();
-            
+
             combo_room_1.addItem("401");
             combo_room_1.addItem("402");
             combo_room_1.addItem("403");
@@ -474,7 +483,7 @@ public class SecuirityForm extends javax.swing.JFrame {
         } else if (combo_floor_1.getSelectedItem().toString().equals("5th")) {
 
             combo_room_1.removeAllItems();
-            
+
             combo_room_1.addItem("501");
             combo_room_1.addItem("502");
             combo_room_1.addItem("503");
@@ -495,11 +504,11 @@ public class SecuirityForm extends javax.swing.JFrame {
 
         if (combo_floor_2.getSelectedItem().toString().equals("1st")) {
             combo_room_2.removeAllItems();
-            
+
             combo_room_2.addItem("101");
             combo_room_2.addItem("102");
             combo_room_2.addItem("103");
-            
+
             combo_room_2.addItem("107");
             combo_room_2.addItem("108");
             combo_room_2.addItem("109");
@@ -507,15 +516,15 @@ public class SecuirityForm extends javax.swing.JFrame {
         } else if (combo_floor_2.getSelectedItem().toString().equals("2nd")) {
 
             combo_room_2.removeAllItems();
-            
+
             combo_room_2.addItem("201");
             combo_room_2.addItem("202");
             combo_room_2.addItem("203");
-            
+
             combo_room_2.addItem("204");
             combo_room_2.addItem("205");
             combo_room_2.addItem("206");
-            
+
             combo_room_2.addItem("shared");
 
             combo_room_2.addItem("207");
@@ -524,11 +533,11 @@ public class SecuirityForm extends javax.swing.JFrame {
         } else if (combo_floor_2.getSelectedItem().toString().equals("3rd")) {
 
             combo_room_2.removeAllItems();
-            
+
             combo_room_2.addItem("301");
             combo_room_2.addItem("302");
             combo_room_2.addItem("303");
-            
+
             combo_room_2.addItem("304");
             combo_room_2.addItem("305");
             combo_room_2.addItem("306");
@@ -539,7 +548,7 @@ public class SecuirityForm extends javax.swing.JFrame {
         } else if (combo_floor_2.getSelectedItem().toString().equals("4th")) {
 
             combo_room_2.removeAllItems();
-            
+
             combo_room_2.addItem("401");
             combo_room_2.addItem("402");
             combo_room_2.addItem("403");
@@ -554,7 +563,7 @@ public class SecuirityForm extends javax.swing.JFrame {
         } else if (combo_floor_2.getSelectedItem().toString().equals("5th")) {
 
             combo_room_2.removeAllItems();
-            
+
             combo_room_2.addItem("501");
             combo_room_2.addItem("502");
             combo_room_2.addItem("503");

@@ -5,11 +5,14 @@
 package hallconnect.room;
 
 import hallconnect.database.CentralController;
+import hallconnect.database.DbConnection;
 import hallconnect.provost.provostDashboard;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -26,13 +29,53 @@ public class ThirdFloor extends javax.swing.JFrame {
      * Creates new form loginPage
      */
     public ThirdFloor(CentralController controller, String hall) {
-        this.hall=hall;
+        this.hall = hall;
         this.controller = controller;
         initComponents();
+        fillinfo();
     }
 
     public ThirdFloor() {
         initComponents();
+        fillinfo();
+    }
+
+    void fillinfo() {
+
+        try {
+            Connection con = DbConnection.getConnection();
+            PreparedStatement pst = con.prepareStatement(
+                    "SELECT room_no, COUNT(*) FROM room_details WHERE hall_name=? AND room_no IN (301, 302, 303, 304, 305, 306, 307, 308, 309) GROUP BY room_no"
+            );
+            pst.setString(1, hall);
+            ResultSet rs = pst.executeQuery();
+
+// Store room counts in a map
+            Map<String, Integer> roomCounts = new HashMap<>();
+            while (rs.next()) {
+                roomCounts.put(rs.getString("room_no"), rs.getInt(2)); // Room number -> Occupied count
+            }
+
+// Update labels dynamically (Assuming each room has a max capacity of 4)
+            label_vacant_301.setText(String.valueOf(4 - roomCounts.getOrDefault("301", 0)));
+            label_vacant_302.setText(String.valueOf(4 - roomCounts.getOrDefault("302", 0)));
+            label_vacant_303.setText(String.valueOf(4 - roomCounts.getOrDefault("303", 0)));
+
+            label_vacant_304.setText(String.valueOf(4 - roomCounts.getOrDefault("304", 0)));
+            label_vacant_305.setText(String.valueOf(4 - roomCounts.getOrDefault("305", 0)));
+            label_vacant_306.setText(String.valueOf(4 - roomCounts.getOrDefault("306", 0)));
+
+            label_vacant_307.setText(String.valueOf(4 - roomCounts.getOrDefault("307", 0)));
+            label_vacant_308.setText(String.valueOf(4 - roomCounts.getOrDefault("308", 0)));
+            label_vacant_309.setText(String.valueOf(4 - roomCounts.getOrDefault("309", 0)));
+
+// Close resources
+            rs.close();
+            pst.close();
+            con.close();
+
+        } catch (Exception e) {
+        }
     }
 
     /**
@@ -104,6 +147,7 @@ public class ThirdFloor extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         label_total_305 = new javax.swing.JLabel();
+        label_login1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -154,11 +198,14 @@ public class ThirdFloor extends javax.swing.JFrame {
         label_login.setFont(new java.awt.Font("Arial Black", 1, 48)); // NOI18N
         label_login.setForeground(new java.awt.Color(255, 255, 255));
         label_login.setText("THIRD FLOOR");
-        panel_parent.add(label_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 500, 400, 50));
+        panel_parent.add(label_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 480, 400, 50));
 
         panel_309.setBackground(new java.awt.Color(0, 51, 51));
         panel_309.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         panel_309.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_309MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panel_309MouseEntered(evt);
             }
@@ -176,12 +223,12 @@ public class ThirdFloor extends javax.swing.JFrame {
         jLabel32.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel32.setForeground(new java.awt.Color(255, 255, 255));
         jLabel32.setText("TOTAL:");
-        panel_309.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 110, 30));
+        panel_309.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 110, 30));
 
         label_total_309.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_total_309.setForeground(new java.awt.Color(255, 255, 255));
-        label_total_309.setText("TOTAL:");
-        panel_309.add(label_total_309, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 110, 30));
+        label_total_309.setText("4");
+        panel_309.add(label_total_309, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 110, 30));
 
         jLabel34.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel34.setForeground(new java.awt.Color(255, 255, 255));
@@ -236,7 +283,7 @@ public class ThirdFloor extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("TOTAL:");
-        panel_304.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 110, 30));
+        panel_304.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 110, 30));
 
         jLabel4.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -245,8 +292,8 @@ public class ThirdFloor extends javax.swing.JFrame {
 
         label_total_304.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_total_304.setForeground(new java.awt.Color(255, 255, 255));
-        label_total_304.setText("TOTAL:");
-        panel_304.add(label_total_304, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 110, 30));
+        label_total_304.setText("4");
+        panel_304.add(label_total_304, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 110, 30));
 
         panel_parent.add(panel_304, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 180, 270, 170));
 
@@ -273,12 +320,12 @@ public class ThirdFloor extends javax.swing.JFrame {
         jLabel27.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(255, 255, 255));
         jLabel27.setText("TOTAL:");
-        panel_308.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 110, 30));
+        panel_308.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 110, 30));
 
         label_total_308.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_total_308.setForeground(new java.awt.Color(255, 255, 255));
-        label_total_308.setText("TOTAL:");
-        panel_308.add(label_total_308, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 110, 30));
+        label_total_308.setText("4");
+        panel_308.add(label_total_308, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 110, 30));
 
         jLabel29.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel29.setForeground(new java.awt.Color(255, 255, 255));
@@ -315,12 +362,12 @@ public class ThirdFloor extends javax.swing.JFrame {
         jLabel47.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel47.setForeground(new java.awt.Color(255, 255, 255));
         jLabel47.setText("TOTAL:");
-        panel_303.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 110, 30));
+        panel_303.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 110, 30));
 
         label_total_303.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_total_303.setForeground(new java.awt.Color(255, 255, 255));
-        label_total_303.setText("TOTAL:");
-        panel_303.add(label_total_303, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 110, 30));
+        label_total_303.setText("4");
+        panel_303.add(label_total_303, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 110, 30));
 
         jLabel49.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel49.setForeground(new java.awt.Color(255, 255, 255));
@@ -357,12 +404,12 @@ public class ThirdFloor extends javax.swing.JFrame {
         jLabel42.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel42.setForeground(new java.awt.Color(255, 255, 255));
         jLabel42.setText("TOTAL:");
-        panel_302.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 110, 30));
+        panel_302.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 110, 30));
 
         label_total_302.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_total_302.setForeground(new java.awt.Color(255, 255, 255));
-        label_total_302.setText("TOTAL:");
-        panel_302.add(label_total_302, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 110, 30));
+        label_total_302.setText("4");
+        panel_302.add(label_total_302, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 110, 30));
 
         jLabel44.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel44.setForeground(new java.awt.Color(255, 255, 255));
@@ -379,6 +426,9 @@ public class ThirdFloor extends javax.swing.JFrame {
         panel_301.setBackground(new java.awt.Color(0, 51, 51));
         panel_301.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         panel_301.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_301MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panel_301MouseEntered(evt);
             }
@@ -396,12 +446,12 @@ public class ThirdFloor extends javax.swing.JFrame {
         jLabel37.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel37.setForeground(new java.awt.Color(255, 255, 255));
         jLabel37.setText("TOTAL:");
-        panel_301.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 110, 30));
+        panel_301.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 110, 30));
 
         label_total_301.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_total_301.setForeground(new java.awt.Color(255, 255, 255));
-        label_total_301.setText("TOTAL:");
-        panel_301.add(label_total_301, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 110, 30));
+        label_total_301.setText("4");
+        panel_301.add(label_total_301, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 110, 30));
 
         jLabel39.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel39.setForeground(new java.awt.Color(255, 255, 255));
@@ -443,7 +493,7 @@ public class ThirdFloor extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("TOTAL:");
-        panel_307.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 110, 30));
+        panel_307.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 110, 30));
 
         jLabel6.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -452,8 +502,8 @@ public class ThirdFloor extends javax.swing.JFrame {
 
         label_total_307.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_total_307.setForeground(new java.awt.Color(255, 255, 255));
-        label_total_307.setText("TOTAL:");
-        panel_307.add(label_total_307, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 110, 30));
+        label_total_307.setText("4");
+        panel_307.add(label_total_307, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 110, 30));
 
         panel_parent.add(panel_307, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 270, 170));
 
@@ -485,7 +535,7 @@ public class ThirdFloor extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("TOTAL:");
-        panel_306.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 110, 30));
+        panel_306.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 110, 30));
 
         jLabel9.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -494,8 +544,8 @@ public class ThirdFloor extends javax.swing.JFrame {
 
         label_total_306.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_total_306.setForeground(new java.awt.Color(255, 255, 255));
-        label_total_306.setText("TOTAL:");
-        panel_306.add(label_total_306, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 110, 30));
+        label_total_306.setText("4");
+        panel_306.add(label_total_306, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 110, 30));
 
         panel_parent.add(panel_306, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 270, 170));
 
@@ -527,7 +577,7 @@ public class ThirdFloor extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("TOTAL:");
-        panel_305.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 110, 30));
+        panel_305.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 110, 30));
 
         jLabel15.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
@@ -536,10 +586,15 @@ public class ThirdFloor extends javax.swing.JFrame {
 
         label_total_305.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_total_305.setForeground(new java.awt.Color(255, 255, 255));
-        label_total_305.setText("TOTAL:");
-        panel_305.add(label_total_305, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 110, 30));
+        label_total_305.setText("4");
+        panel_305.add(label_total_305, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 110, 30));
 
         panel_parent.add(panel_305, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 180, 270, 170));
+
+        label_login1.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        label_login1.setForeground(new java.awt.Color(255, 255, 255));
+        label_login1.setText("click to see room details");
+        panel_parent.add(label_login1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 540, 350, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -581,141 +636,175 @@ public class ThirdFloor extends javax.swing.JFrame {
 
     private void panel_309MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_309MouseEntered
         // TODO add your handling code here:
-        Color clr = new Color(0,153,153);
+        Color clr = new Color(0, 153, 153);
         panel_309.setBackground(clr);
     }//GEN-LAST:event_panel_309MouseEntered
 
     private void panel_309MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_309MouseExited
         // TODO add your handling code here:
-        Color clr  = new Color(0,51,51);
+        Color clr = new Color(0, 51, 51);
         panel_309.setBackground(clr);
     }//GEN-LAST:event_panel_309MouseExited
 
     private void panel_304MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_304MouseEntered
         // TODO add your handling code here:
-        Color clr = new Color(0,153,153);
+        Color clr = new Color(0, 153, 153);
         panel_304.setBackground(clr);
     }//GEN-LAST:event_panel_304MouseEntered
 
     private void panel_304MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_304MouseExited
         // TODO add your handling code here:
-        Color clr  = new Color(0,51,51);
+        Color clr = new Color(0, 51, 51);
         panel_304.setBackground(clr);
     }//GEN-LAST:event_panel_304MouseExited
 
     private void panel_304MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_304MouseClicked
         // TODO add your handling code here:
-        
-        
+
+        controller.addFrame(this);
+        new RoomDetails(controller, hall, 4, "304").setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_panel_304MouseClicked
 
     private void panel_308MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_308MouseClicked
         // TODO add your handling code here:
+        controller.addFrame(this);
+        new RoomDetails(controller, hall, 4, "308").setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_panel_308MouseClicked
 
     private void panel_308MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_308MouseEntered
         // TODO add your handling code here:
-        Color clr = new Color(0,153,153);
+        Color clr = new Color(0, 153, 153);
         panel_308.setBackground(clr);
     }//GEN-LAST:event_panel_308MouseEntered
 
     private void panel_308MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_308MouseExited
         // TODO add your handling code here:
-        Color clr  = new Color(0,51,51);
+        Color clr = new Color(0, 51, 51);
         panel_308.setBackground(clr);
     }//GEN-LAST:event_panel_308MouseExited
 
     private void panel_303MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_303MouseClicked
         // TODO add your handling code here:
+        controller.addFrame(this);
+        new RoomDetails(controller,hall,4,"303").setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_panel_303MouseClicked
 
     private void panel_303MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_303MouseEntered
         // TODO add your handling code here:
-        Color clr = new Color(0,153,153);
+        Color clr = new Color(0, 153, 153);
         panel_303.setBackground(clr);
     }//GEN-LAST:event_panel_303MouseEntered
 
     private void panel_303MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_303MouseExited
         // TODO add your handling code here:
-        Color clr  = new Color(0,51,51);
+        Color clr = new Color(0, 51, 51);
         panel_303.setBackground(clr);
     }//GEN-LAST:event_panel_303MouseExited
 
     private void panel_302MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_302MouseClicked
         // TODO add your handling code here:
+        controller.addFrame(this);
+        new RoomDetails(controller,hall,4,"302").setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_panel_302MouseClicked
 
     private void panel_302MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_302MouseEntered
         // TODO add your handling code here:
-        Color clr = new Color(0,153,153);
+        Color clr = new Color(0, 153, 153);
         panel_302.setBackground(clr);
     }//GEN-LAST:event_panel_302MouseEntered
 
     private void panel_302MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_302MouseExited
         // TODO add your handling code here:
-        Color clr  = new Color(0,51,51);
+        Color clr = new Color(0, 51, 51);
         panel_302.setBackground(clr);
     }//GEN-LAST:event_panel_302MouseExited
 
     private void panel_301MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_301MouseEntered
         // TODO add your handling code here:
-        Color clr = new Color(0,153,153);
+        Color clr = new Color(0, 153, 153);
         panel_301.setBackground(clr);
     }//GEN-LAST:event_panel_301MouseEntered
 
     private void panel_301MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_301MouseExited
         // TODO add your handling code here:
-        Color clr  = new Color(0,51,51);
+        Color clr = new Color(0, 51, 51);
         panel_301.setBackground(clr);
     }//GEN-LAST:event_panel_301MouseExited
 
     private void panel_307MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_307MouseClicked
         // TODO add your handling code here:
+        controller.addFrame(this);
+        new RoomDetails(controller, hall, 4, "307").setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_panel_307MouseClicked
 
     private void panel_307MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_307MouseEntered
         // TODO add your handling code here:
-        Color clr = new Color(0,153,153);
+        Color clr = new Color(0, 153, 153);
         panel_307.setBackground(clr);
     }//GEN-LAST:event_panel_307MouseEntered
 
     private void panel_307MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_307MouseExited
         // TODO add your handling code here:
-        Color clr  = new Color(0,51,51);
+        Color clr = new Color(0, 51, 51);
         panel_307.setBackground(clr);
     }//GEN-LAST:event_panel_307MouseExited
 
     private void panel_306MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_306MouseClicked
         // TODO add your handling code here:
+        controller.addFrame(this);
+        new RoomDetails(controller, hall, 4, "306").setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_panel_306MouseClicked
 
     private void panel_306MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_306MouseEntered
         // TODO add your handling code here:
-        Color clr = new Color(0,153,153);
+        Color clr = new Color(0, 153, 153);
         panel_306.setBackground(clr);
     }//GEN-LAST:event_panel_306MouseEntered
 
     private void panel_306MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_306MouseExited
         // TODO add your handling code here:
-        Color clr  = new Color(0,51,51);
+        Color clr = new Color(0, 51, 51);
         panel_306.setBackground(clr);
     }//GEN-LAST:event_panel_306MouseExited
 
     private void panel_305MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_305MouseClicked
         // TODO add your handling code here:
+        controller.addFrame(this);
+        new RoomDetails(controller, hall, 4, "305").setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_panel_305MouseClicked
 
     private void panel_305MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_305MouseEntered
         // TODO add your handling code here:
-        Color clr = new Color(0,153,153);
+        Color clr = new Color(0, 153, 153);
         panel_305.setBackground(clr);
     }//GEN-LAST:event_panel_305MouseEntered
 
     private void panel_305MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_305MouseExited
         // TODO add your handling code here:
-        Color clr  = new Color(0,51,51);
+        Color clr = new Color(0, 51, 51);
         panel_305.setBackground(clr);
     }//GEN-LAST:event_panel_305MouseExited
+
+    private void panel_309MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_309MouseClicked
+        // TODO add your handling code here:
+        controller.addFrame(this);
+        new RoomDetails(controller, hall, 4, "309").setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panel_309MouseClicked
+
+    private void panel_301MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_301MouseClicked
+        // TODO add your handling code here:
+        controller.addFrame(this);
+        new RoomDetails(controller,hall,4,"301").setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panel_301MouseClicked
 
     /**
      * @param args the command line arguments
@@ -848,6 +937,7 @@ public class ThirdFloor extends javax.swing.JFrame {
     private javax.swing.JLabel label_;
     private javax.swing.JLabel label_hallconnect;
     private javax.swing.JLabel label_login;
+    private javax.swing.JLabel label_login1;
     private javax.swing.JLabel label_total_301;
     private javax.swing.JLabel label_total_302;
     private javax.swing.JLabel label_total_303;

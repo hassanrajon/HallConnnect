@@ -217,6 +217,9 @@ public class provostDashboard extends javax.swing.JFrame {
         panel_signupRequest.setBackground(new java.awt.Color(153, 0, 51));
         panel_signupRequest.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         panel_signupRequest.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_signupRequestMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panel_signupRequestMouseEntered(evt);
             }
@@ -483,6 +486,13 @@ public class provostDashboard extends javax.swing.JFrame {
         Color clr = new Color(153, 0, 51);
         panel_clearance.setBackground(clr);
     }//GEN-LAST:event_panel_clearanceMouseExited
+
+    private void panel_signupRequestMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_signupRequestMouseClicked
+        // TODO add your handling code here:
+        controller.addFrame(this);
+        new SignUpRequest(controller, username).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panel_signupRequestMouseClicked
 
     /**
      * @param args the command line arguments
