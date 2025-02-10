@@ -100,9 +100,8 @@ public class provostDashboard extends javax.swing.JFrame {
         panel_hallFee = new javax.swing.JPanel();
         label_home12 = new javax.swing.JLabel();
         label_home13 = new javax.swing.JLabel();
-        panel_addNotice = new javax.swing.JPanel();
+        panel_Notice = new javax.swing.JPanel();
         label_home5 = new javax.swing.JLabel();
-        label_home9 = new javax.swing.JLabel();
         panel_hallAsso = new javax.swing.JPanel();
         label_home6 = new javax.swing.JLabel();
         label_home10 = new javax.swing.JLabel();
@@ -289,29 +288,24 @@ public class provostDashboard extends javax.swing.JFrame {
 
         panel_parent.add(panel_hallFee, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 220, 310, 150));
 
-        panel_addNotice.setBackground(new java.awt.Color(153, 0, 51));
-        panel_addNotice.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        panel_addNotice.addMouseListener(new java.awt.event.MouseAdapter() {
+        panel_Notice.setBackground(new java.awt.Color(153, 0, 51));
+        panel_Notice.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panel_Notice.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                panel_addNoticeMouseEntered(evt);
+                panel_NoticeMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                panel_addNoticeMouseExited(evt);
+                panel_NoticeMouseExited(evt);
             }
         });
-        panel_addNotice.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panel_Notice.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label_home5.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
         label_home5.setForeground(new java.awt.Color(255, 255, 255));
         label_home5.setText("NOTICE");
-        panel_addNotice.add(label_home5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, -1, -1));
+        panel_Notice.add(label_home5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, -1, -1));
 
-        label_home9.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
-        label_home9.setForeground(new java.awt.Color(255, 255, 255));
-        label_home9.setText("ADD");
-        panel_addNotice.add(label_home9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, -1, -1));
-
-        panel_parent.add(panel_addNotice, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 310, 150));
+        panel_parent.add(panel_Notice, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 310, 150));
 
         panel_hallAsso.setBackground(new java.awt.Color(153, 0, 51));
         panel_hallAsso.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -432,11 +426,11 @@ public class provostDashboard extends javax.swing.JFrame {
         panel_complainBox.setBackground(clr);
     }//GEN-LAST:event_panel_complainBoxMouseEntered
 
-    private void panel_addNoticeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_addNoticeMouseEntered
+    private void panel_NoticeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_NoticeMouseEntered
         // TODO add your handling code here:
         Color clr = new Color(0, 153, 153);
-        panel_addNotice.setBackground(clr);
-    }//GEN-LAST:event_panel_addNoticeMouseEntered
+        panel_Notice.setBackground(clr);
+    }//GEN-LAST:event_panel_NoticeMouseEntered
 
     private void panel_hallAssoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_hallAssoMouseEntered
         // TODO add your handling code here:
@@ -457,11 +451,11 @@ public class provostDashboard extends javax.swing.JFrame {
         panel_signupRequest.setBackground(clr);
     }//GEN-LAST:event_panel_signupRequestMouseExited
 
-    private void panel_addNoticeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_addNoticeMouseExited
+    private void panel_NoticeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_NoticeMouseExited
         // TODO add your handling code here:
         Color clr = new Color(153, 0, 51);
-        panel_addNotice.setBackground(clr);
-    }//GEN-LAST:event_panel_addNoticeMouseExited
+        panel_Notice.setBackground(clr);
+    }//GEN-LAST:event_panel_NoticeMouseExited
 
     private void panel_hallFeeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_hallFeeMouseExited
         // TODO add your handling code here:
@@ -559,10 +553,9 @@ public class provostDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel label_home6;
     private javax.swing.JLabel label_home7;
     private javax.swing.JLabel label_home8;
-    private javax.swing.JLabel label_home9;
     private javax.swing.JLabel label_name;
     private javax.swing.JLabel label_post;
-    private javax.swing.JPanel panel_addNotice;
+    private javax.swing.JPanel panel_Notice;
     private javax.swing.JPanel panel_clearance;
     private javax.swing.JPanel panel_complainBox;
     private javax.swing.JPanel panel_hallAsso;
