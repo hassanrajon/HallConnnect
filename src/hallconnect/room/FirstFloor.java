@@ -5,6 +5,7 @@
 package hallconnect.room;
 
 import hallconnect.database.CentralController;
+import hallconnect.database.DbConnection;
 import hallconnect.provost.provostDashboard;
 import java.awt.Color;
 import java.sql.ResultSet;
@@ -12,6 +13,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -20,18 +23,54 @@ import javax.swing.JOptionPane;
 public class FirstFloor extends javax.swing.JFrame {
 
     private CentralController controller = new CentralController();
-private String hall;
+    private String hall;
+
+
     /**
      * Creates new form loginPage
      */
     public FirstFloor(CentralController controller, String hall) {
         this.controller = controller;
-        this.hall=hall;
+        this.hall = hall;
         initComponents();
+        fillinfo();
     }
 
     public FirstFloor() {
         initComponents();
+        fillinfo();
+
+    }
+
+    void fillinfo() {
+
+        try {
+            Connection con = DbConnection.getConnection();
+            PreparedStatement pst = con.prepareStatement(
+                    "SELECT room_no, COUNT(*) FROM room_details WHERE hall_name=? AND room_no IN (101, 102, 103, 107, 108, 109) GROUP BY room_no"
+            );
+            pst.setString(1, hall);
+            ResultSet rs = pst.executeQuery();
+            // Store room counts in a map
+            Map<String, Integer> roomCounts = new HashMap<>();
+            while (rs.next()) {
+                roomCounts.put(rs.getString("room_no"), rs.getInt(2)); // Room number -> Occupied count
+            }
+            // Update labels dynamically (Assuming each room has a max capacity of 6)
+            label_vacant_101.setText(String.valueOf(6 - roomCounts.getOrDefault("101", 0)));
+            label_vacant_102.setText(String.valueOf(6 - roomCounts.getOrDefault("102", 0)));
+            label_vacant_103.setText(String.valueOf(6 - roomCounts.getOrDefault("103", 0)));
+            label_vacant_107.setText(String.valueOf(6 - roomCounts.getOrDefault("107", 0)));
+            label_vacant_108.setText(String.valueOf(6 - roomCounts.getOrDefault("108", 0)));
+            label_vacant_109.setText(String.valueOf(6 - roomCounts.getOrDefault("109", 0)));
+
+            // Close resources
+            rs.close();
+            pst.close();
+            con.close();
+
+        } catch (Exception e) {
+        }
     }
 
     /**
@@ -49,7 +88,7 @@ private String hall;
         btn_back = new javax.swing.JButton();
         label_login = new javax.swing.JLabel();
         panel_109 = new javax.swing.JPanel();
-        jLabel31 = new javax.swing.JLabel();
+        label_109 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         label_total_109 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
@@ -59,32 +98,33 @@ private String hall;
         jLabel1 = new javax.swing.JLabel();
         label_vacant_107 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        label_107 = new javax.swing.JLabel();
         label_total_107 = new javax.swing.JLabel();
         panel_108 = new javax.swing.JPanel();
-        jLabel26 = new javax.swing.JLabel();
+        label_108 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         label_total_108 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         label_vacant_108 = new javax.swing.JLabel();
         panel_103 = new javax.swing.JPanel();
-        jLabel46 = new javax.swing.JLabel();
+        label_103 = new javax.swing.JLabel();
         jLabel47 = new javax.swing.JLabel();
         label_total_103 = new javax.swing.JLabel();
         jLabel49 = new javax.swing.JLabel();
         label_vacant_103 = new javax.swing.JLabel();
         panel_102 = new javax.swing.JPanel();
-        jLabel41 = new javax.swing.JLabel();
+        label_102 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
         label_total_102 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
         label_vacant_102 = new javax.swing.JLabel();
         panel_101 = new javax.swing.JPanel();
-        label_ = new javax.swing.JLabel();
+        label_101 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
         label_total_101 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
         label_vacant_101 = new javax.swing.JLabel();
+        label_login1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -132,14 +172,17 @@ private String hall;
         });
         panel_parent.add(btn_back, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 670, 140, 60));
 
-        label_login.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
+        label_login.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         label_login.setForeground(new java.awt.Color(255, 255, 255));
-        label_login.setText("FIRST FLOOR");
-        panel_parent.add(label_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 390, 290, 50));
+        label_login.setText("click to see room details");
+        panel_parent.add(label_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 440, 350, 50));
 
         panel_109.setBackground(new java.awt.Color(0, 51, 51));
         panel_109.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         panel_109.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_109MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panel_109MouseEntered(evt);
             }
@@ -149,30 +192,30 @@ private String hall;
         });
         panel_109.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel31.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
-        jLabel31.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel31.setText("109");
-        panel_109.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 80, 30));
+        label_109.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
+        label_109.setForeground(new java.awt.Color(255, 255, 255));
+        label_109.setText("109");
+        panel_109.add(label_109, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 80, 30));
 
         jLabel32.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel32.setForeground(new java.awt.Color(255, 255, 255));
         jLabel32.setText("TOTAL:");
-        panel_109.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 110, 30));
+        panel_109.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 110, 30));
 
         label_total_109.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_total_109.setForeground(new java.awt.Color(255, 255, 255));
-        label_total_109.setText("TOTAL:");
-        panel_109.add(label_total_109, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 110, 30));
+        label_total_109.setText("6");
+        panel_109.add(label_total_109, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 110, 30));
 
         jLabel34.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel34.setForeground(new java.awt.Color(255, 255, 255));
         jLabel34.setText("VACANT:");
-        panel_109.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, 30));
+        panel_109.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 130, 30));
 
         label_vacant_109.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_vacant_109.setForeground(new java.awt.Color(255, 255, 255));
-        label_vacant_109.setText("TOTAL:");
-        panel_109.add(label_vacant_109, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 110, 30));
+        label_vacant_109.setText("0");
+        panel_109.add(label_vacant_109, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 110, 30));
 
         panel_parent.add(panel_109, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 560, 270, 170));
 
@@ -207,27 +250,27 @@ private String hall;
         jLabel1.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("VACANT:");
-        panel_107.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, 30));
+        panel_107.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 130, 30));
 
         label_vacant_107.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_vacant_107.setForeground(new java.awt.Color(255, 255, 255));
-        label_vacant_107.setText("TOTAL:");
-        panel_107.add(label_vacant_107, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 110, 30));
+        label_vacant_107.setText("0");
+        panel_107.add(label_vacant_107, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 110, 30));
 
         jLabel3.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("TOTAL:");
-        panel_107.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 110, 30));
+        panel_107.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 110, 30));
 
-        jLabel4.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("107");
-        panel_107.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 80, 30));
+        label_107.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
+        label_107.setForeground(new java.awt.Color(255, 255, 255));
+        label_107.setText("107");
+        panel_107.add(label_107, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 80, 30));
 
         label_total_107.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_total_107.setForeground(new java.awt.Color(255, 255, 255));
-        label_total_107.setText("TOTAL:");
-        panel_107.add(label_total_107, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 110, 30));
+        label_total_107.setText("6");
+        panel_107.add(label_total_107, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 110, 30));
 
         panel_parent.add(panel_107, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 270, 170));
 
@@ -246,30 +289,30 @@ private String hall;
         });
         panel_108.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel26.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
-        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel26.setText("108");
-        panel_108.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 80, 30));
+        label_108.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
+        label_108.setForeground(new java.awt.Color(255, 255, 255));
+        label_108.setText("108");
+        panel_108.add(label_108, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 80, 30));
 
         jLabel27.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(255, 255, 255));
         jLabel27.setText("TOTAL:");
-        panel_108.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 110, 30));
+        panel_108.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 110, 30));
 
         label_total_108.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_total_108.setForeground(new java.awt.Color(255, 255, 255));
-        label_total_108.setText("TOTAL:");
-        panel_108.add(label_total_108, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 110, 30));
+        label_total_108.setText("6");
+        panel_108.add(label_total_108, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 110, 30));
 
         jLabel29.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel29.setForeground(new java.awt.Color(255, 255, 255));
         jLabel29.setText("VACANT:");
-        panel_108.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, 30));
+        panel_108.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 130, 30));
 
         label_vacant_108.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_vacant_108.setForeground(new java.awt.Color(255, 255, 255));
-        label_vacant_108.setText("TOTAL:");
-        panel_108.add(label_vacant_108, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 110, 30));
+        label_vacant_108.setText("0");
+        panel_108.add(label_vacant_108, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 110, 30));
 
         panel_parent.add(panel_108, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, 270, 170));
 
@@ -288,30 +331,30 @@ private String hall;
         });
         panel_103.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel46.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
-        jLabel46.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel46.setText("103");
-        panel_103.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 80, 30));
+        label_103.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
+        label_103.setForeground(new java.awt.Color(255, 255, 255));
+        label_103.setText("103");
+        panel_103.add(label_103, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 80, 30));
 
         jLabel47.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel47.setForeground(new java.awt.Color(255, 255, 255));
         jLabel47.setText("TOTAL:");
-        panel_103.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 110, 30));
+        panel_103.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 110, 30));
 
         label_total_103.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_total_103.setForeground(new java.awt.Color(255, 255, 255));
-        label_total_103.setText("TOTAL:");
-        panel_103.add(label_total_103, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 110, 30));
+        label_total_103.setText("6");
+        panel_103.add(label_total_103, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 110, 30));
 
         jLabel49.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel49.setForeground(new java.awt.Color(255, 255, 255));
         jLabel49.setText("VACANT:");
-        panel_103.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, 30));
+        panel_103.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 130, 30));
 
         label_vacant_103.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_vacant_103.setForeground(new java.awt.Color(255, 255, 255));
-        label_vacant_103.setText("TOTAL:");
-        panel_103.add(label_vacant_103, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 110, 30));
+        label_vacant_103.setText("0");
+        panel_103.add(label_vacant_103, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 110, 30));
 
         panel_parent.add(panel_103, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 180, 280, 170));
 
@@ -330,36 +373,39 @@ private String hall;
         });
         panel_102.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel41.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
-        jLabel41.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel41.setText("102");
-        panel_102.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 80, 30));
+        label_102.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
+        label_102.setForeground(new java.awt.Color(255, 255, 255));
+        label_102.setText("102");
+        panel_102.add(label_102, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 80, 30));
 
         jLabel42.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel42.setForeground(new java.awt.Color(255, 255, 255));
         jLabel42.setText("TOTAL:");
-        panel_102.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 110, 30));
+        panel_102.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 110, 30));
 
         label_total_102.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_total_102.setForeground(new java.awt.Color(255, 255, 255));
-        label_total_102.setText("TOTAL:");
-        panel_102.add(label_total_102, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 110, 30));
+        label_total_102.setText("6");
+        panel_102.add(label_total_102, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 110, 30));
 
         jLabel44.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel44.setForeground(new java.awt.Color(255, 255, 255));
         jLabel44.setText("VACANT:");
-        panel_102.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, 30));
+        panel_102.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 130, 30));
 
         label_vacant_102.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_vacant_102.setForeground(new java.awt.Color(255, 255, 255));
-        label_vacant_102.setText("TOTAL:");
-        panel_102.add(label_vacant_102, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 110, 30));
+        label_vacant_102.setText("0");
+        panel_102.add(label_vacant_102, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 110, 30));
 
         panel_parent.add(panel_102, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 370, 280, 170));
 
         panel_101.setBackground(new java.awt.Color(0, 51, 51));
         panel_101.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         panel_101.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_101MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panel_101MouseEntered(evt);
             }
@@ -369,32 +415,37 @@ private String hall;
         });
         panel_101.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        label_.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
-        label_.setForeground(new java.awt.Color(255, 255, 255));
-        label_.setText("101");
-        panel_101.add(label_, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 80, 30));
+        label_101.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
+        label_101.setForeground(new java.awt.Color(255, 255, 255));
+        label_101.setText("101");
+        panel_101.add(label_101, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 80, 30));
 
         jLabel37.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel37.setForeground(new java.awt.Color(255, 255, 255));
         jLabel37.setText("TOTAL:");
-        panel_101.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 110, 30));
+        panel_101.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 110, 30));
 
         label_total_101.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_total_101.setForeground(new java.awt.Color(255, 255, 255));
-        label_total_101.setText("TOTAL:");
-        panel_101.add(label_total_101, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 110, 30));
+        label_total_101.setText("6");
+        panel_101.add(label_total_101, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 110, 30));
 
         jLabel39.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel39.setForeground(new java.awt.Color(255, 255, 255));
         jLabel39.setText("VACANT:");
-        panel_101.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, 30));
+        panel_101.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 130, 30));
 
         label_vacant_101.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_vacant_101.setForeground(new java.awt.Color(255, 255, 255));
-        label_vacant_101.setText("TOTAL:");
-        panel_101.add(label_vacant_101, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 110, 30));
+        label_vacant_101.setText("0");
+        panel_101.add(label_vacant_101, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 110, 30));
 
         panel_parent.add(panel_101, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 560, 280, 170));
+
+        label_login1.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
+        label_login1.setForeground(new java.awt.Color(255, 255, 255));
+        label_login1.setText("FIRST FLOOR");
+        panel_parent.add(label_login1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 390, 290, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -436,93 +487,119 @@ private String hall;
 
     private void panel_109MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_109MouseEntered
         // TODO add your handling code here:
-        Color clr = new Color(0,153,153);
+        Color clr = new Color(0, 153, 153);
         panel_109.setBackground(clr);
     }//GEN-LAST:event_panel_109MouseEntered
 
     private void panel_109MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_109MouseExited
         // TODO add your handling code here:
-        Color clr  = new Color(0,51,51);
+        Color clr = new Color(0, 51, 51);
         panel_109.setBackground(clr);
     }//GEN-LAST:event_panel_109MouseExited
 
     private void panel_107MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_107MouseEntered
         // TODO add your handling code here:
-        Color clr = new Color(0,153,153);
+        Color clr = new Color(0, 153, 153);
         panel_107.setBackground(clr);
     }//GEN-LAST:event_panel_107MouseEntered
 
     private void panel_107MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_107MouseExited
         // TODO add your handling code here:
-        Color clr  = new Color(0,51,51);
+        Color clr = new Color(0, 51, 51);
         panel_107.setBackground(clr);
     }//GEN-LAST:event_panel_107MouseExited
 
     private void panel_107MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_107MouseClicked
         // TODO add your handling code here:
-        
-        
+        controller.addFrame(this);
+        new RoomDetails(controller,hall,6,"107").setVisible(true);
+        this.setVisible(false);
+
+
     }//GEN-LAST:event_panel_107MouseClicked
 
     private void panel_108MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_108MouseClicked
         // TODO add your handling code here:
+        controller.addFrame(this);
+        new RoomDetails(controller,hall,6,"108").setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_panel_108MouseClicked
 
     private void panel_108MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_108MouseEntered
         // TODO add your handling code here:
-        Color clr = new Color(0,153,153);
+        Color clr = new Color(0, 153, 153);
         panel_108.setBackground(clr);
     }//GEN-LAST:event_panel_108MouseEntered
 
     private void panel_108MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_108MouseExited
         // TODO add your handling code here:
-        Color clr  = new Color(0,51,51);
+        Color clr = new Color(0, 51, 51);
         panel_108.setBackground(clr);
     }//GEN-LAST:event_panel_108MouseExited
 
     private void panel_103MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_103MouseClicked
         // TODO add your handling code here:
+        controller.addFrame(this);
+        new RoomDetails(controller,hall,6,"103").setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_panel_103MouseClicked
 
     private void panel_103MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_103MouseEntered
         // TODO add your handling code here:
-        Color clr = new Color(0,153,153);
+        Color clr = new Color(0, 153, 153);
         panel_103.setBackground(clr);
     }//GEN-LAST:event_panel_103MouseEntered
 
     private void panel_103MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_103MouseExited
         // TODO add your handling code here:
-        Color clr  = new Color(0,51,51);
+        Color clr = new Color(0, 51, 51);
         panel_103.setBackground(clr);
     }//GEN-LAST:event_panel_103MouseExited
 
     private void panel_102MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_102MouseClicked
         // TODO add your handling code here:
+        controller.addFrame(this);
+        new RoomDetails(controller,hall,6,"102").setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_panel_102MouseClicked
 
     private void panel_102MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_102MouseEntered
         // TODO add your handling code here:
-        Color clr = new Color(0,153,153);
+        Color clr = new Color(0, 153, 153);
         panel_102.setBackground(clr);
     }//GEN-LAST:event_panel_102MouseEntered
 
     private void panel_102MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_102MouseExited
         // TODO add your handling code here:
-        Color clr  = new Color(0,51,51);
+        Color clr = new Color(0, 51, 51);
         panel_102.setBackground(clr);
     }//GEN-LAST:event_panel_102MouseExited
 
     private void panel_101MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_101MouseEntered
         // TODO add your handling code here:
-        Color clr = new Color(0,153,153);
+        Color clr = new Color(0, 153, 153);
         panel_101.setBackground(clr);
     }//GEN-LAST:event_panel_101MouseEntered
 
     private void panel_101MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_101MouseExited
         // TODO add your handling code here:
-        Color clr  = new Color(0,51,51);
+        Color clr = new Color(0, 51, 51);
         panel_101.setBackground(clr);
     }//GEN-LAST:event_panel_101MouseExited
+
+    private void panel_109MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_109MouseClicked
+        // TODO add your handling code here:
+        controller.addFrame(this);
+        new RoomDetails(controller,hall,6,"109").setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panel_109MouseClicked
+
+    private void panel_101MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_101MouseClicked
+        // TODO add your handling code here:
+        controller.addFrame(this);
+        new RoomDetails(controller,hall,6,"101").setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panel_101MouseClicked
 
     /**
      * @param args the command line arguments
@@ -578,26 +655,27 @@ private String hall;
     private javax.swing.JButton btn_back;
     private javax.swing.JButton btn_exit;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel39;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel44;
-    private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel49;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel label_;
+    private javax.swing.JLabel label_101;
+    private javax.swing.JLabel label_102;
+    private javax.swing.JLabel label_103;
+    private javax.swing.JLabel label_107;
+    private javax.swing.JLabel label_108;
+    private javax.swing.JLabel label_109;
     private javax.swing.JLabel label_hallconnect;
     private javax.swing.JLabel label_login;
+    private javax.swing.JLabel label_login1;
     private javax.swing.JLabel label_total_101;
     private javax.swing.JLabel label_total_102;
     private javax.swing.JLabel label_total_103;

@@ -141,22 +141,17 @@ public class SignUp extends javax.swing.JFrame {
         txt_email = new javax.swing.JTextField();
         label_home11 = new javax.swing.JLabel();
         label_home12 = new javax.swing.JLabel();
-        combo_hall = new javax.swing.JComboBox<>();
-        label_home13 = new javax.swing.JLabel();
-        txt_localGuardianContact = new javax.swing.JTextField();
-        label_home14 = new javax.swing.JLabel();
-        txt_localGuardianRelation = new javax.swing.JTextField();
+        combo_dept = new javax.swing.JComboBox<>();
         label_home15 = new javax.swing.JLabel();
-        label_home16 = new javax.swing.JLabel();
         label_home17 = new javax.swing.JLabel();
         txt_dob = new com.toedter.calendar.JDateChooser();
-        label_home18 = new javax.swing.JLabel();
         btn_login = new javax.swing.JButton();
         btn_submit = new javax.swing.JButton();
         btn_back = new javax.swing.JButton();
         txt_session = new com.toedter.calendar.JYearChooser();
         combo_blood = new javax.swing.JComboBox<>();
         label_home19 = new javax.swing.JLabel();
+        combo_hall = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -215,7 +210,7 @@ public class SignUp extends javax.swing.JFrame {
                 txt_usernameActionPerformed(evt);
             }
         });
-        panel_parent1.add(txt_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 460, 280, 40));
+        panel_parent1.add(txt_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 550, 280, 40));
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 153));
 
@@ -245,31 +240,31 @@ public class SignUp extends javax.swing.JFrame {
         label_home7.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         label_home7.setForeground(new java.awt.Color(255, 255, 255));
         label_home7.setText("BLOOD  :");
-        panel_parent1.add(label_home7, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 320, -1, 30));
+        panel_parent1.add(label_home7, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 370, -1, 30));
         panel_parent1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 193, 260, 10));
 
         label_home8.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         label_home8.setForeground(new java.awt.Color(255, 255, 255));
         label_home8.setText("USERNAME :");
-        panel_parent1.add(label_home8, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 460, -1, 30));
+        panel_parent1.add(label_home8, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 550, -1, 30));
 
         label_home9.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         label_home9.setForeground(new java.awt.Color(255, 255, 255));
         label_home9.setText("PASS :");
-        panel_parent1.add(label_home9, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 460, -1, 30));
+        panel_parent1.add(label_home9, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 550, -1, 30));
 
         label_home5.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         label_home5.setForeground(new java.awt.Color(255, 255, 255));
         label_home5.setText("DATE OF BIRTH :");
-        panel_parent1.add(label_home5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, -1, 30));
+        panel_parent1.add(label_home5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, -1, 30));
 
         txt_name.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        panel_parent1.add(txt_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, 280, 40));
+        panel_parent1.add(txt_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, 280, 40));
 
         label_home6.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         label_home6.setForeground(new java.awt.Color(255, 255, 255));
         label_home6.setText("REG :");
-        panel_parent1.add(label_home6, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 240, -1, 30));
+        panel_parent1.add(label_home6, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 260, -1, 30));
 
         txt_reg.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         txt_reg.addActionListener(new java.awt.event.ActionListener() {
@@ -277,26 +272,26 @@ public class SignUp extends javax.swing.JFrame {
                 txt_regActionPerformed(evt);
             }
         });
-        panel_parent1.add(txt_reg, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 240, 280, 40));
+        panel_parent1.add(txt_reg, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 260, 280, 40));
 
         label_home4.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         label_home4.setForeground(new java.awt.Color(255, 255, 255));
         label_home4.setText("SESSION :");
-        panel_parent1.add(label_home4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 240, -1, 30));
+        panel_parent1.add(label_home4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 260, -1, 30));
 
         txt_pass.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        panel_parent1.add(txt_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 460, 280, 40));
+        panel_parent1.add(txt_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 550, 280, 40));
 
         txt_ConPass.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        panel_parent1.add(txt_ConPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 460, 280, 40));
+        panel_parent1.add(txt_ConPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 540, 280, 40));
 
         label_home10.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         label_home10.setForeground(new java.awt.Color(255, 255, 255));
         label_home10.setText("CONTACT NO :");
-        panel_parent1.add(label_home10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 380, -1, 30));
+        panel_parent1.add(label_home10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 460, -1, 30));
 
         txt_contact.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        panel_parent1.add(txt_contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 380, 280, 40));
+        panel_parent1.add(txt_contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 460, 280, 40));
 
         txt_email.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         txt_email.addActionListener(new java.awt.event.ActionListener() {
@@ -304,65 +299,34 @@ public class SignUp extends javax.swing.JFrame {
                 txt_emailActionPerformed(evt);
             }
         });
-        panel_parent1.add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 380, 280, 40));
+        panel_parent1.add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 460, 280, 40));
 
         label_home11.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         label_home11.setForeground(new java.awt.Color(255, 255, 255));
         label_home11.setText("E-MAIL :");
-        panel_parent1.add(label_home11, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 390, -1, 30));
+        panel_parent1.add(label_home11, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 470, -1, 30));
 
         label_home12.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         label_home12.setForeground(new java.awt.Color(255, 255, 255));
-        label_home12.setText("SELECT HALL:");
-        panel_parent1.add(label_home12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 390, -1, 30));
+        label_home12.setText("HALL:");
+        panel_parent1.add(label_home12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 460, -1, 30));
 
-        combo_hall.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        combo_hall.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BANGABONDHU HALL", "MUKTIJODDHA HALL", "BANGAMATA HALL", " " }));
-        panel_parent1.add(combo_hall, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 380, 280, 40));
-
-        label_home13.setFont(new java.awt.Font("Colonna MT", 1, 18)); // NOI18N
-        label_home13.setForeground(new java.awt.Color(0, 255, 102));
-        label_home13.setText("(EXAMPLE: 2021-2022)");
-        panel_parent1.add(label_home13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 300, -1, 30));
-
-        txt_localGuardianContact.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        panel_parent1.add(txt_localGuardianContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 530, 280, 40));
-
-        label_home14.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        label_home14.setForeground(new java.awt.Color(255, 255, 255));
-        label_home14.setText("RELATION WITH LOCAL GUARDIAN :");
-        panel_parent1.add(label_home14, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 540, -1, 30));
-
-        txt_localGuardianRelation.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        txt_localGuardianRelation.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_localGuardianRelationActionPerformed(evt);
-            }
-        });
-        panel_parent1.add(txt_localGuardianRelation, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 530, 280, 40));
+        combo_dept.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        combo_dept.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CSE", "EEE", "CIVIL" }));
+        panel_parent1.add(combo_dept, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 360, 280, 40));
 
         label_home15.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         label_home15.setForeground(new java.awt.Color(255, 255, 255));
-        label_home15.setText("LOCAL GUARDIAN CONTACT NO :");
-        panel_parent1.add(label_home15, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 540, -1, 30));
-
-        label_home16.setFont(new java.awt.Font("Colonna MT", 1, 18)); // NOI18N
-        label_home16.setForeground(new java.awt.Color(0, 255, 102));
-        label_home16.setText("(OPTIONAL)");
-        panel_parent1.add(label_home16, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 580, -1, 30));
+        label_home15.setText("DEPARTMENT:");
+        panel_parent1.add(label_home15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 360, -1, 30));
 
         label_home17.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         label_home17.setForeground(new java.awt.Color(255, 255, 255));
         label_home17.setText("NAME :");
-        panel_parent1.add(label_home17, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, -1, 30));
+        panel_parent1.add(label_home17, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, -1, 30));
 
         txt_dob.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        panel_parent1.add(txt_dob, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 310, 280, 40));
-
-        label_home18.setFont(new java.awt.Font("Colonna MT", 1, 18)); // NOI18N
-        label_home18.setForeground(new java.awt.Color(0, 255, 102));
-        label_home18.setText("(OPTIONAL)");
-        panel_parent1.add(label_home18, new org.netbeans.lib.awtextra.AbsoluteConstraints(1270, 580, -1, 30));
+        panel_parent1.add(txt_dob, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 360, 280, 40));
 
         btn_login.setBackground(new java.awt.Color(102, 102, 102));
         btn_login.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
@@ -405,16 +369,20 @@ public class SignUp extends javax.swing.JFrame {
 
         txt_session.setMinimum(0);
         txt_session.setValue(0);
-        panel_parent1.add(txt_session, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 240, 100, 40));
+        panel_parent1.add(txt_session, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 260, 100, 40));
 
         combo_blood.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         combo_blood.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AB+", "AB-", "A+", "A-", "B+", "B-", "O+", "O-" }));
-        panel_parent1.add(combo_blood, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 310, 280, 40));
+        panel_parent1.add(combo_blood, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 360, 280, 40));
 
         label_home19.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         label_home19.setForeground(new java.awt.Color(255, 255, 255));
         label_home19.setText("CONFIRM PASS :");
-        panel_parent1.add(label_home19, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 460, -1, 30));
+        panel_parent1.add(label_home19, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 550, -1, 30));
+
+        combo_hall.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        combo_hall.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BANGABONDHU HALL", "MUKTIJODDHA HALL", "BANGAMATA HALL" }));
+        panel_parent1.add(combo_hall, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 460, 280, 40));
 
         panel_parent.add(panel_parent1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, 800));
 
@@ -436,10 +404,6 @@ public class SignUp extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_emailActionPerformed
 
-    private void txt_localGuardianRelationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_localGuardianRelationActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_localGuardianRelationActionPerformed
-
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
         // TODO add your handling code here:
         controller.addFrame(this);
@@ -460,20 +424,20 @@ public class SignUp extends javax.swing.JFrame {
               dob = formate.format(txt_dob.getDate());
            }
 
-           String blood=combo_hall.getSelectedItem().toString();
+           String blood=combo_blood.getSelectedItem().toString();
            String contact = txt_contact.getText();
            String email = txt_email.getText();
            String username = txt_username.getText();
            String pass = txt_pass.getText();
            String con_pass = txt_ConPass.getText();
-           String local_guardian_contact=txt_localGuardianContact.getText();
-           String local_guardian_relation=txt_localGuardianRelation.getText();
+           String dept=combo_dept.getSelectedItem().toString();
            String hall=combo_hall.getSelectedItem().toString();
         if(validation(name, reg, session, dob, blood, contact, email, username, pass, con_pass)){
           if(validUsername(username)){
           controller.addFrame(this);
-          SecuirityForm sf = new SecuirityForm(controller,hall,name, reg, session, dob, blood, contact, email, username, pass,local_guardian_contact,local_guardian_relation);
+          SecuirityForm sf = new SecuirityForm(controller,hall,dept,name, reg, session, dob, blood, contact, email, username, pass);
           sf.setVisible(true);
+          this.dispose();
           }
         }
     }//GEN-LAST:event_btn_submitActionPerformed
@@ -528,6 +492,7 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JButton btn_login;
     private javax.swing.JButton btn_submit;
     private javax.swing.JComboBox<String> combo_blood;
+    private javax.swing.JComboBox<String> combo_dept;
     private javax.swing.JComboBox<String> combo_hall;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -538,12 +503,8 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JLabel label_home10;
     private javax.swing.JLabel label_home11;
     private javax.swing.JLabel label_home12;
-    private javax.swing.JLabel label_home13;
-    private javax.swing.JLabel label_home14;
     private javax.swing.JLabel label_home15;
-    private javax.swing.JLabel label_home16;
     private javax.swing.JLabel label_home17;
-    private javax.swing.JLabel label_home18;
     private javax.swing.JLabel label_home19;
     private javax.swing.JLabel label_home4;
     private javax.swing.JLabel label_home5;
@@ -559,8 +520,6 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JTextField txt_contact;
     private com.toedter.calendar.JDateChooser txt_dob;
     private javax.swing.JTextField txt_email;
-    private javax.swing.JTextField txt_localGuardianContact;
-    private javax.swing.JTextField txt_localGuardianRelation;
     private javax.swing.JTextField txt_name;
     private javax.swing.JPasswordField txt_pass;
     private javax.swing.JTextField txt_reg;

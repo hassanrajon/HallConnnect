@@ -7,6 +7,7 @@ package hallconnect.signup;
 import hallconnect.database.CentralController;
 import hallconnect.database.DbConnection;
 import hallconnect.provost.provostDashboard;
+import hallconnect.student.StudentDashboard;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -211,13 +212,17 @@ public class loginPage extends javax.swing.JFrame {
         try {
             Connection con = DbConnection.getConnection();
             PreparedStatement pst;
+
             if (role.equals("STUDENT")) {
                 pst = con.prepareStatement("SELECT * FROM student where username=? AND pass=?");
+
             } else {
                 pst = con.prepareStatement("SELECT * FROM provost where username=? AND pass=?");
+
             }
             pst.setString(1, username);
             pst.setString(2, pass);
+
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 JOptionPane.showMessageDialog(this, "LOGIN SUCCESSFUL");
@@ -225,10 +230,26 @@ public class loginPage extends javax.swing.JFrame {
                     provostDashboard pv = new provostDashboard(username);
                     pv.setVisible(true);
                     this.dispose();
+                } else {
+                    new StudentDashboard().setVisible(true);
+                    this.dispose();
+
                 }
 
             } else {
-                JOptionPane.showMessageDialog(this, "INVALID USERNAME ,PASSWORD OR ROLE");
+                if (role.equals("STUDENT")) {
+
+                    PreparedStatement pst2 = con.prepareStatement("SELECT * FROM pending where username=? AND pass=?");
+                    pst2.setString(1, username);
+                    pst2.setString(2, pass);
+                    ResultSet rs2 = pst2.executeQuery();
+                    if (rs2.next()) {
+
+                        JOptionPane.showMessageDialog(this, "YOUR REQUEST IS IN PENDING, PLEASE WAIT");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "INVALID USERNAME AND PASSWORD");
+                }
             }
 
         } catch (Exception e) {

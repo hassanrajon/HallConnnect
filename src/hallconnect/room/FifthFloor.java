@@ -12,6 +12,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import java.util.Map;
+import java.util.HashMap;
+import hallconnect.database.DbConnection;
 
 /**
  *
@@ -29,11 +32,51 @@ public class FifthFloor extends javax.swing.JFrame {
         this.hall=hall;
         this.controller = controller;
         initComponents();
+        fillinfo();
+        
     }
 
     public FifthFloor() {
         initComponents();
+        fillinfo();
     }
+void fillinfo() {
+    try {
+        Connection con = DbConnection.getConnection();
+        PreparedStatement pst = con.prepareStatement(
+            "SELECT room_no, COUNT(*) FROM room_details WHERE hall_name=? AND room_no IN (501, 502, 503, 504, 505, 506, 507, 508, 509) GROUP BY room_no"
+        );
+        pst.setString(1, hall);
+        ResultSet rs = pst.executeQuery();
+
+        // Store room counts in a map
+        Map<String, Integer> roomCounts = new HashMap<>();
+        while (rs.next()) {
+            roomCounts.put(rs.getString("room_no"), rs.getInt(2)); // Room number -> Occupied count
+        }
+
+        // Update labels dynamically (Assuming each room has a max capacity of 4)
+        label_vacant_501.setText(String.valueOf(4 - roomCounts.getOrDefault("501", 0)));
+        label_vacant_502.setText(String.valueOf(4 - roomCounts.getOrDefault("502", 0)));
+        label_vacant_503.setText(String.valueOf(4 - roomCounts.getOrDefault("503", 0)));
+
+        label_vacant_504.setText(String.valueOf(4 - roomCounts.getOrDefault("504", 0)));
+        label_vacant_505.setText(String.valueOf(4 - roomCounts.getOrDefault("505", 0)));
+        label_vacant_506.setText(String.valueOf(4 - roomCounts.getOrDefault("506", 0)));
+
+        label_vacant_507.setText(String.valueOf(4 - roomCounts.getOrDefault("507", 0)));
+        label_vacant_508.setText(String.valueOf(4 - roomCounts.getOrDefault("508", 0)));
+        label_vacant_509.setText(String.valueOf(4 - roomCounts.getOrDefault("509", 0)));
+
+        // Close resources
+        rs.close();
+        pst.close();
+        con.close();
+
+    } catch (Exception e) {
+        e.printStackTrace(); // Print the error for debugging
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -49,61 +92,62 @@ public class FifthFloor extends javax.swing.JFrame {
         label_hallconnect = new javax.swing.JLabel();
         btn_back = new javax.swing.JButton();
         label_login = new javax.swing.JLabel();
-        panel_309 = new javax.swing.JPanel();
+        panel_509 = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         label_total_509 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
         label_vacant_509 = new javax.swing.JLabel();
         btn_exit = new javax.swing.JButton();
-        panel_304 = new javax.swing.JPanel();
+        panel_504 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         label_vacant_504 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         label_total_504 = new javax.swing.JLabel();
-        panel_308 = new javax.swing.JPanel();
+        panel_508 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         label_total_508 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         label_vacant_508 = new javax.swing.JLabel();
-        panel_303 = new javax.swing.JPanel();
+        panel_503 = new javax.swing.JPanel();
         jLabel46 = new javax.swing.JLabel();
         jLabel47 = new javax.swing.JLabel();
         label_total_503 = new javax.swing.JLabel();
         jLabel49 = new javax.swing.JLabel();
         label_vacant_503 = new javax.swing.JLabel();
-        panel_302 = new javax.swing.JPanel();
+        panel_502 = new javax.swing.JPanel();
         jLabel41 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
         label_total_502 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
         label_vacant_502 = new javax.swing.JLabel();
-        panel_301 = new javax.swing.JPanel();
+        panel_501 = new javax.swing.JPanel();
         label_ = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
         label_total_501 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
         label_vacant_501 = new javax.swing.JLabel();
-        panel_307 = new javax.swing.JPanel();
+        panel_507 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         label_vacant_507 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         label_total_507 = new javax.swing.JLabel();
-        panel_306 = new javax.swing.JPanel();
+        panel_506 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         label_vacant_506 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         label_total_506 = new javax.swing.JLabel();
-        panel_305 = new javax.swing.JPanel();
+        panel_505 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         label_vacant_505 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         label_total_505 = new javax.swing.JLabel();
+        label_login1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -154,46 +198,49 @@ public class FifthFloor extends javax.swing.JFrame {
         label_login.setFont(new java.awt.Font("Arial Black", 1, 48)); // NOI18N
         label_login.setForeground(new java.awt.Color(255, 255, 255));
         label_login.setText("FIFTH FLOOR");
-        panel_parent.add(label_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 500, 450, 50));
+        panel_parent.add(label_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 500, 450, 50));
 
-        panel_309.setBackground(new java.awt.Color(0, 51, 51));
-        panel_309.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        panel_309.addMouseListener(new java.awt.event.MouseAdapter() {
+        panel_509.setBackground(new java.awt.Color(0, 51, 51));
+        panel_509.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        panel_509.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_509MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                panel_309MouseEntered(evt);
+                panel_509MouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                panel_309MouseExited(evt);
+                panel_509MouseExited(evt);
             }
         });
-        panel_309.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panel_509.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel31.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(255, 255, 255));
         jLabel31.setText("509");
-        panel_309.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 80, 30));
+        panel_509.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 80, 30));
 
         jLabel32.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel32.setForeground(new java.awt.Color(255, 255, 255));
         jLabel32.setText("TOTAL:");
-        panel_309.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 110, 30));
+        panel_509.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 110, 30));
 
         label_total_509.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_total_509.setForeground(new java.awt.Color(255, 255, 255));
-        label_total_509.setText("TOTAL:");
-        panel_309.add(label_total_509, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 110, 30));
+        label_total_509.setText("4");
+        panel_509.add(label_total_509, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 110, 30));
 
         jLabel34.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel34.setForeground(new java.awt.Color(255, 255, 255));
         jLabel34.setText("VACANT:");
-        panel_309.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, 30));
+        panel_509.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, 30));
 
         label_vacant_509.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_vacant_509.setForeground(new java.awt.Color(255, 255, 255));
         label_vacant_509.setText("TOTAL:");
-        panel_309.add(label_vacant_509, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 110, 30));
+        panel_509.add(label_vacant_509, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 110, 30));
 
-        panel_parent.add(panel_309, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 560, 270, 170));
+        panel_parent.add(panel_509, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 560, 270, 170));
 
         btn_exit.setBackground(new java.awt.Color(102, 102, 102));
         btn_exit.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
@@ -208,338 +255,346 @@ public class FifthFloor extends javax.swing.JFrame {
         });
         panel_parent.add(btn_exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 670, 160, 60));
 
-        panel_304.setBackground(new java.awt.Color(0, 51, 51));
-        panel_304.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        panel_304.addMouseListener(new java.awt.event.MouseAdapter() {
+        panel_504.setBackground(new java.awt.Color(0, 51, 51));
+        panel_504.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        panel_504.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panel_304MouseClicked(evt);
+                panel_504MouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                panel_304MouseEntered(evt);
+                panel_504MouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                panel_304MouseExited(evt);
+                panel_504MouseExited(evt);
             }
         });
-        panel_304.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panel_504.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("VACANT:");
-        panel_304.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, 30));
+        panel_504.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, 30));
 
         label_vacant_504.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_vacant_504.setForeground(new java.awt.Color(255, 255, 255));
         label_vacant_504.setText("TOTAL:");
-        panel_304.add(label_vacant_504, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 110, 30));
+        panel_504.add(label_vacant_504, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 110, 30));
 
         jLabel3.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("TOTAL:");
-        panel_304.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 110, 30));
+        panel_504.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 110, 30));
 
         jLabel4.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("504");
-        panel_304.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 80, 30));
+        panel_504.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 80, 30));
 
         label_total_504.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_total_504.setForeground(new java.awt.Color(255, 255, 255));
-        label_total_504.setText("TOTAL:");
-        panel_304.add(label_total_504, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 110, 30));
+        label_total_504.setText("4");
+        panel_504.add(label_total_504, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 110, 30));
 
-        panel_parent.add(panel_304, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 180, 270, 170));
+        panel_parent.add(panel_504, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 180, 270, 170));
 
-        panel_308.setBackground(new java.awt.Color(0, 51, 51));
-        panel_308.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        panel_308.addMouseListener(new java.awt.event.MouseAdapter() {
+        panel_508.setBackground(new java.awt.Color(0, 51, 51));
+        panel_508.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        panel_508.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panel_308MouseClicked(evt);
+                panel_508MouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                panel_308MouseEntered(evt);
+                panel_508MouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                panel_308MouseExited(evt);
+                panel_508MouseExited(evt);
             }
         });
-        panel_308.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panel_508.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel26.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(255, 255, 255));
         jLabel26.setText("508");
-        panel_308.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 80, 30));
+        panel_508.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 80, 30));
 
         jLabel27.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(255, 255, 255));
         jLabel27.setText("TOTAL:");
-        panel_308.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 110, 30));
+        panel_508.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 110, 30));
 
         label_total_508.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_total_508.setForeground(new java.awt.Color(255, 255, 255));
-        label_total_508.setText("TOTAL:");
-        panel_308.add(label_total_508, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 110, 30));
+        label_total_508.setText("4");
+        panel_508.add(label_total_508, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 110, 30));
 
         jLabel29.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel29.setForeground(new java.awt.Color(255, 255, 255));
         jLabel29.setText("VACANT:");
-        panel_308.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, 30));
+        panel_508.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, 30));
 
         label_vacant_508.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_vacant_508.setForeground(new java.awt.Color(255, 255, 255));
         label_vacant_508.setText("TOTAL:");
-        panel_308.add(label_vacant_508, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 110, 30));
+        panel_508.add(label_vacant_508, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 110, 30));
 
-        panel_parent.add(panel_308, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 370, 270, 170));
+        panel_parent.add(panel_508, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 370, 270, 170));
 
-        panel_303.setBackground(new java.awt.Color(0, 51, 51));
-        panel_303.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        panel_303.addMouseListener(new java.awt.event.MouseAdapter() {
+        panel_503.setBackground(new java.awt.Color(0, 51, 51));
+        panel_503.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        panel_503.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panel_303MouseClicked(evt);
+                panel_503MouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                panel_303MouseEntered(evt);
+                panel_503MouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                panel_303MouseExited(evt);
+                panel_503MouseExited(evt);
             }
         });
-        panel_303.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panel_503.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel46.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
         jLabel46.setForeground(new java.awt.Color(255, 255, 255));
         jLabel46.setText("503");
-        panel_303.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 80, 30));
+        panel_503.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 80, 30));
 
         jLabel47.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel47.setForeground(new java.awt.Color(255, 255, 255));
         jLabel47.setText("TOTAL:");
-        panel_303.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 110, 30));
+        panel_503.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 110, 30));
 
         label_total_503.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_total_503.setForeground(new java.awt.Color(255, 255, 255));
-        label_total_503.setText("TOTAL:");
-        panel_303.add(label_total_503, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 110, 30));
+        label_total_503.setText("4");
+        panel_503.add(label_total_503, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 110, 30));
 
         jLabel49.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel49.setForeground(new java.awt.Color(255, 255, 255));
         jLabel49.setText("VACANT:");
-        panel_303.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, 30));
+        panel_503.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, 30));
 
         label_vacant_503.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_vacant_503.setForeground(new java.awt.Color(255, 255, 255));
         label_vacant_503.setText("TOTAL:");
-        panel_303.add(label_vacant_503, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 110, 30));
+        panel_503.add(label_vacant_503, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 110, 30));
 
-        panel_parent.add(panel_303, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 180, 280, 170));
+        panel_parent.add(panel_503, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 180, 280, 170));
 
-        panel_302.setBackground(new java.awt.Color(0, 51, 51));
-        panel_302.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        panel_302.addMouseListener(new java.awt.event.MouseAdapter() {
+        panel_502.setBackground(new java.awt.Color(0, 51, 51));
+        panel_502.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        panel_502.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panel_302MouseClicked(evt);
+                panel_502MouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                panel_302MouseEntered(evt);
+                panel_502MouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                panel_302MouseExited(evt);
+                panel_502MouseExited(evt);
             }
         });
-        panel_302.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panel_502.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel41.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
         jLabel41.setForeground(new java.awt.Color(255, 255, 255));
         jLabel41.setText("502");
-        panel_302.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 80, 30));
+        panel_502.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 80, 30));
 
         jLabel42.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel42.setForeground(new java.awt.Color(255, 255, 255));
         jLabel42.setText("TOTAL:");
-        panel_302.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 110, 30));
+        panel_502.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 110, 30));
 
         label_total_502.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_total_502.setForeground(new java.awt.Color(255, 255, 255));
-        label_total_502.setText("TOTAL:");
-        panel_302.add(label_total_502, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 110, 30));
+        label_total_502.setText("4");
+        panel_502.add(label_total_502, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 110, 30));
 
         jLabel44.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel44.setForeground(new java.awt.Color(255, 255, 255));
         jLabel44.setText("VACANT:");
-        panel_302.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, 30));
+        panel_502.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, 30));
 
         label_vacant_502.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_vacant_502.setForeground(new java.awt.Color(255, 255, 255));
         label_vacant_502.setText("TOTAL:");
-        panel_302.add(label_vacant_502, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 110, 30));
+        panel_502.add(label_vacant_502, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 110, 30));
 
-        panel_parent.add(panel_302, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 370, 280, 170));
+        panel_parent.add(panel_502, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 370, 280, 170));
 
-        panel_301.setBackground(new java.awt.Color(0, 51, 51));
-        panel_301.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        panel_301.addMouseListener(new java.awt.event.MouseAdapter() {
+        panel_501.setBackground(new java.awt.Color(0, 51, 51));
+        panel_501.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        panel_501.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_501MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                panel_301MouseEntered(evt);
+                panel_501MouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                panel_301MouseExited(evt);
+                panel_501MouseExited(evt);
             }
         });
-        panel_301.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panel_501.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label_.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
         label_.setForeground(new java.awt.Color(255, 255, 255));
         label_.setText("501");
-        panel_301.add(label_, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 80, 30));
+        panel_501.add(label_, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 80, 30));
 
         jLabel37.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel37.setForeground(new java.awt.Color(255, 255, 255));
         jLabel37.setText("TOTAL:");
-        panel_301.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 110, 30));
+        panel_501.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 110, 30));
 
         label_total_501.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_total_501.setForeground(new java.awt.Color(255, 255, 255));
-        label_total_501.setText("TOTAL:");
-        panel_301.add(label_total_501, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 110, 30));
+        label_total_501.setText("4");
+        panel_501.add(label_total_501, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 110, 30));
 
         jLabel39.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel39.setForeground(new java.awt.Color(255, 255, 255));
         jLabel39.setText("VACANT:");
-        panel_301.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, 30));
+        panel_501.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, 30));
 
         label_vacant_501.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_vacant_501.setForeground(new java.awt.Color(255, 255, 255));
         label_vacant_501.setText("TOTAL:");
-        panel_301.add(label_vacant_501, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 110, 30));
+        panel_501.add(label_vacant_501, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 110, 30));
 
-        panel_parent.add(panel_301, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 560, 280, 170));
+        panel_parent.add(panel_501, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 560, 280, 170));
 
-        panel_307.setBackground(new java.awt.Color(0, 51, 51));
-        panel_307.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        panel_307.addMouseListener(new java.awt.event.MouseAdapter() {
+        panel_507.setBackground(new java.awt.Color(0, 51, 51));
+        panel_507.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        panel_507.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panel_307MouseClicked(evt);
+                panel_507MouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                panel_307MouseEntered(evt);
+                panel_507MouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                panel_307MouseExited(evt);
+                panel_507MouseExited(evt);
             }
         });
-        panel_307.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panel_507.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("VACANT:");
-        panel_307.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, 30));
+        panel_507.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, 30));
 
         label_vacant_507.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_vacant_507.setForeground(new java.awt.Color(255, 255, 255));
         label_vacant_507.setText("TOTAL:");
-        panel_307.add(label_vacant_507, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 110, 30));
+        panel_507.add(label_vacant_507, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 110, 30));
 
         jLabel5.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("TOTAL:");
-        panel_307.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 110, 30));
+        panel_507.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 110, 30));
 
         jLabel6.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("507");
-        panel_307.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 80, 30));
+        panel_507.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 80, 30));
 
         label_total_507.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_total_507.setForeground(new java.awt.Color(255, 255, 255));
-        label_total_507.setText("TOTAL:");
-        panel_307.add(label_total_507, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 110, 30));
+        label_total_507.setText("4");
+        panel_507.add(label_total_507, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 110, 30));
 
-        panel_parent.add(panel_307, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 270, 170));
+        panel_parent.add(panel_507, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 270, 170));
 
-        panel_306.setBackground(new java.awt.Color(0, 51, 51));
-        panel_306.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        panel_306.addMouseListener(new java.awt.event.MouseAdapter() {
+        panel_506.setBackground(new java.awt.Color(0, 51, 51));
+        panel_506.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        panel_506.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panel_306MouseClicked(evt);
+                panel_506MouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                panel_306MouseEntered(evt);
+                panel_506MouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                panel_306MouseExited(evt);
+                panel_506MouseExited(evt);
             }
         });
-        panel_306.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panel_506.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel7.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("VACANT:");
-        panel_306.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, 30));
+        panel_506.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, 30));
 
         label_vacant_506.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_vacant_506.setForeground(new java.awt.Color(255, 255, 255));
         label_vacant_506.setText("TOTAL:");
-        panel_306.add(label_vacant_506, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 110, 30));
+        panel_506.add(label_vacant_506, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 110, 30));
 
         jLabel8.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("TOTAL:");
-        panel_306.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 110, 30));
+        panel_506.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 110, 30));
 
         jLabel9.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("506");
-        panel_306.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 80, 30));
+        panel_506.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 80, 30));
 
         label_total_506.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_total_506.setForeground(new java.awt.Color(255, 255, 255));
-        label_total_506.setText("TOTAL:");
-        panel_306.add(label_total_506, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 110, 30));
+        label_total_506.setText("4");
+        panel_506.add(label_total_506, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 110, 30));
 
-        panel_parent.add(panel_306, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 270, 170));
+        panel_parent.add(panel_506, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 270, 170));
 
-        panel_305.setBackground(new java.awt.Color(0, 51, 51));
-        panel_305.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        panel_305.addMouseListener(new java.awt.event.MouseAdapter() {
+        panel_505.setBackground(new java.awt.Color(0, 51, 51));
+        panel_505.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        panel_505.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panel_305MouseClicked(evt);
+                panel_505MouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                panel_305MouseEntered(evt);
+                panel_505MouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                panel_305MouseExited(evt);
+                panel_505MouseExited(evt);
             }
         });
-        panel_305.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panel_505.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel13.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("VACANT:");
-        panel_305.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, 30));
+        panel_505.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, 30));
 
         label_vacant_505.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_vacant_505.setForeground(new java.awt.Color(255, 255, 255));
         label_vacant_505.setText("TOTAL:");
-        panel_305.add(label_vacant_505, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 110, 30));
+        panel_505.add(label_vacant_505, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 110, 30));
 
         jLabel14.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("TOTAL:");
-        panel_305.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 110, 30));
+        panel_505.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 110, 30));
 
         jLabel15.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("505");
-        panel_305.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 80, 30));
+        panel_505.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 80, 30));
 
         label_total_505.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         label_total_505.setForeground(new java.awt.Color(255, 255, 255));
-        label_total_505.setText("TOTAL:");
-        panel_305.add(label_total_505, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 110, 30));
+        label_total_505.setText("4");
+        panel_505.add(label_total_505, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 110, 30));
 
-        panel_parent.add(panel_305, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 180, 270, 170));
+        panel_parent.add(panel_505, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 180, 270, 170));
+
+        label_login1.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        label_login1.setForeground(new java.awt.Color(255, 255, 255));
+        label_login1.setText("click to see room details");
+        panel_parent.add(label_login1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 560, 350, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -579,143 +634,177 @@ public class FifthFloor extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btn_exitActionPerformed
 
-    private void panel_309MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_309MouseEntered
+    private void panel_509MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_509MouseEntered
         // TODO add your handling code here:
         Color clr = new Color(0,153,153);
-        panel_309.setBackground(clr);
-    }//GEN-LAST:event_panel_309MouseEntered
+        panel_509.setBackground(clr);
+    }//GEN-LAST:event_panel_509MouseEntered
 
-    private void panel_309MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_309MouseExited
+    private void panel_509MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_509MouseExited
         // TODO add your handling code here:
         Color clr  = new Color(0,51,51);
-        panel_309.setBackground(clr);
-    }//GEN-LAST:event_panel_309MouseExited
+        panel_509.setBackground(clr);
+    }//GEN-LAST:event_panel_509MouseExited
 
-    private void panel_304MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_304MouseEntered
+    private void panel_504MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_504MouseEntered
         // TODO add your handling code here:
         Color clr = new Color(0,153,153);
-        panel_304.setBackground(clr);
-    }//GEN-LAST:event_panel_304MouseEntered
+        panel_504.setBackground(clr);
+    }//GEN-LAST:event_panel_504MouseEntered
 
-    private void panel_304MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_304MouseExited
+    private void panel_504MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_504MouseExited
         // TODO add your handling code here:
         Color clr  = new Color(0,51,51);
-        panel_304.setBackground(clr);
-    }//GEN-LAST:event_panel_304MouseExited
+        panel_504.setBackground(clr);
+    }//GEN-LAST:event_panel_504MouseExited
 
-    private void panel_304MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_304MouseClicked
+    private void panel_504MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_504MouseClicked
         // TODO add your handling code here:
         
-        
-    }//GEN-LAST:event_panel_304MouseClicked
+        controller.addFrame(this);
+        new RoomDetails(controller, hall, 4, "504").setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panel_504MouseClicked
 
-    private void panel_308MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_308MouseClicked
+    private void panel_508MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_508MouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_panel_308MouseClicked
+        controller.addFrame(this);
+        new RoomDetails(controller, hall, 4, "508").setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panel_508MouseClicked
 
-    private void panel_308MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_308MouseEntered
-        // TODO add your handling code here:
-        Color clr = new Color(0,153,153);
-        panel_308.setBackground(clr);
-    }//GEN-LAST:event_panel_308MouseEntered
-
-    private void panel_308MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_308MouseExited
-        // TODO add your handling code here:
-        Color clr  = new Color(0,51,51);
-        panel_308.setBackground(clr);
-    }//GEN-LAST:event_panel_308MouseExited
-
-    private void panel_303MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_303MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_panel_303MouseClicked
-
-    private void panel_303MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_303MouseEntered
+    private void panel_508MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_508MouseEntered
         // TODO add your handling code here:
         Color clr = new Color(0,153,153);
-        panel_303.setBackground(clr);
-    }//GEN-LAST:event_panel_303MouseEntered
+        panel_508.setBackground(clr);
+    }//GEN-LAST:event_panel_508MouseEntered
 
-    private void panel_303MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_303MouseExited
+    private void panel_508MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_508MouseExited
         // TODO add your handling code here:
         Color clr  = new Color(0,51,51);
-        panel_303.setBackground(clr);
-    }//GEN-LAST:event_panel_303MouseExited
+        panel_508.setBackground(clr);
+    }//GEN-LAST:event_panel_508MouseExited
 
-    private void panel_302MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_302MouseClicked
+    private void panel_503MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_503MouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_panel_302MouseClicked
+        controller.addFrame(this);
+        new RoomDetails(controller, hall, 4, "503").setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panel_503MouseClicked
 
-    private void panel_302MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_302MouseEntered
+    private void panel_503MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_503MouseEntered
         // TODO add your handling code here:
         Color clr = new Color(0,153,153);
-        panel_302.setBackground(clr);
-    }//GEN-LAST:event_panel_302MouseEntered
+        panel_503.setBackground(clr);
+    }//GEN-LAST:event_panel_503MouseEntered
 
-    private void panel_302MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_302MouseExited
+    private void panel_503MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_503MouseExited
         // TODO add your handling code here:
         Color clr  = new Color(0,51,51);
-        panel_302.setBackground(clr);
-    }//GEN-LAST:event_panel_302MouseExited
+        panel_503.setBackground(clr);
+    }//GEN-LAST:event_panel_503MouseExited
 
-    private void panel_301MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_301MouseEntered
+    private void panel_502MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_502MouseClicked
+        // TODO add your handling code here:
+        controller.addFrame(this);
+        new RoomDetails(controller, hall, 4, "502").setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panel_502MouseClicked
+
+    private void panel_502MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_502MouseEntered
         // TODO add your handling code here:
         Color clr = new Color(0,153,153);
-        panel_301.setBackground(clr);
-    }//GEN-LAST:event_panel_301MouseEntered
+        panel_502.setBackground(clr);
+    }//GEN-LAST:event_panel_502MouseEntered
 
-    private void panel_301MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_301MouseExited
+    private void panel_502MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_502MouseExited
         // TODO add your handling code here:
         Color clr  = new Color(0,51,51);
-        panel_301.setBackground(clr);
-    }//GEN-LAST:event_panel_301MouseExited
+        panel_502.setBackground(clr);
+    }//GEN-LAST:event_panel_502MouseExited
 
-    private void panel_307MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_307MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_panel_307MouseClicked
-
-    private void panel_307MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_307MouseEntered
+    private void panel_501MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_501MouseEntered
         // TODO add your handling code here:
         Color clr = new Color(0,153,153);
-        panel_307.setBackground(clr);
-    }//GEN-LAST:event_panel_307MouseEntered
+        panel_501.setBackground(clr);
+    }//GEN-LAST:event_panel_501MouseEntered
 
-    private void panel_307MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_307MouseExited
+    private void panel_501MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_501MouseExited
         // TODO add your handling code here:
         Color clr  = new Color(0,51,51);
-        panel_307.setBackground(clr);
-    }//GEN-LAST:event_panel_307MouseExited
+        panel_501.setBackground(clr);
+    }//GEN-LAST:event_panel_501MouseExited
 
-    private void panel_306MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_306MouseClicked
+    private void panel_507MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_507MouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_panel_306MouseClicked
+        controller.addFrame(this);
+        new RoomDetails(controller, hall, 4, "507").setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panel_507MouseClicked
 
-    private void panel_306MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_306MouseEntered
+    private void panel_507MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_507MouseEntered
         // TODO add your handling code here:
         Color clr = new Color(0,153,153);
-        panel_306.setBackground(clr);
-    }//GEN-LAST:event_panel_306MouseEntered
+        panel_507.setBackground(clr);
+    }//GEN-LAST:event_panel_507MouseEntered
 
-    private void panel_306MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_306MouseExited
+    private void panel_507MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_507MouseExited
         // TODO add your handling code here:
         Color clr  = new Color(0,51,51);
-        panel_306.setBackground(clr);
-    }//GEN-LAST:event_panel_306MouseExited
+        panel_507.setBackground(clr);
+    }//GEN-LAST:event_panel_507MouseExited
 
-    private void panel_305MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_305MouseClicked
+    private void panel_506MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_506MouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_panel_305MouseClicked
+        controller.addFrame(this);
+        new RoomDetails(controller, hall, 4, "506").setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panel_506MouseClicked
 
-    private void panel_305MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_305MouseEntered
+    private void panel_506MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_506MouseEntered
         // TODO add your handling code here:
         Color clr = new Color(0,153,153);
-        panel_305.setBackground(clr);
-    }//GEN-LAST:event_panel_305MouseEntered
+        panel_506.setBackground(clr);
+    }//GEN-LAST:event_panel_506MouseEntered
 
-    private void panel_305MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_305MouseExited
+    private void panel_506MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_506MouseExited
         // TODO add your handling code here:
         Color clr  = new Color(0,51,51);
-        panel_305.setBackground(clr);
-    }//GEN-LAST:event_panel_305MouseExited
+        panel_506.setBackground(clr);
+    }//GEN-LAST:event_panel_506MouseExited
+
+    private void panel_505MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_505MouseClicked
+        // TODO add your handling code here:
+        controller.addFrame(this);
+        new RoomDetails(controller, hall, 4, "505").setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panel_505MouseClicked
+
+    private void panel_505MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_505MouseEntered
+        // TODO add your handling code here:
+        Color clr = new Color(0,153,153);
+        panel_505.setBackground(clr);
+    }//GEN-LAST:event_panel_505MouseEntered
+
+    private void panel_505MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_505MouseExited
+        // TODO add your handling code here:
+        Color clr  = new Color(0,51,51);
+        panel_505.setBackground(clr);
+    }//GEN-LAST:event_panel_505MouseExited
+
+    private void panel_509MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_509MouseClicked
+        // TODO add your handling code here:
+        controller.addFrame(this);
+        new RoomDetails(controller, hall, 4, "509").setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panel_509MouseClicked
+
+    private void panel_501MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_501MouseClicked
+        // TODO add your handling code here:
+        controller.addFrame(this);
+        new RoomDetails(controller, hall, 4, "501").setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panel_501MouseClicked
 
     /**
      * @param args the command line arguments
@@ -1040,6 +1129,7 @@ public class FifthFloor extends javax.swing.JFrame {
     private javax.swing.JLabel label_;
     private javax.swing.JLabel label_hallconnect;
     private javax.swing.JLabel label_login;
+    private javax.swing.JLabel label_login1;
     private javax.swing.JLabel label_total_501;
     private javax.swing.JLabel label_total_502;
     private javax.swing.JLabel label_total_503;
@@ -1058,15 +1148,15 @@ public class FifthFloor extends javax.swing.JFrame {
     private javax.swing.JLabel label_vacant_507;
     private javax.swing.JLabel label_vacant_508;
     private javax.swing.JLabel label_vacant_509;
-    private javax.swing.JPanel panel_301;
-    private javax.swing.JPanel panel_302;
-    private javax.swing.JPanel panel_303;
-    private javax.swing.JPanel panel_304;
-    private javax.swing.JPanel panel_305;
-    private javax.swing.JPanel panel_306;
-    private javax.swing.JPanel panel_307;
-    private javax.swing.JPanel panel_308;
-    private javax.swing.JPanel panel_309;
+    private javax.swing.JPanel panel_501;
+    private javax.swing.JPanel panel_502;
+    private javax.swing.JPanel panel_503;
+    private javax.swing.JPanel panel_504;
+    private javax.swing.JPanel panel_505;
+    private javax.swing.JPanel panel_506;
+    private javax.swing.JPanel panel_507;
+    private javax.swing.JPanel panel_508;
+    private javax.swing.JPanel panel_509;
     private javax.swing.JPanel panel_parent;
     // End of variables declaration//GEN-END:variables
 }
