@@ -348,16 +348,16 @@ public class StudentDashboard extends javax.swing.JFrame {
         panel_complainLayout.setHorizontalGroup(
             panel_complainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_complainLayout.createSequentialGroup()
-                .addGap(63, 63, 63)
+                .addGap(53, 53, 53)
                 .addComponent(label_home10)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         panel_complainLayout.setVerticalGroup(
             panel_complainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_complainLayout.createSequentialGroup()
-                .addContainerGap(47, Short.MAX_VALUE)
+            .addGroup(panel_complainLayout.createSequentialGroup()
+                .addGap(48, 48, 48)
                 .addComponent(label_home10)
-                .addGap(49, 49, 49))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         panel_parent.add(panel_complain, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 390, 260, 140));

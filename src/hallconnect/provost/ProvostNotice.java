@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package hallconnect.student;
+package hallconnect.provost;
 
+import hallconnect.student.*;
 import hallconnect.database.CentralController;
 import java.sql.ResultSet;
 import java.sql.Connection;
@@ -15,16 +16,16 @@ import javax.swing.JOptionPane;
  *
  * @author Lenovo
  */
-public class StudentComplain extends javax.swing.JFrame {
+public class ProvostNotice extends javax.swing.JFrame {
   private CentralController controller = new CentralController();
     /**
      * Creates new form loginPage
      */
-    public StudentComplain(CentralController controller) {
+    public ProvostNotice(CentralController controller) {
         this.controller=controller;
         initComponents();
     }
-    public StudentComplain() {
+    public ProvostNotice() {
         initComponents();
     }
 
@@ -44,7 +45,10 @@ public class StudentComplain extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         label_login = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        Text_Complain = new javax.swing.JTextField();
+        Text_Notice = new javax.swing.JTextField();
+        label_home17 = new javax.swing.JLabel();
+        label_home18 = new javax.swing.JLabel();
+        Text_Heading = new javax.swing.JTextField();
         btn_submit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -91,20 +95,31 @@ public class StudentComplain extends javax.swing.JFrame {
                 btn_backActionPerformed(evt);
             }
         });
-        panel_parent.add(btn_back, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 670, 140, 54));
-        panel_parent.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 193, 200, 10));
+        panel_parent.add(btn_back, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 710, 140, 54));
+        panel_parent.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 190, 290, 10));
 
         label_login.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
         label_login.setForeground(new java.awt.Color(255, 255, 255));
-        label_login.setText("Complain");
-        panel_parent.add(label_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 140, -1, 50));
+        label_login.setText("Add Notice");
+        panel_parent.add(label_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 140, -1, 50));
 
         jPanel3.setBackground(new java.awt.Color(0, 51, 51));
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(0, 153, 153), null, null));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel3.add(Text_Complain, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 1360, 340));
+        jPanel3.add(Text_Notice, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 1360, 280));
 
-        panel_parent.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 1440, 420));
+        label_home17.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        label_home17.setForeground(new java.awt.Color(255, 255, 255));
+        label_home17.setText("Details :");
+        jPanel3.add(label_home17, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, 30));
+
+        label_home18.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        label_home18.setForeground(new java.awt.Color(255, 255, 255));
+        label_home18.setText("Heading :");
+        jPanel3.add(label_home18, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, 30));
+        jPanel3.add(Text_Heading, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 1250, 40));
+
+        panel_parent.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 1440, 470));
 
         btn_submit.setBackground(new java.awt.Color(102, 102, 102));
         btn_submit.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
@@ -117,7 +132,7 @@ public class StudentComplain extends javax.swing.JFrame {
                 btn_submitActionPerformed(evt);
             }
         });
-        panel_parent.add(btn_submit, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 670, 170, 54));
+        panel_parent.add(btn_submit, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 710, 170, 54));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -153,7 +168,7 @@ public class StudentComplain extends javax.swing.JFrame {
 
     private void btn_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_submitActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_btn_submitActionPerformed
 
     /**
@@ -173,14 +188,110 @@ public class StudentComplain extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StudentComplain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProvostNotice.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StudentComplain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProvostNotice.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StudentComplain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProvostNotice.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StudentComplain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProvostNotice.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -217,19 +328,22 @@ public class StudentComplain extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StudentComplain().setVisible(true);
+                new ProvostNotice().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Text_Complain;
+    private javax.swing.JTextField Text_Heading;
+    private javax.swing.JTextField Text_Notice;
     private javax.swing.JButton btn_back;
     private javax.swing.JButton btn_submit;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel label_hallconnect;
+    private javax.swing.JLabel label_home17;
+    private javax.swing.JLabel label_home18;
     private javax.swing.JLabel label_login;
     private javax.swing.JPanel panel_parent;
     // End of variables declaration//GEN-END:variables
