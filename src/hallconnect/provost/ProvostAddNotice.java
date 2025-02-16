@@ -160,6 +160,9 @@ public class ProvostAddNotice extends javax.swing.JFrame {
         panel_delete_notice.setBackground(new java.awt.Color(153, 0, 51));
         panel_delete_notice.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         panel_delete_notice.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_delete_noticeMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panel_delete_noticeMouseEntered(evt);
             }
@@ -228,6 +231,13 @@ public class ProvostAddNotice extends javax.swing.JFrame {
     private void panel_delete_noticeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_delete_noticeMouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_panel_delete_noticeMouseExited
+
+    private void panel_delete_noticeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_delete_noticeMouseClicked
+        // TODO add your handling code here:
+        controller.addFrame(this);
+        new ProvostDeleteNotice(controller).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panel_delete_noticeMouseClicked
 
     /**
      * @param args the command line arguments

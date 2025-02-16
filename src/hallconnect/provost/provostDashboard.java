@@ -243,6 +243,9 @@ public class provostDashboard extends javax.swing.JFrame {
         panel_complainBox.setBackground(new java.awt.Color(153, 0, 51));
         panel_complainBox.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         panel_complainBox.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_complainBoxMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panel_complainBoxMouseEntered(evt);
             }
@@ -291,6 +294,9 @@ public class provostDashboard extends javax.swing.JFrame {
         panel_Notice.setBackground(new java.awt.Color(153, 0, 51));
         panel_Notice.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         panel_Notice.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_NoticeMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panel_NoticeMouseEntered(evt);
             }
@@ -487,6 +493,20 @@ public class provostDashboard extends javax.swing.JFrame {
         new SignUpRequest(controller, username).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_panel_signupRequestMouseClicked
+
+    private void panel_complainBoxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_complainBoxMouseClicked
+        // TODO add your handling code here:
+        controller.addFrame(this);
+        new ProvostComplain(controller).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panel_complainBoxMouseClicked
+
+    private void panel_NoticeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_NoticeMouseClicked
+        // TODO add your handling code here:
+        controller.addFrame(this);
+        new ProvostNotice(controller).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panel_NoticeMouseClicked
 
     /**
      * @param args the command line arguments

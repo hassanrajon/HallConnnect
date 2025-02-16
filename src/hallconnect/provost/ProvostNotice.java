@@ -114,6 +114,9 @@ public class ProvostNotice extends javax.swing.JFrame {
         panel_AddNotice.setBackground(new java.awt.Color(153, 0, 51));
         panel_AddNotice.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         panel_AddNotice.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_AddNoticeMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panel_AddNoticeMouseEntered(evt);
             }
@@ -138,6 +141,9 @@ public class ProvostNotice extends javax.swing.JFrame {
         panel_DeleteNotice.setBackground(new java.awt.Color(153, 0, 51));
         panel_DeleteNotice.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         panel_DeleteNotice.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_DeleteNoticeMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panel_DeleteNoticeMouseEntered(evt);
             }
@@ -235,14 +241,28 @@ public class ProvostNotice extends javax.swing.JFrame {
     private void panel_DeleteNoticeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_DeleteNoticeMouseEntered
         // TODO add your handling code here:
         Color clr = new Color(0, 153, 153);
-        panel_AddNotice.setBackground(clr);
+        panel_DeleteNotice.setBackground(clr);
     }//GEN-LAST:event_panel_DeleteNoticeMouseEntered
 
     private void panel_DeleteNoticeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_DeleteNoticeMouseExited
         // TODO add your handling code here:
         Color clr = new Color(153, 0, 51);
-        panel_AddNotice.setBackground(clr);
+        panel_DeleteNotice.setBackground(clr);
     }//GEN-LAST:event_panel_DeleteNoticeMouseExited
+
+    private void panel_AddNoticeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_AddNoticeMouseClicked
+        // TODO add your handling code here:
+        controller.addFrame(this);
+        new ProvostAddNotice(controller).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panel_AddNoticeMouseClicked
+
+    private void panel_DeleteNoticeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_DeleteNoticeMouseClicked
+        // TODO add your handling code here:
+        controller.addFrame(this);
+        new ProvostDeleteNotice(controller).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panel_DeleteNoticeMouseClicked
 
     /**
      * @param args the command line arguments
