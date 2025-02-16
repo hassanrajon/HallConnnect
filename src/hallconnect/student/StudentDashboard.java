@@ -6,6 +6,7 @@ package hallconnect.student;
 
 import hallconnect.Associates;
 import hallconnect.database.CentralController;
+import hallconnect.signup.loginPage;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.Connection;
@@ -70,6 +71,8 @@ public class StudentDashboard extends javax.swing.JFrame {
         label_home13 = new javax.swing.JLabel();
         panel_room = new javax.swing.JPanel();
         label_home7 = new javax.swing.JLabel();
+        btn_exit = new javax.swing.JButton();
+        btn_logout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -286,6 +289,9 @@ public class StudentDashboard extends javax.swing.JFrame {
         panel_notice.setBackground(new java.awt.Color(153, 0, 51));
         panel_notice.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         panel_notice.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_noticeMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panel_noticeMouseEntered(evt);
             }
@@ -348,16 +354,16 @@ public class StudentDashboard extends javax.swing.JFrame {
         panel_complainLayout.setHorizontalGroup(
             panel_complainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_complainLayout.createSequentialGroup()
-                .addGap(63, 63, 63)
+                .addGap(53, 53, 53)
                 .addComponent(label_home10)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         panel_complainLayout.setVerticalGroup(
             panel_complainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_complainLayout.createSequentialGroup()
-                .addContainerGap(47, Short.MAX_VALUE)
+            .addGroup(panel_complainLayout.createSequentialGroup()
+                .addGap(48, 48, 48)
                 .addComponent(label_home10)
-                .addGap(49, 49, 49))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         panel_parent.add(panel_complain, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 390, 260, 140));
@@ -445,6 +451,32 @@ public class StudentDashboard extends javax.swing.JFrame {
         );
 
         panel_parent.add(panel_room, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 230, 260, 140));
+
+        btn_exit.setBackground(new java.awt.Color(102, 102, 102));
+        btn_exit.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        btn_exit.setForeground(new java.awt.Color(255, 255, 255));
+        btn_exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/exit.png"))); // NOI18N
+        btn_exit.setText(" EXIT");
+        btn_exit.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
+        btn_exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_exitActionPerformed(evt);
+            }
+        });
+        panel_parent.add(btn_exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 590, 200, 70));
+
+        btn_logout.setBackground(new java.awt.Color(102, 102, 102));
+        btn_logout.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        btn_logout.setForeground(new java.awt.Color(255, 255, 255));
+        btn_logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/logout.png"))); // NOI18N
+        btn_logout.setText("LOGOUT");
+        btn_logout.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
+        btn_logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_logoutActionPerformed(evt);
+            }
+        });
+        panel_parent.add(btn_logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 590, 200, 70));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -600,6 +632,27 @@ public class StudentDashboard extends javax.swing.JFrame {
         
     }//GEN-LAST:event_panel_clearenceMouseClicked
 
+    private void panel_noticeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_noticeMouseClicked
+        // TODO add your handling code here:
+        controller.addFrame(this);
+        new StudentNoticeBoard(controller).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panel_noticeMouseClicked
+
+    private void btn_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_exitActionPerformed
+        // TODO add your handling code here:
+
+        System.exit(0);
+    }//GEN-LAST:event_btn_exitActionPerformed
+
+    private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
+        // TODO add your handling code here:
+
+        loginPage lg = new loginPage();
+        lg.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_logoutActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -643,6 +696,8 @@ public class StudentDashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_exit;
+    private javax.swing.JButton btn_logout;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
