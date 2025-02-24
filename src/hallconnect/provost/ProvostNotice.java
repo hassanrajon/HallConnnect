@@ -6,28 +6,69 @@ package hallconnect.provost;
 
 import hallconnect.student.*;
 import hallconnect.database.CentralController;
+import hallconnect.database.DbConnection;
 import java.awt.Color;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.*;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import java.sql.Timestamp;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Lenovo
  */
 public class ProvostNotice extends javax.swing.JFrame {
-  private CentralController controller = new CentralController();
+
+    private CentralController controller = new CentralController();
+    File selectedFile;
+
     /**
      * Creates new form loginPage
      */
     public ProvostNotice(CentralController controller) {
-        this.controller=controller;
+        this.controller = controller;
         initComponents();
+        showDetails();
     }
+
     public ProvostNotice() {
         initComponents();
+        showDetails();
+    }
+
+    private void showDetails() {
+        try {
+            // Connect to the database
+            Connection con = DbConnection.getConnection();
+            String query = "SELECT * FROM notice";
+            PreparedStatement pst = con.prepareStatement(query);
+            ResultSet rs = pst.executeQuery();
+
+            // Get table model
+            DefaultTableModel model = (DefaultTableModel) table_notice.getModel();
+            model.setRowCount(0); // Clear existing rows
+
+            // Add rows from ResultSet to JTable
+            while (rs.next()) {
+
+                String title = rs.getString("title");
+                String time = rs.getString("time"); // Assuming it's a Timestamp
+                String file = rs.getString("file"); // File path
+                model.addRow(new Object[]{title, time, file});
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -43,17 +84,19 @@ public class ProvostNotice extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         label_hallconnect = new javax.swing.JLabel();
         btn_back = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
-        label_login = new javax.swing.JLabel();
+        btn_add = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        panel_AddNotice = new javax.swing.JPanel();
-        label_home5 = new javax.swing.JLabel();
-        label_home7 = new javax.swing.JLabel();
-        panel_DeleteNotice = new javax.swing.JPanel();
-        label_home6 = new javax.swing.JLabel();
-        label_home8 = new javax.swing.JLabel();
-        panel_notice_3 = new javax.swing.JPanel();
-        label_home14 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        txt_fileName = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        btn_choose = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        btn_download = new javax.swing.JButton();
+        txt_title = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        table_notice = new javax.swing.JTable();
+        btn_delete1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,29 +110,29 @@ public class ProvostNotice extends javax.swing.JFrame {
 
         label_hallconnect.setFont(new java.awt.Font("Arial Black", 1, 48)); // NOI18N
         label_hallconnect.setForeground(new java.awt.Color(255, 255, 255));
-        label_hallconnect.setText("HallConnect");
+        label_hallconnect.setText("NOTICE");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(586, 586, 586)
+                .addGap(659, 659, 659)
                 .addComponent(label_hallconnect)
-                .addContainerGap(614, Short.MAX_VALUE))
+                .addContainerGap(667, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(35, 35, 35)
                 .addComponent(label_hallconnect, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         panel_parent.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, 130));
 
         btn_back.setBackground(new java.awt.Color(102, 102, 102));
-        btn_back.setFont(new java.awt.Font("Arial Black", 1, 20)); // NOI18N
+        btn_back.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         btn_back.setForeground(new java.awt.Color(255, 255, 255));
         btn_back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/back1.png"))); // NOI18N
         btn_back.setText("BACK");
@@ -99,125 +142,216 @@ public class ProvostNotice extends javax.swing.JFrame {
                 btn_backActionPerformed(evt);
             }
         });
-        panel_parent.add(btn_back, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 710, 140, 54));
-        panel_parent.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 190, 150, 10));
+        panel_parent.add(btn_back, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 680, 170, 60));
 
-        label_login.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
-        label_login.setForeground(new java.awt.Color(255, 255, 255));
-        label_login.setText("Notice");
-        panel_parent.add(label_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 140, -1, 50));
+        btn_add.setBackground(new java.awt.Color(102, 102, 102));
+        btn_add.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        btn_add.setForeground(new java.awt.Color(255, 255, 255));
+        btn_add.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/add2.png"))); // NOI18N
+        btn_add.setText("ADD ");
+        btn_add.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
+        btn_add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_addActionPerformed(evt);
+            }
+        });
+        panel_parent.add(btn_add, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 680, 170, 60));
 
         jPanel3.setBackground(new java.awt.Color(0, 51, 51));
-        jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(0, 153, 153), null, null));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
-        panel_AddNotice.setBackground(new java.awt.Color(153, 0, 51));
-        panel_AddNotice.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        panel_AddNotice.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel1.setBackground(new java.awt.Color(153, 102, 255));
+        jLabel1.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("CLICK ANY ROW TO SELECT");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(34, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addContainerGap())
+        );
+
+        panel_parent.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 140, 500, 50));
+
+        txt_fileName.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        panel_parent.add(txt_fileName, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 350, 330, 40));
+        panel_parent.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 570, -1, -1));
+
+        btn_choose.setBackground(new java.awt.Color(102, 102, 102));
+        btn_choose.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        btn_choose.setForeground(new java.awt.Color(255, 255, 255));
+        btn_choose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/add2.png"))); // NOI18N
+        btn_choose.setText("CHOOSE FILE");
+        btn_choose.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
+        btn_choose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_chooseActionPerformed(evt);
+            }
+        });
+        panel_parent.add(btn_choose, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 430, 250, 60));
+
+        jLabel3.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("PATH :");
+        panel_parent.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 350, -1, -1));
+
+        btn_download.setBackground(new java.awt.Color(102, 102, 102));
+        btn_download.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        btn_download.setForeground(new java.awt.Color(255, 255, 255));
+        btn_download.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/add2.png"))); // NOI18N
+        btn_download.setText("DOWNLOAD");
+        btn_download.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
+        btn_download.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_downloadActionPerformed(evt);
+            }
+        });
+        panel_parent.add(btn_download, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 680, 220, 60));
+
+        txt_title.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        panel_parent.add(txt_title, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 260, 330, 40));
+
+        jLabel4.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("TITLE :");
+        panel_parent.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 260, -1, -1));
+
+        table_notice.setBackground(new java.awt.Color(0, 51, 51));
+        table_notice.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        table_notice.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        table_notice.setForeground(new java.awt.Color(255, 255, 255));
+        table_notice.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "title", "time", "file"
+            }
+        ));
+        table_notice.setRowHeight(40);
+        table_notice.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panel_AddNoticeMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                panel_AddNoticeMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                panel_AddNoticeMouseExited(evt);
+                table_noticeMouseClicked(evt);
             }
         });
-        panel_AddNotice.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jScrollPane1.setViewportView(table_notice);
 
-        label_home5.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
-        label_home5.setForeground(new java.awt.Color(255, 255, 255));
-        label_home5.setText("ADD");
-        panel_AddNotice.add(label_home5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, -1, -1));
+        panel_parent.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 730, 400));
 
-        label_home7.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
-        label_home7.setForeground(new java.awt.Color(255, 255, 255));
-        label_home7.setText("NOTICE");
-        panel_AddNotice.add(label_home7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
-
-        jPanel3.add(panel_AddNotice, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, 310, 150));
-
-        panel_DeleteNotice.setBackground(new java.awt.Color(153, 0, 51));
-        panel_DeleteNotice.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        panel_DeleteNotice.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panel_DeleteNoticeMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                panel_DeleteNoticeMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                panel_DeleteNoticeMouseExited(evt);
+        btn_delete1.setBackground(new java.awt.Color(102, 102, 102));
+        btn_delete1.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        btn_delete1.setForeground(new java.awt.Color(255, 255, 255));
+        btn_delete1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/delete.png"))); // NOI18N
+        btn_delete1.setText("DELETE ");
+        btn_delete1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
+        btn_delete1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_delete1ActionPerformed(evt);
             }
         });
-        panel_DeleteNotice.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        label_home6.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
-        label_home6.setForeground(new java.awt.Color(255, 255, 255));
-        label_home6.setText("NOTICE");
-        panel_DeleteNotice.add(label_home6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
-
-        label_home8.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
-        label_home8.setForeground(new java.awt.Color(255, 255, 255));
-        label_home8.setText("DELETE");
-        panel_DeleteNotice.add(label_home8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
-
-        jPanel3.add(panel_DeleteNotice, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 140, 310, 150));
-
-        panel_parent.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 1440, 470));
-
-        panel_notice_3.setBackground(new java.awt.Color(153, 0, 51));
-        panel_notice_3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        panel_notice_3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                panel_notice_3MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                panel_notice_3MouseExited(evt);
-            }
-        });
-        panel_notice_3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        label_home14.setFont(new java.awt.Font("Arial Black", 1, 32)); // NOI18N
-        label_home14.setForeground(new java.awt.Color(255, 255, 255));
-        label_home14.setText("Notice - 03");
-        panel_notice_3.add(label_home14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, 30));
-
-        panel_parent.add(panel_notice_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 290, 70));
+        panel_parent.add(btn_delete1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 680, 170, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1540, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(panel_parent, javax.swing.GroupLayout.PREFERRED_SIZE, 1540, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(panel_parent, javax.swing.GroupLayout.PREFERRED_SIZE, 1540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(panel_parent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panel_parent, javax.swing.GroupLayout.PREFERRED_SIZE, 811, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void panel_notice_3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_notice_3MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_panel_notice_3MouseExited
+    private void btn_chooseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_chooseActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        int returnValue = fileChooser.showOpenDialog(this);
 
-    private void panel_notice_3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_notice_3MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_panel_notice_3MouseEntered
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            selectedFile = fileChooser.getSelectedFile();
+            String path = selectedFile.getAbsolutePath();
+            txt_fileName.setText(path);
+        } else {
+            JOptionPane.showMessageDialog(this, "please select file");
+        }
+    }//GEN-LAST:event_btn_chooseActionPerformed
+
+    private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
+
+        String fileName = selectedFile.getName();
+        String destinationPath = "C:/xampp/htdocs/notice/" + fileName;
+
+        // Ensure directory exists
+        File directory = new File("C:/xampp/htdocs/notice/");
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        // Copy the file to the destination
+        try {
+            FileInputStream fileInputStream = new FileInputStream(selectedFile);
+            FileOutputStream fileOutputStream = new FileOutputStream(destinationPath);
+
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = fileInputStream.read(buffer)) > 0) {
+                fileOutputStream.write(buffer, 0, length);
+            }
+
+            fileInputStream.close();
+            fileOutputStream.close();
+
+            txt_fileName.setText(destinationPath);
+
+            // ✅ FIXED Timestamp issue
+            try {
+                String title = txt_title.getText();
+                Timestamp time = new Timestamp(System.currentTimeMillis());
+                String path = destinationPath;
+
+                Connection con = DbConnection.getConnection();
+                PreparedStatement pst = con.prepareStatement("INSERT INTO notice (title, time, file) VALUES (?, ?, ?)");
+                pst.setString(1, title);
+                pst.setTimestamp(2, time);
+                pst.setString(3, path);
+
+                int rowsInserted = pst.executeUpdate(); // ✅ Use executeUpdate() for INSERT, not executeQuery()
+                if (rowsInserted > 0) {
+                    JOptionPane.showMessageDialog(this, "File uploaded successfully!");
+                    showDetails();
+                    txt_fileName.setText("");
+                    txt_title.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error uploading file.");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Database Error: " + e.getMessage());
+            }
+
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error uploading file: " + e.getMessage());
+        }
+
+    }//GEN-LAST:event_btn_addActionPerformed
 
     private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
         // TODO add your handling code here:
@@ -226,43 +360,85 @@ public class ProvostNotice extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btn_backActionPerformed
 
-    private void panel_AddNoticeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_AddNoticeMouseEntered
-        // TODO add your handling code here:
-        Color clr = new Color(0, 153, 153);
-        panel_AddNotice.setBackground(clr);
-    }//GEN-LAST:event_panel_AddNoticeMouseEntered
+    private void btn_downloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_downloadActionPerformed
+        // Get the file path from txt_fileName
+        String sourcePath = txt_fileName.getText();
 
-    private void panel_AddNoticeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_AddNoticeMouseExited
-        // TODO add your handling code here:
-        Color clr = new Color(153, 0, 51);
-        panel_AddNotice.setBackground(clr);
-    }//GEN-LAST:event_panel_AddNoticeMouseExited
+        if (sourcePath.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No file selected!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-    private void panel_DeleteNoticeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_DeleteNoticeMouseEntered
-        // TODO add your handling code here:
-        Color clr = new Color(0, 153, 153);
-        panel_DeleteNotice.setBackground(clr);
-    }//GEN-LAST:event_panel_DeleteNoticeMouseEntered
+        // Let user choose the download location
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Choose Download Location");
+        fileChooser.setSelectedFile(new File(new File(sourcePath).getName())); // Default file name
 
-    private void panel_DeleteNoticeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_DeleteNoticeMouseExited
-        // TODO add your handling code here:
-        Color clr = new Color(153, 0, 51);
-        panel_DeleteNotice.setBackground(clr);
-    }//GEN-LAST:event_panel_DeleteNoticeMouseExited
+        int userSelection = fileChooser.showSaveDialog(this);
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File destinationFile = fileChooser.getSelectedFile();
+            String destinationPath = destinationFile.getAbsolutePath();
 
-    private void panel_AddNoticeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_AddNoticeMouseClicked
-        // TODO add your handling code here:
-        controller.addFrame(this);
-        new ProvostAddNotice(controller).setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_panel_AddNoticeMouseClicked
+            // Copy file to chosen location
+            try {
+                Files.copy(Paths.get(sourcePath), Paths.get(destinationPath), StandardCopyOption.REPLACE_EXISTING);
+                JOptionPane.showMessageDialog(this, "Download successful!\nFile saved to: " + destinationPath);
+                txt_fileName.setText("");
+                txt_title.setText("");
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Error downloading file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btn_downloadActionPerformed
 
-    private void panel_DeleteNoticeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_DeleteNoticeMouseClicked
+    private void table_noticeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_noticeMouseClicked
         // TODO add your handling code here:
-        controller.addFrame(this);
-        new ProvostDeleteNotice(controller).setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_panel_DeleteNoticeMouseClicked
+        int rowcount = table_notice.getSelectedRow();
+        txt_fileName.setText(table_notice.getValueAt(rowcount, 2).toString());
+        txt_title.setText(table_notice.getValueAt(rowcount, 0).toString());
+
+
+    }//GEN-LAST:event_table_noticeMouseClicked
+
+    private void btn_delete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_delete1ActionPerformed
+        // TODO add your handling code here:
+        // Get title and file path
+        String title = txt_title.getText();
+        String sourcePath = txt_fileName.getText();
+
+        if (title.isEmpty() || sourcePath.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please select a notice first!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+            // Delete from database
+            Connection con = DbConnection.getConnection();
+            PreparedStatement pst = con.prepareStatement("DELETE FROM notice WHERE title = ?");
+            pst.setString(1, title);
+            int rowsAffected = pst.executeUpdate();
+
+            if (rowsAffected > 0) {
+                // Delete file from htdocs folder
+                File file = new File(sourcePath);
+                if (file.exists() && file.delete()) {
+                    JOptionPane.showMessageDialog(this, "Notice and file deleted successfully!");
+                    txt_fileName.setText("");
+                    txt_title.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Database record deleted, but file could not be deleted!", "Warning", JOptionPane.WARNING_MESSAGE);
+                }
+
+                // Refresh the table
+                showDetails();
+            } else {
+                JOptionPane.showMessageDialog(this, "No such notice found!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btn_delete1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1323,20 +1499,22 @@ public class ProvostNotice extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_add;
     private javax.swing.JButton btn_back;
+    private javax.swing.JButton btn_choose;
+    private javax.swing.JButton btn_delete1;
+    private javax.swing.JButton btn_download;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label_hallconnect;
-    private javax.swing.JLabel label_home14;
-    private javax.swing.JLabel label_home5;
-    private javax.swing.JLabel label_home6;
-    private javax.swing.JLabel label_home7;
-    private javax.swing.JLabel label_home8;
-    private javax.swing.JLabel label_login;
-    private javax.swing.JPanel panel_AddNotice;
-    private javax.swing.JPanel panel_DeleteNotice;
-    private javax.swing.JPanel panel_notice_3;
     private javax.swing.JPanel panel_parent;
+    private javax.swing.JTable table_notice;
+    private javax.swing.JTextField txt_fileName;
+    private javax.swing.JTextField txt_title;
     // End of variables declaration//GEN-END:variables
 }
