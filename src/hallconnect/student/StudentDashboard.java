@@ -20,11 +20,13 @@ import javax.swing.JOptionPane;
  */
 public class StudentDashboard extends javax.swing.JFrame {
   private CentralController controller = new CentralController();
+  private String student_name;
     /**
      * Creates new form loginPage
      */
-    public StudentDashboard(CentralController controller) {
+    public StudentDashboard(CentralController controller,String stu_name) {
         this.controller=controller;
+        this.student_name=stu_name;
         initComponents();
     }
     public StudentDashboard() {
@@ -609,8 +611,8 @@ public class StudentDashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         controller.addFrame(this);
-        StudentComplain StudentComplain = new StudentComplain(controller);
-        StudentComplain.setVisible(true);
+        StudentComplain stdcmp = new StudentComplain(controller,student_name);
+        stdcmp.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_panel_complainMouseClicked
 

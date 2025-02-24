@@ -231,7 +231,7 @@ public class loginPage extends javax.swing.JFrame {
                     pv.setVisible(true);
                     this.dispose();
                 } else {
-                    new StudentDashboard().setVisible(true);
+                    new StudentDashboard(controller,username).setVisible(true);
                     this.dispose();
 
                 }

@@ -497,7 +497,7 @@ public class provostDashboard extends javax.swing.JFrame {
     private void panel_complainBoxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_complainBoxMouseClicked
         // TODO add your handling code here:
         controller.addFrame(this);
-        new ProvostComplain(controller).setVisible(true);
+        new ProvostComplainBox(controller,username).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_panel_complainBoxMouseClicked
 

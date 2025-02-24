@@ -5,6 +5,7 @@
 package hallconnect.student;
 
 import hallconnect.database.CentralController;
+import hallconnect.database.DbConnection;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,16 +17,54 @@ import javax.swing.JOptionPane;
  * @author Lenovo
  */
 public class StudentComplain extends javax.swing.JFrame {
-  private CentralController controller = new CentralController();
+
+    private CentralController controller = new CentralController();
+    private String student_name;
+
     /**
      * Creates new form loginPage
      */
-    public StudentComplain(CentralController controller) {
-        this.controller=controller;
+    public StudentComplain(CentralController controller, String stu_name) {
+        this.controller = controller;
+        this.student_name = stu_name;
         initComponents();
     }
+
     public StudentComplain() {
         initComponents();
+    }
+
+    public String getHall() {
+        try {
+            String name = null;
+            Connection con = DbConnection.getConnection();
+
+            // First Query
+            PreparedStatement pst = con.prepareStatement("SELECT name FROM student WHERE username=?");
+            pst.setString(1, student_name);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {  // Move cursor to the first row
+                name = rs.getString("name");
+            } else {
+                return null; // No student found
+            }
+
+            // Second Query
+            PreparedStatement pst2 = con.prepareStatement("SELECT hall_name FROM room_details WHERE username=?");
+            pst2.setString(1, name);
+            ResultSet rs2 = pst2.executeQuery();
+
+            if (rs2.next()) {  // Move cursor to the first row
+                return rs2.getString("hall_name");
+            } else {
+                return null; // No hall found
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
@@ -44,7 +83,11 @@ public class StudentComplain extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         label_login = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        Text_Complain = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txt_text = new javax.swing.JTextArea();
+        txt_title = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         btn_submit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -102,7 +145,26 @@ public class StudentComplain extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(0, 51, 51));
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(0, 153, 153), null, null));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel3.add(Text_Complain, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 1360, 340));
+
+        txt_text.setColumns(20);
+        txt_text.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txt_text.setRows(5);
+        jScrollPane1.setViewportView(txt_text);
+
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, 1090, 310));
+
+        txt_title.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jPanel3.add(txt_title, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, 1090, 50));
+
+        jLabel1.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Complain :");
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 160, 40));
+
+        jLabel2.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Title :");
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 100, 40));
 
         panel_parent.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 1440, 420));
 
@@ -153,7 +215,32 @@ public class StudentComplain extends javax.swing.JFrame {
 
     private void btn_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_submitActionPerformed
         // TODO add your handling code here:
-        
+
+        String hall_name = getHall();
+        if (hall_name != null) {
+            String title = txt_title.getText();
+            String text = txt_text.getText();
+            try {
+                Connection con = DbConnection.getConnection();
+                PreparedStatement pst = con.prepareStatement("INSERT INTO complain (hall_name,username,title,text) values(?,?,?,?)");
+                pst.setString(1, hall_name);
+                pst.setString(2, student_name);
+                pst.setString(3, title);
+                pst.setString(4, text);
+                int row = pst.executeUpdate();
+                if (row > 0) {
+                    JOptionPane.showMessageDialog(this, "Complain added");
+                    txt_text.setText("");
+                    txt_title.setText("");
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(this, "hall name problem");
+        }
     }//GEN-LAST:event_btn_submitActionPerformed
 
     /**
@@ -223,14 +310,18 @@ public class StudentComplain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Text_Complain;
     private javax.swing.JButton btn_back;
     private javax.swing.JButton btn_submit;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel label_hallconnect;
     private javax.swing.JLabel label_login;
     private javax.swing.JPanel panel_parent;
+    private javax.swing.JTextArea txt_text;
+    private javax.swing.JTextField txt_title;
     // End of variables declaration//GEN-END:variables
 }
