@@ -4,6 +4,9 @@
  */
 package hallconnect.provost;
 
+import hallconnect.BH_Associates;
+import hallconnect.MH_Associates;
+import hallconnect.MMH_Associates;
 import hallconnect.database.CentralController;
 import hallconnect.database.DbConnection;
 import hallconnect.signup.loginPage;
@@ -21,7 +24,7 @@ import javax.swing.JOptionPane;
 public class provostDashboard extends javax.swing.JFrame {
 
     private CentralController controller = new CentralController();
-    String username = "";
+    private String username;
 
     /**
      * Creates new form loginPage
@@ -29,13 +32,15 @@ public class provostDashboard extends javax.swing.JFrame {
     public provostDashboard(CentralController controller, String username) {
         this.controller = controller;
         this.username = username;
-        fillInfo();
+
         initComponents();
+        fillInfo();
+
     }
 
     public provostDashboard(String username) {
         this.username = username;
-        
+
         initComponents();
         fillInfo();
     }
@@ -44,29 +49,29 @@ public class provostDashboard extends javax.swing.JFrame {
         initComponents();
     }
 
-   void fillInfo() {
-    try {
-        Connection con = DbConnection.getConnection();
-        PreparedStatement pst = con.prepareStatement("SELECT * FROM provost WHERE username=?");
-        pst.setString(1, username);
-        ResultSet rs = pst.executeQuery();
+    void fillInfo() {
+        try {
+            Connection con = DbConnection.getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM provost WHERE username = ?");
+            pst.setString(1, username);
+            ResultSet rs = pst.executeQuery();
 
-        // Check if the ResultSet contains data
-        if (rs.next()) {
-            label_name.setText(rs.getString("name"));
-            label_blood.setText(rs.getString("blood"));
-            label_contact.setText(rs.getString("contact"));
-            label_email.setText(rs.getString("email"));
-            label_post.setText(rs.getString("profile"));
-        } else {
-            // Handle the case when no rows are found
-            System.out.println("No data found for username: " + username);
+            // Check if the ResultSet contains data
+            if (rs.next()) {
+
+                label_blood.setText(rs.getString("blood"));
+                label_contact.setText(rs.getString("contact"));
+                label_email.setText(rs.getString("email"));
+                label_post.setText(rs.getString("profile"));
+                label_name.setText(rs.getString("name"));
+            } else {
+                // Handle the case when no rows are found
+                System.out.println("No data found for username: " + username);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    } catch (Exception e) {
-        e.printStackTrace();
     }
-}
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -172,7 +177,7 @@ public class provostDashboard extends javax.swing.JFrame {
 
         label_name.setFont(new java.awt.Font("Kristen ITC", 1, 24)); // NOI18N
         label_name.setForeground(new java.awt.Color(255, 255, 255));
-        label_name.setText("ABU NASER MOJUMDER");
+        label_name.setText("hello world");
         panel_profile.add(label_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 350, 40));
 
         label_post.setBackground(new java.awt.Color(51, 255, 0));
@@ -270,6 +275,9 @@ public class provostDashboard extends javax.swing.JFrame {
         panel_hallFee.setBackground(new java.awt.Color(153, 0, 51));
         panel_hallFee.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         panel_hallFee.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_hallFeeMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panel_hallFeeMouseEntered(evt);
             }
@@ -316,6 +324,9 @@ public class provostDashboard extends javax.swing.JFrame {
         panel_hallAsso.setBackground(new java.awt.Color(153, 0, 51));
         panel_hallAsso.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         panel_hallAsso.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_hallAssoMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panel_hallAssoMouseEntered(evt);
             }
@@ -340,6 +351,9 @@ public class provostDashboard extends javax.swing.JFrame {
         panel_clearance.setBackground(new java.awt.Color(153, 0, 51));
         panel_clearance.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         panel_clearance.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_clearanceMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panel_clearanceMouseEntered(evt);
             }
@@ -491,13 +505,14 @@ public class provostDashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
         controller.addFrame(this);
         new SignUpRequest(controller, username).setVisible(true);
+
         this.setVisible(false);
     }//GEN-LAST:event_panel_signupRequestMouseClicked
 
     private void panel_complainBoxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_complainBoxMouseClicked
         // TODO add your handling code here:
         controller.addFrame(this);
-        new ProvostComplainBox(controller,username).setVisible(true);
+        new ProvostComplainBox(controller, username).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_panel_complainBoxMouseClicked
 
@@ -507,6 +522,45 @@ public class provostDashboard extends javax.swing.JFrame {
         new ProvostNotice(controller).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_panel_NoticeMouseClicked
+
+    private void panel_hallFeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_hallFeeMouseClicked
+        // TODO add your handling code here:
+        ProvostHallFee hallfee = new ProvostHallFee(controller, username);
+        controller.addFrame(this);
+        hallfee.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panel_hallFeeMouseClicked
+
+    private void panel_hallAssoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_hallAssoMouseClicked
+        // TODO add your handling code here:
+        if ("abu_naser".equals(username)) {
+            controller.addFrame(this);
+            BH_Associates bh = new BH_Associates(controller);
+            bh.setVisible(true);
+            this.setVisible(false);
+
+        } else if ("naznin_ara".equals(username)) {
+            controller.addFrame(this);
+            MMH_Associates bh = new MMH_Associates(controller);
+            bh.setVisible(true);
+            this.setVisible(false);
+        } else {
+            controller.addFrame(this);
+            MH_Associates bh = new MH_Associates(controller);
+            bh.setVisible(true);
+            this.setVisible(false);
+
+        }
+    }//GEN-LAST:event_panel_hallAssoMouseClicked
+
+    private void panel_clearanceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_clearanceMouseClicked
+        // TODO add your handling code here:
+        
+        controller.addFrame(this);
+        provostClearance clr = new provostClearance(controller, username);
+        clr.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panel_clearanceMouseClicked
 
     /**
      * @param args the command line arguments

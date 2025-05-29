@@ -227,7 +227,7 @@ public class loginPage extends javax.swing.JFrame {
             if (rs.next()) {
                 JOptionPane.showMessageDialog(this, "LOGIN SUCCESSFUL");
                 if (role.equals("PROVOST")) {
-                    provostDashboard pv = new provostDashboard(username);
+                    provostDashboard pv = new provostDashboard(controller,username);
                     pv.setVisible(true);
                     this.dispose();
                 } else {

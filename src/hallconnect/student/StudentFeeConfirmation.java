@@ -5,9 +5,13 @@
 package hallconnect.student;
 
 import hallconnect.database.CentralController;
+import hallconnect.database.DbConnection;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.TreeSet;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -16,16 +20,52 @@ import javax.swing.JOptionPane;
  * @author Lenovo
  */
 public class StudentFeeConfirmation extends javax.swing.JFrame {
-  private CentralController controller = new CentralController();
+
+    private CentralController controller = new CentralController();
+    private String session;
+    private String student_username;
+
     /**
      * Creates new form loginPage
      */
-    public StudentFeeConfirmation(CentralController controller) {
-        this.controller=controller;
+    public StudentFeeConfirmation(CentralController controller, String student_username, String session) {
+        this.controller = controller;
+        this.session = session;
+        this.student_username = student_username;
         initComponents();
+        label_session.setText(session);
+        fill_combo();
+
     }
+
     public StudentFeeConfirmation() {
         initComponents();
+        fill_combo();
+    }
+
+    void fill_combo() {
+        try {
+            Connection con = DbConnection.getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT semester FROM semester WHERE session = ?");
+            pst.setString(1, session);
+            ResultSet rs = pst.executeQuery();
+
+            // Use a TreeSet to store semesters in sorted order
+            TreeSet<String> sortedSemesters = new TreeSet<>();
+
+            while (rs.next()) {
+                sortedSemesters.add(rs.getString("semester"));
+            }
+
+            // Assuming your JComboBox is named semesterComboBox
+            combo_semester.removeAllItems(); // Clear previous items
+            for (String semester : sortedSemesters) {
+                combo_semester.addItem(semester);
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }
 
     /**
@@ -45,13 +85,20 @@ public class StudentFeeConfirmation extends javax.swing.JFrame {
         label_login = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         label_home18 = new javax.swing.JLabel();
+        label_home24 = new javax.swing.JLabel();
+        combo_semester = new javax.swing.JComboBox<>();
+        label_home25 = new javax.swing.JLabel();
+        label_session = new javax.swing.JLabel();
+        label_fee = new javax.swing.JLabel();
         label_home19 = new javax.swing.JLabel();
-        label_home20 = new javax.swing.JLabel();
+        label_due = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         label_home21 = new javax.swing.JLabel();
         label_home22 = new javax.swing.JLabel();
-        btn_submit = new javax.swing.JButton();
         combo_payment_method = new javax.swing.JComboBox<>();
+        txt_transaction = new javax.swing.JTextField();
+        btn_search = new javax.swing.JButton();
+        btn_submit1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -111,20 +158,45 @@ public class StudentFeeConfirmation extends javax.swing.JFrame {
 
         label_home18.setFont(new java.awt.Font("Arial Black", 1, 22)); // NOI18N
         label_home18.setForeground(new java.awt.Color(255, 255, 255));
-        label_home18.setText("Dues          :");
-        jPanel2.add(label_home18, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, 30));
+        label_home18.setText("Fee          :");
+        jPanel2.add(label_home18, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, -1, 30));
+
+        label_home24.setFont(new java.awt.Font("Arial Black", 1, 22)); // NOI18N
+        label_home24.setForeground(new java.awt.Color(255, 255, 255));
+        label_home24.setText(" Current Semester :");
+        jPanel2.add(label_home24, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
+
+        combo_semester.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        combo_semester.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8" }));
+        combo_semester.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel2.add(combo_semester, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 150, 30));
+
+        label_home25.setFont(new java.awt.Font("Arial Black", 1, 22)); // NOI18N
+        label_home25.setForeground(new java.awt.Color(255, 255, 255));
+        label_home25.setText("Session :");
+        jPanel2.add(label_home25, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, -1, 40));
+
+        label_session.setFont(new java.awt.Font("Arial Black", 1, 22)); // NOI18N
+        label_session.setForeground(new java.awt.Color(255, 255, 255));
+        label_session.setText("Session :");
+        jPanel2.add(label_session, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, 220, 40));
+
+        label_fee.setFont(new java.awt.Font("Arial Black", 1, 22)); // NOI18N
+        label_fee.setForeground(new java.awt.Color(255, 255, 255));
+        label_fee.setText("0");
+        jPanel2.add(label_fee, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 200, 190, 30));
 
         label_home19.setFont(new java.awt.Font("Arial Black", 1, 22)); // NOI18N
         label_home19.setForeground(new java.awt.Color(255, 255, 255));
-        label_home19.setText("Fine           :");
-        jPanel2.add(label_home19, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, 30));
+        label_home19.setText("Dues          :");
+        jPanel2.add(label_home19, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, -1, 30));
 
-        label_home20.setFont(new java.awt.Font("Arial Black", 1, 22)); // NOI18N
-        label_home20.setForeground(new java.awt.Color(255, 255, 255));
-        label_home20.setText("Total Due  :");
-        jPanel2.add(label_home20, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, 30));
+        label_due.setFont(new java.awt.Font("Arial Black", 1, 22)); // NOI18N
+        label_due.setForeground(new java.awt.Color(255, 255, 255));
+        label_due.setText("0");
+        jPanel2.add(label_due, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 250, 190, 30));
 
-        panel_parent.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 530, 190));
+        panel_parent.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, 550, 320));
 
         jPanel3.setBackground(new java.awt.Color(0, 51, 51));
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(0, 153, 153), null, null));
@@ -133,31 +205,47 @@ public class StudentFeeConfirmation extends javax.swing.JFrame {
         label_home21.setFont(new java.awt.Font("Arial Black", 1, 22)); // NOI18N
         label_home21.setForeground(new java.awt.Color(255, 255, 255));
         label_home21.setText("Payment Method    :");
-        jPanel3.add(label_home21, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, 30));
+        jPanel3.add(label_home21, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, 30));
 
         label_home22.setFont(new java.awt.Font("Arial Black", 1, 22)); // NOI18N
         label_home22.setForeground(new java.awt.Color(255, 255, 255));
         label_home22.setText("Transaction ID       :");
-        jPanel3.add(label_home22, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, 30));
-
-        btn_submit.setBackground(new java.awt.Color(102, 102, 102));
-        btn_submit.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        btn_submit.setForeground(new java.awt.Color(255, 255, 255));
-        btn_submit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/signup.png"))); // NOI18N
-        btn_submit.setText("SUBMIT");
-        btn_submit.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
-        btn_submit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_submitActionPerformed(evt);
-            }
-        });
-        jPanel3.add(btn_submit, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, 170, 54));
+        jPanel3.add(label_home22, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, 30));
 
         combo_payment_method.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         combo_payment_method.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "bKash", "Nagad", "Rocket", "Bank" }));
-        jPanel3.add(combo_payment_method, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 320, 40));
+        jPanel3.add(combo_payment_method, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, 320, 40));
+
+        txt_transaction.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        jPanel3.add(txt_transaction, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 160, 320, 40));
 
         panel_parent.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 230, 730, 320));
+
+        btn_search.setBackground(new java.awt.Color(102, 102, 102));
+        btn_search.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        btn_search.setForeground(new java.awt.Color(255, 255, 255));
+        btn_search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/icons8-search-32.png"))); // NOI18N
+        btn_search.setText("SEARCH");
+        btn_search.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
+        btn_search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_searchActionPerformed(evt);
+            }
+        });
+        panel_parent.add(btn_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 600, 180, 54));
+
+        btn_submit1.setBackground(new java.awt.Color(102, 102, 102));
+        btn_submit1.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        btn_submit1.setForeground(new java.awt.Color(255, 255, 255));
+        btn_submit1.setIcon(new javax.swing.ImageIcon("D:\\Project\\HallConnnect\\HallConnnect-master\\src\\hallconnect\\icons\\icons8-payment-32.png")); // NOI18N
+        btn_submit1.setText("CONFIRM");
+        btn_submit1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
+        btn_submit1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_submit1ActionPerformed(evt);
+            }
+        });
+        panel_parent.add(btn_submit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 600, 190, 54));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -191,10 +279,126 @@ public class StudentFeeConfirmation extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btn_backActionPerformed
 
-    private void btn_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_submitActionPerformed
+    private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_btn_submitActionPerformed
+
+        try {
+            // Get selected semester from combo box
+            String semester = combo_semester.getSelectedItem().toString();
+
+            // Get database connection
+            Connection con = DbConnection.getConnection();
+
+            // Prepare statements
+            PreparedStatement pst = con.prepareStatement(
+                    "SELECT semester, payment_status FROM payment WHERE session=? AND username=?"
+            );
+            PreparedStatement pst2 = con.prepareStatement(
+                    "SELECT semester, fee FROM semester WHERE session=?"
+            );
+
+            // Set parameters for the queries
+            pst.setString(1, session);
+            pst.setString(2, student_username);
+            pst2.setString(1, session);
+
+            // Execute semester fee query
+            ResultSet rs2 = pst2.executeQuery();
+
+            // Store semester fees in a map for quick lookup
+            HashMap<String, Integer> semesterFees = new HashMap<>();
+            while (rs2.next()) {
+                String sem = rs2.getString("semester");
+                int fee = Integer.parseInt(rs2.getString("fee"));
+                semesterFees.put(sem, fee);
+            }
+
+            // Execute payment status query
+            ResultSet rs = pst.executeQuery();
+
+            int due = 0;
+            HashSet<String> paidSemesters = new HashSet<>();
+
+            while (rs.next()) {
+                String paidSemester = rs.getString("semester");
+                String paymentStatus = rs.getString("payment_status");
+
+                paidSemesters.add(paidSemester); // Track semesters where payment is recorded
+
+                if (semesterFees.containsKey(paidSemester)) {
+                    int feeAmount = semesterFees.get(paidSemester);
+
+                    // If payment is not complete, add fee to due
+                    if (!"Paid".equalsIgnoreCase(paymentStatus)) {
+                        due += feeAmount;
+                    }
+                }
+            }
+
+            // **Handle Case Where No Payments Exist**
+            if (paidSemesters.isEmpty()) {
+                for (String sem : semesterFees.keySet()) {
+                    if (sem.compareTo(semester) < 0) { // Include only past semesters
+                        due += semesterFees.get(sem);
+                    }
+                }
+            } else {
+                // Add missing unpaid semesters (not in `payment` table)
+                for (String sem : semesterFees.keySet()) {
+                    if (!paidSemesters.contains(sem) && sem.compareTo(semester) < 0) {
+                        due += semesterFees.get(sem);
+                    }
+                }
+            }
+
+            // Get current semester fee
+            int currentSemesterFee = semesterFees.getOrDefault(semester, 0);
+            //  due=due-currentSemesterFee;
+            // Update UI labels
+            label_fee.setText(String.valueOf(currentSemesterFee));
+            label_due.setText(String.valueOf(due));
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+
+
+    }//GEN-LAST:event_btn_searchActionPerformed
+
+    private void btn_submit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_submit1ActionPerformed
+        // TODO add your handling code here:
+        String semester = combo_semester.getSelectedItem().toString();
+        String method = combo_payment_method.getSelectedItem().toString();
+        String transaction_id = txt_transaction.getText();
+        try {
+            Connection con = DbConnection.getConnection();
+            String hallName = null;
+            PreparedStatement pst2=con.prepareStatement("SELECT hall_name FROM room_details where username=?");
+            pst2.setString(1, student_username);
+            ResultSet rs2=pst2.executeQuery();
+            if(rs2.next()){
+            hallName=rs2.getString("hall_name");
+       
+            }
+            pst2.close();
+            PreparedStatement pst = con.prepareStatement("INSERT INTO pending_payment (username,session,semester,method,transaction_id,hallName) values(?,?,?,?,?,?)");
+            pst.setString(1, student_username);
+            pst.setString(2, session);
+            pst.setString(3, semester);
+            pst.setString(4, method);
+            pst.setString(5, transaction_id);
+            pst.setString(6, hallName);
+            int row=pst.executeUpdate();
+            if(row>0){
+                JOptionPane.showMessageDialog(this, "Requested Successfully");
+                txt_transaction.setText("");
+                
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }//GEN-LAST:event_btn_submit1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -248,19 +452,26 @@ public class StudentFeeConfirmation extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_back;
-    private javax.swing.JButton btn_submit;
+    private javax.swing.JButton btn_search;
+    private javax.swing.JButton btn_submit1;
     private javax.swing.JComboBox<String> combo_payment_method;
+    private javax.swing.JComboBox<String> combo_semester;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel label_due;
+    private javax.swing.JLabel label_fee;
     private javax.swing.JLabel label_hallconnect;
     private javax.swing.JLabel label_home18;
     private javax.swing.JLabel label_home19;
-    private javax.swing.JLabel label_home20;
     private javax.swing.JLabel label_home21;
     private javax.swing.JLabel label_home22;
+    private javax.swing.JLabel label_home24;
+    private javax.swing.JLabel label_home25;
     private javax.swing.JLabel label_login;
+    private javax.swing.JLabel label_session;
     private javax.swing.JPanel panel_parent;
+    private javax.swing.JTextField txt_transaction;
     // End of variables declaration//GEN-END:variables
 }

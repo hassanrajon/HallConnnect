@@ -4,6 +4,9 @@
  */
 package hallconnect.provost;
 
+import hallconnect.BH_Associates;
+import hallconnect.MH_Associates;
+import hallconnect.MMH_Associates;
 import hallconnect.room.RoomSelection;
 import hallconnect.database.CentralController;
 import hallconnect.database.DbConnection;
@@ -12,6 +15,7 @@ import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -24,29 +28,28 @@ public class SignUpRequest extends javax.swing.JFrame {
 
     private CentralController controller = new CentralController();
 
-    String username; // provost username
+    String provost_username; // provost username
     String hall_name;
     String room;
     int id;
-    String stu_name; // student name
+    String student_username; // student name
     String dept;
 
     /**
      * Creates new form loginPage
      */
-    public SignUpRequest(CentralController controller, String username) {
+    public SignUpRequest(CentralController controller, String provost_username) {
         this.controller = controller;
-        this.username = username;
+        this.provost_username = provost_username;
 
         initComponents();
-        showRechord(username);
+        showRechord(provost_username);
     }
 
     public SignUpRequest(String username) {
-        this.username = username;
-
+        this.provost_username = provost_username;
         initComponents();
-        showRechord(username);
+        showRechord(provost_username);
 
     }
 
@@ -57,9 +60,9 @@ public class SignUpRequest extends javax.swing.JFrame {
 //    BANGABONDHU HALL
 //MUKTIJODDHA HALL
 //BANGAMATA HALL
-    void showRechord(String username) {
+    void showRechord(String provost_username) {
 
-        hall_name = switch (username) {
+        hall_name = switch (provost_username) {
             case "abu_naser" ->
                 "BANGABONDHU HALL";
             case "naznin_ara" ->
@@ -69,7 +72,7 @@ public class SignUpRequest extends javax.swing.JFrame {
         };
         try {
             Connection con = DbConnection.getConnection();
-            String query = "SELECT p.id, p.name, p.reg, "
+            String query = "SELECT p.id, p.username, p.reg, "
                     + "pr.room1, pr.room2, pr.room3, pr.dept "
                     + "FROM pending p "
                     + "JOIN pending_room pr ON p.username = pr.username "
@@ -84,13 +87,13 @@ public class SignUpRequest extends javax.swing.JFrame {
             // add new data
             while (rs.next()) {
                 int id = rs.getInt("id");
-                String name = rs.getString("name");
+                String username = rs.getString("username");
                 String reg = rs.getString("reg");
                 String room1 = rs.getString("room1");
                 String room2 = rs.getString("room2");
                 String room3 = rs.getString("room3");
                 String dept = rs.getString("dept");
-                Object obj[] = {id, name, reg, dept, room1, room2, room3};
+                Object obj[] = {id, username, reg, dept, room1, room2, room3};
                 table_model.addRow(obj);
 
             }
@@ -120,77 +123,113 @@ public class SignUpRequest extends javax.swing.JFrame {
     }
 
     void accept() {
-
-        Connection con = null;
-        PreparedStatement insertStudentStmt = null;
-        PreparedStatement insertRoomStmt = null;
-        PreparedStatement deletePendingStmt = null;
-        PreparedStatement deletePendingRoomStmt = null;
-        PreparedStatement findUsername = null;
-
         try {
-            // Establish database connection
-            con = DbConnection.getConnection();
+            Connection con = DbConnection.getConnection();
             con.setAutoCommit(false); // Start transaction
 
-            // Step 1: Insert into student table
-            String insertStudentQuery = "INSERT INTO STUDENT (name, reg, session, dob, blood, contact, email, username, pass, question, ans) "
-                    + "SELECT name, reg, session, dob, blood, contact, email, username, pass, question, ans "
-                    + "FROM pending WHERE id = ?";
-            insertStudentStmt = con.prepareStatement(insertStudentQuery);
-            insertStudentStmt.setInt(1, id); // Set the id
-            int rowsInsertedStudent = insertStudentStmt.executeUpdate();
+            // Step 1: Retrieve student details from 'pending' table
+            String selectStudentQuery = "SELECT * FROM pending WHERE id = ?";
+            PreparedStatement selectStudentPst = con.prepareStatement(selectStudentQuery);
+            selectStudentPst.setInt(1, id);
+            ResultSet studentRs = selectStudentPst.executeQuery();
 
-            // Step 2: Insert into room_details table
-            String insertRoomQuery = "INSERT INTO room_details (hall_name, username, room_no, dept) VALUES (?,?,?,?)";
-            insertRoomStmt = con.prepareStatement(insertRoomQuery);
-            insertRoomStmt.setString(1, hall_name); // Set hall_name
-            insertRoomStmt.setString(2, stu_name);  // Set username (stu_name)
-            insertRoomStmt.setString(3, room);      // Set room_no
-            insertRoomStmt.setString(4, dept);      // Set dept
-            int rowsInsertedRoom = insertRoomStmt.executeUpdate();
+            if (studentRs.next()) {
+                // Fetch student details
+                String name = studentRs.getString("name");
+                String reg = studentRs.getString("reg");
+                String session = studentRs.getString("session");
+                String dob = studentRs.getString("dob");
+                String blood = studentRs.getString("blood");
+                String contact = studentRs.getString("contact");
+                String email = studentRs.getString("email");
+                String username = studentRs.getString("username");
+                String pass = studentRs.getString("pass");
+                String question = studentRs.getString("question");
+                String ans = studentRs.getString("ans");
 
-            // find student username
-            String student_username = null;
-            findUsername = con.prepareStatement("SELECT username FROM pending where id=?");
-            findUsername.setInt(1, id);
-            ResultSet rs = findUsername.executeQuery();
-            if (rs.next()) {
-                student_username = rs.getString("username");
-            }
-            // Step 3: Delete from pending table
-            String deletePendingQuery = "DELETE FROM pending WHERE id = ?";
-            deletePendingStmt = con.prepareStatement(deletePendingQuery);
-            deletePendingStmt.setInt(1, id); // Set the same id
-            int rowsDeletedPending = deletePendingStmt.executeUpdate();
+                // Step 2: Retrieve room details from 'pending_room' table
+                String selectRoomQuery = "SELECT * FROM pending_room WHERE username = ?";
+                PreparedStatement selectRoomPst = con.prepareStatement(selectRoomQuery);
+                selectRoomPst.setString(1, username);
+                ResultSet roomRs = selectRoomPst.executeQuery();
 
-            // Step 4: Delete from pending_room table
-            String deletePendingRoomQuery = "DELETE FROM pending_room WHERE username = ?";
-            deletePendingRoomStmt = con.prepareStatement(deletePendingRoomQuery);
-            deletePendingRoomStmt.setString(1, student_username); // Set username (stu_name)
-            int rowsDeletedPendingRoom = deletePendingRoomStmt.executeUpdate();
+                // Step 3: Insert into 'student' table
+                String insertStudentQuery = "INSERT INTO student (name, reg, session, dob, blood, contact, email, username, pass, question, ans) "
+                        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                PreparedStatement insertStudentPst = con.prepareStatement(insertStudentQuery);
+                insertStudentPst.setString(1, name);
+                insertStudentPst.setString(2, reg);
+                insertStudentPst.setString(3, session);
+                insertStudentPst.setString(4, dob);
+                insertStudentPst.setString(5, blood);
+                insertStudentPst.setString(6, contact);
+                insertStudentPst.setString(7, email);
+                insertStudentPst.setString(8, username);
+                insertStudentPst.setString(9, pass);
+                insertStudentPst.setString(10, question);
+                insertStudentPst.setString(11, ans);
+                insertStudentPst.executeUpdate();
 
-            // Commit transaction
-            con.commit();
-            if (rowsInsertedRoom > 0 && rowsDeletedPendingRoom > 0 && rowsDeletedPending > 0 && rowsInsertedStudent > 0) {
+                // Step 4: Insert into 'room_details' table
+                if (roomRs.next()) {
+                    String hallName = roomRs.getString("hall_name");
+                    String room1 = roomRs.getString("room1");
+                    String room2 = roomRs.getString("room2");
+                    String room3 = roomRs.getString("room3");
+                    String dept = roomRs.getString("dept");
 
-                JOptionPane.showMessageDialog(this, "STUDENT ADDED SUCCESSFULLY");
-            } else {
-                JOptionPane.showMessageDialog(this, "FAILED");
+                    String insertRoomQuery = "INSERT INTO room_details (hall_name, username, room_no, dept) "
+                            + "VALUES (?, ?, ?, ?)";
+                    PreparedStatement insertRoomPst = con.prepareStatement(insertRoomQuery);
 
-            }
-        } catch (Exception e) {
-            if (con != null) {
-                try {
-                    con.rollback(); // Rollback changes if an error occurs
+                    insertRoomPst.setString(1, hallName);
+                    insertRoomPst.setString(2, username);
 
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                    // Fix: Insert all room numbers properly
+                    insertRoomPst.setString(3, room1);
+                    insertRoomPst.setString(4, dept);
+                    insertRoomPst.executeUpdate();
+
+                    insertRoomPst.setString(3, room2);
+                    insertRoomPst.executeUpdate();
+
+                    insertRoomPst.setString(3, room3);
+                    insertRoomPst.executeUpdate();
+
+                    insertRoomPst.close();
                 }
+
+                // Step 5: Delete from 'pending' table
+                String deleteStudentQuery = "DELETE FROM pending WHERE id = ?";
+                PreparedStatement deleteStudentPst = con.prepareStatement(deleteStudentQuery);
+                deleteStudentPst.setInt(1, id);
+                deleteStudentPst.executeUpdate();
+
+                // Step 6: Delete from 'pending_room' table
+                String deleteRoomQuery = "DELETE FROM pending_room WHERE username = ?";
+                PreparedStatement deleteRoomPst = con.prepareStatement(deleteRoomQuery);
+                deleteRoomPst.setString(1, username);
+                deleteRoomPst.executeUpdate();
+
+                // Commit transaction
+                con.commit();
+
+                // Close resources
+                deleteStudentPst.close();
+                deleteRoomPst.close();
+                insertStudentPst.close();
+                studentRs.close();
+                roomRs.close();
+                selectStudentPst.close();
+                selectRoomPst.close();
+            } else {
+                System.out.println("Student ID not found in pending list.");
             }
+
+            con.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -281,6 +320,9 @@ public class SignUpRequest extends javax.swing.JFrame {
         panel_complainBox.setBackground(new java.awt.Color(153, 0, 51));
         panel_complainBox.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         panel_complainBox.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_complainBoxMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panel_complainBoxMouseEntered(evt);
             }
@@ -305,6 +347,9 @@ public class SignUpRequest extends javax.swing.JFrame {
         panel_hallFee.setBackground(new java.awt.Color(153, 0, 51));
         panel_hallFee.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         panel_hallFee.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_hallFeeMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panel_hallFeeMouseEntered(evt);
             }
@@ -329,6 +374,9 @@ public class SignUpRequest extends javax.swing.JFrame {
         panel_clearance.setBackground(new java.awt.Color(153, 0, 51));
         panel_clearance.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         panel_clearance.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_clearanceMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panel_clearanceMouseEntered(evt);
             }
@@ -353,6 +401,9 @@ public class SignUpRequest extends javax.swing.JFrame {
         panel_hallAsso.setBackground(new java.awt.Color(153, 0, 51));
         panel_hallAsso.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         panel_hallAsso.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_hallAssoMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panel_hallAssoMouseEntered(evt);
             }
@@ -377,6 +428,9 @@ public class SignUpRequest extends javax.swing.JFrame {
         panel_addNotice.setBackground(new java.awt.Color(153, 0, 51));
         panel_addNotice.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         panel_addNotice.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_addNoticeMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panel_addNoticeMouseEntered(evt);
             }
@@ -433,7 +487,7 @@ public class SignUpRequest extends javax.swing.JFrame {
 
             },
             new String [] {
-                "id", "name", "registration no", "department", "Room1", "Room2", "Room3"
+                "id", "username", "registration no", "department", "Room1", "Room2", "Room3"
             }
         ));
         table_info.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -662,7 +716,7 @@ public class SignUpRequest extends javax.swing.JFrame {
 
         if (checkRoom()) {
             accept();
-            showRechord(username);
+            showRechord(provost_username);
         }
     }//GEN-LAST:event_btn_acceptActionPerformed
 
@@ -670,35 +724,27 @@ public class SignUpRequest extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             Connection con = DbConnection.getConnection();
-            // find student username
-            String student_username = null;
-            PreparedStatement findUsername = con.prepareStatement("SELECT username FROM pending where id=?");
-            findUsername.setInt(1, id);
-            ResultSet rs = findUsername.executeQuery();
-            if (rs.next()) {
-                student_username = rs.getString("username");
-            }
-            // delete from pending
-            String deletePendingQuery = "DELETE FROM pending WHERE id = ?";
-            PreparedStatement deletePendingStmt = con.prepareStatement(deletePendingQuery);
-            deletePendingStmt.setInt(1, id);
-            int rowsDeletedPending = deletePendingStmt.executeUpdate();
-            // Step 4: Delete from pending_room table
-            String deletePendingRoomQuery = "DELETE FROM pending_room WHERE username = ?";
-            PreparedStatement deletePendingRoomStmt = con.prepareStatement(deletePendingRoomQuery);
-            deletePendingRoomStmt.setString(1, student_username);
-            int rowsDeletedPendingRoom = deletePendingRoomStmt.executeUpdate();
-            if (rowsDeletedPending > 0 && rowsDeletedPendingRoom > 0) {
-                JOptionPane.showMessageDialog(this, "REJECTED SUCCESSFULLY");
-                showRechord(username);
-            } else {
-                JOptionPane.showMessageDialog(this, "REJECTED FAILED");
 
-            }
+            // Step 1: Delete from 'pending' table
+            String deletePendingQuery = "DELETE FROM pending WHERE username = ?";
+            PreparedStatement deletePendingPst = con.prepareStatement(deletePendingQuery);
+            deletePendingPst.setString(1, student_username);
+            deletePendingPst.executeUpdate();
+            deletePendingPst.close();
+
+            // Step 2: Delete from 'pending_room' table
+            String deletePendingRoomQuery = "DELETE FROM pending_room WHERE username = ?";
+            PreparedStatement deletePendingRoomPst = con.prepareStatement(deletePendingRoomQuery);
+            deletePendingRoomPst.setString(1, student_username);
+            deletePendingRoomPst.executeUpdate();
+            deletePendingRoomPst.close();
+
+            con.close();
+            JOptionPane.showMessageDialog(this, "Student data rejected successfully.");
+            showRechord(provost_username);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
     }//GEN-LAST:event_btn_reject1ActionPerformed
 
@@ -711,7 +757,7 @@ public class SignUpRequest extends javax.swing.JFrame {
         btn_room2.setText((String) table.getValueAt(rowNO, 5));
         btn_room3.setText((String) table.getValueAt(rowNO, 6));
         id = (int) table_info.getValueAt(rowNO, 0);
-        stu_name = (String) table.getValueAt(rowNO, 1);
+        student_username = (String) table.getValueAt(rowNO, 1);
         dept = (String) table.getValueAt(rowNO, 3);
 
 
@@ -731,6 +777,57 @@ public class SignUpRequest extends javax.swing.JFrame {
         prev.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btn_backActionPerformed
+
+    private void panel_hallFeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_hallFeeMouseClicked
+        // TODO add your handling code here:
+        ProvostHallFee hallfee = new ProvostHallFee(controller, provost_username);
+        controller.addFrame(this);
+        hallfee.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panel_hallFeeMouseClicked
+
+    private void panel_clearanceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_clearanceMouseClicked
+        // TODO add your handling code here:
+         controller.addFrame(this);
+        provostClearance clr = new provostClearance(controller, provost_username);
+        clr.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panel_clearanceMouseClicked
+
+    private void panel_addNoticeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_addNoticeMouseClicked
+        // TODO add your handling code here:controller.addFrame(this);
+        new ProvostNotice(controller).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panel_addNoticeMouseClicked
+
+    private void panel_complainBoxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_complainBoxMouseClicked
+        // TODO add your handling code here:
+        controller.addFrame(this);
+        new ProvostComplainBox(controller, provost_username).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panel_complainBoxMouseClicked
+
+    private void panel_hallAssoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_hallAssoMouseClicked
+        // TODO add your handling code here:
+        if ("abu_naser".equals(provost_username)) {
+            controller.addFrame(this);
+            BH_Associates bh = new BH_Associates(controller);
+            bh.setVisible(true);
+            this.setVisible(false);
+
+        } else if ("naznin_ara".equals(provost_username)) {
+            controller.addFrame(this);
+            MMH_Associates bh = new MMH_Associates(controller);
+            bh.setVisible(true);
+            this.setVisible(false);
+        } else {
+            controller.addFrame(this);
+            MH_Associates bh = new MH_Associates(controller);
+            bh.setVisible(true);
+            this.setVisible(false);
+
+        }
+    }//GEN-LAST:event_panel_hallAssoMouseClicked
 
     /**
      * @param args the command line arguments

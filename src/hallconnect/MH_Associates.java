@@ -15,16 +15,16 @@ import javax.swing.JOptionPane;
  *
  * @author Lenovo
  */
-public class Associates extends javax.swing.JFrame {
+public class MH_Associates extends javax.swing.JFrame {
   private CentralController controller = new CentralController();
     /**
      * Creates new form loginPage
      */
-    public Associates(CentralController controller) {
+    public MH_Associates(CentralController controller) {
         this.controller=controller;
         initComponents();
     }
-    public Associates() {
+    public MH_Associates() {
         initComponents();
     }
 
@@ -48,9 +48,15 @@ public class Associates extends javax.swing.JFrame {
         label_home19 = new javax.swing.JLabel();
         label_home22 = new javax.swing.JLabel();
         label_home23 = new javax.swing.JLabel();
+        label_home27 = new javax.swing.JLabel();
+        label_home28 = new javax.swing.JLabel();
+        label_home29 = new javax.swing.JLabel();
+        label_home24 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         label_home20 = new javax.swing.JLabel();
         label_home21 = new javax.swing.JLabel();
+        label_home25 = new javax.swing.JLabel();
+        label_home26 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -128,6 +134,26 @@ public class Associates extends javax.swing.JFrame {
         label_home23.setText("Plumber             :");
         jPanel2.add(label_home23, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, -1, 30));
 
+        label_home27.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        label_home27.setForeground(new java.awt.Color(255, 255, 255));
+        label_home27.setText("01712345678");
+        jPanel2.add(label_home27, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, -1, 30));
+
+        label_home28.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        label_home28.setForeground(new java.awt.Color(255, 255, 255));
+        label_home28.setText("01712345678");
+        jPanel2.add(label_home28, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, -1, 30));
+
+        label_home29.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        label_home29.setForeground(new java.awt.Color(255, 255, 255));
+        label_home29.setText("01712345678");
+        jPanel2.add(label_home29, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, -1, 30));
+
+        label_home24.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        label_home24.setForeground(new java.awt.Color(255, 255, 255));
+        label_home24.setText("01712345678");
+        jPanel2.add(label_home24, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 310, -1, 30));
+
         panel_parent.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 220, 640, 470));
 
         jPanel4.setBackground(new java.awt.Color(0, 51, 51));
@@ -143,6 +169,16 @@ public class Associates extends javax.swing.JFrame {
         label_home21.setForeground(new java.awt.Color(255, 255, 255));
         label_home21.setText("Provost                :");
         jPanel4.add(label_home21, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, 30));
+
+        label_home25.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        label_home25.setForeground(new java.awt.Color(255, 255, 255));
+        label_home25.setText("Shahid Iqbal");
+        jPanel4.add(label_home25, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, -1, 30));
+
+        label_home26.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        label_home26.setForeground(new java.awt.Color(255, 255, 255));
+        label_home26.setText("Shahid Iqbal");
+        jPanel4.add(label_home26, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 160, -1, 30));
 
         panel_parent.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 640, 320));
 
@@ -195,14 +231,206 @@ public class Associates extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Associates.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MH_Associates.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Associates.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MH_Associates.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Associates.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MH_Associates.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Associates.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MH_Associates.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -271,7 +499,7 @@ public class Associates extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Associates().setVisible(true);
+                new MH_Associates().setVisible(true);
             }
         });
     }
@@ -289,6 +517,12 @@ public class Associates extends javax.swing.JFrame {
     private javax.swing.JLabel label_home21;
     private javax.swing.JLabel label_home22;
     private javax.swing.JLabel label_home23;
+    private javax.swing.JLabel label_home24;
+    private javax.swing.JLabel label_home25;
+    private javax.swing.JLabel label_home26;
+    private javax.swing.JLabel label_home27;
+    private javax.swing.JLabel label_home28;
+    private javax.swing.JLabel label_home29;
     private javax.swing.JLabel label_login;
     private javax.swing.JPanel panel_parent;
     // End of variables declaration//GEN-END:variables

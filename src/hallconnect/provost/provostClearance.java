@@ -4,7 +4,6 @@
  */
 package hallconnect.provost;
 
-
 import hallconnect.BH_Associates;
 import hallconnect.MH_Associates;
 import hallconnect.MMH_Associates;
@@ -13,59 +12,55 @@ import hallconnect.database.CentralController;
 import hallconnect.database.DbConnection;
 import hallconnect.signup.loginPage;
 import java.awt.Color;
-import java.awt.Font;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Lenovo
  */
-public class ProvostComplainBox extends javax.swing.JFrame {
+public class provostClearance extends javax.swing.JFrame {
 
     private CentralController controller = new CentralController();
-
-    String provost_username; // provost provost_username
+    String provost_username; // provost username
     String hall_name;
-    String title;
-    String stu_name; // student name
-    String text;
+    String contact = "";
+    String student_username = ""; // student name
+    String session = "";
 
     /**
      * Creates new form loginPage
      */
-    public ProvostComplainBox(CentralController controller, String username) {
+    public provostClearance(CentralController controller, String provost_username) {
         this.controller = controller;
-        this.provost_username = username;
+        this.provost_username = provost_username;
 
         initComponents();
         showRechord(provost_username);
     }
 
-    public ProvostComplainBox(String username) {
-        this.provost_username = username;
+    public provostClearance(String provost_username) {
+        this.provost_username = provost_username;
         initComponents();
         showRechord(provost_username);
 
     }
 
-    public ProvostComplainBox() {
+    public provostClearance() {
         initComponents();
     }
 
 //    BANGABONDHU HALL
 //MUKTIJODDHA HALL
 //BANGAMATA HALL
-    void showRechord(String username) {
+    void showRechord(String provost_username) {
 
-        hall_name = switch (username) {
+        hall_name = switch (provost_username) {
             case "abu_naser" ->
                 "BANGABONDHU HALL";
             case "naznin_ara" ->
@@ -75,20 +70,21 @@ public class ProvostComplainBox extends javax.swing.JFrame {
         };
         try {
             Connection con = DbConnection.getConnection();
-            String query = "SELECT username,title,text FROM complain where hall_name=?";
+            String query = "select username,session,contact from clearance where hallname=?";
             PreparedStatement pst = con.prepareStatement(query);
             pst.setString(1, this.hall_name);
             ResultSet rs = pst.executeQuery();
-            DefaultTableModel table_model = (DefaultTableModel) table_complain.getModel();
+            DefaultTableModel table_model = (DefaultTableModel) table_info.getModel();
             // clear previous data
             table_model.setRowCount(0);
             // add new data
             while (rs.next()) {
 
-                String name = rs.getString("username");
-                String title = rs.getString("title");
-                String text = rs.getString("text");
-                Object obj[] = {name, title, text};
+                String username = rs.getString("username");
+                String session = rs.getString("session");
+                String contact = rs.getString("contact");
+
+                Object obj[] = {username, session, contact};
                 table_model.addRow(obj);
 
             }
@@ -98,6 +94,10 @@ public class ProvostComplainBox extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    void accept() {
+
     }
 
     /**
@@ -114,14 +114,20 @@ public class ProvostComplainBox extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         label_hallconnect = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        table_complain = new javax.swing.JTable();
+        table_info = new javax.swing.JTable();
+        btn_accept = new javax.swing.JButton();
         btn_reject1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        btn_see = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         btn_back = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        label_username = new javax.swing.JLabel();
+        label_session = new javax.swing.JLabel();
+        label_contact = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        panel_complainBox1 = new javax.swing.JPanel();
+        panel_complainBox = new javax.swing.JPanel();
         label_home4 = new javax.swing.JLabel();
         label_home15 = new javax.swing.JLabel();
         panel_hallFee = new javax.swing.JPanel();
@@ -173,40 +179,52 @@ public class ProvostComplainBox extends javax.swing.JFrame {
 
         panel_parent.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, 80));
 
-        table_complain.setBackground(new java.awt.Color(0, 51, 51));
-        table_complain.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        table_complain.setFont(new java.awt.Font("Calisto MT", 0, 16)); // NOI18N
-        table_complain.setForeground(new java.awt.Color(255, 255, 255));
-        table_complain.setModel(new javax.swing.table.DefaultTableModel(
+        table_info.setBackground(new java.awt.Color(0, 51, 51));
+        table_info.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        table_info.setFont(new java.awt.Font("Calisto MT", 0, 16)); // NOI18N
+        table_info.setForeground(new java.awt.Color(255, 255, 255));
+        table_info.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "name", "title", "text"
+                "username", "session", "contact"
             }
         ));
-        table_complain.setRowHeight(40);
-        table_complain.addMouseListener(new java.awt.event.MouseAdapter() {
+        table_info.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                table_complainMouseClicked(evt);
+                table_infoMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(table_complain);
+        jScrollPane1.setViewportView(table_info);
 
-        panel_parent.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 170, 990, 450));
+        panel_parent.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 170, 990, 350));
+
+        btn_accept.setBackground(new java.awt.Color(102, 102, 102));
+        btn_accept.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        btn_accept.setForeground(new java.awt.Color(255, 255, 255));
+        btn_accept.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/add2.png"))); // NOI18N
+        btn_accept.setText("ACCEPT");
+        btn_accept.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
+        btn_accept.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_acceptActionPerformed(evt);
+            }
+        });
+        panel_parent.add(btn_accept, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 700, 180, 60));
 
         btn_reject1.setBackground(new java.awt.Color(102, 102, 102));
         btn_reject1.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         btn_reject1.setForeground(new java.awt.Color(255, 255, 255));
         btn_reject1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/delete.png"))); // NOI18N
-        btn_reject1.setText("DELETE");
+        btn_reject1.setText("REJECT");
         btn_reject1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
         btn_reject1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_reject1ActionPerformed(evt);
             }
         });
-        panel_parent.add(btn_reject1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 650, 180, 60));
+        panel_parent.add(btn_reject1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 700, 180, 60));
 
         jPanel3.setBackground(new java.awt.Color(0, 51, 51));
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -235,18 +253,10 @@ public class ProvostComplainBox extends javax.swing.JFrame {
 
         panel_parent.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 90, 500, 50));
 
-        btn_see.setBackground(new java.awt.Color(102, 102, 102));
-        btn_see.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        btn_see.setForeground(new java.awt.Color(255, 255, 255));
-        btn_see.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hallconnect/icons/icons8-eye.gif"))); // NOI18N
-        btn_see.setText("SEE ");
-        btn_see.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 3, true));
-        btn_see.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_seeActionPerformed(evt);
-            }
-        });
-        panel_parent.add(btn_see, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 650, 200, 60));
+        jLabel3.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("contact:");
+        panel_parent.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 590, -1, 20));
 
         btn_back.setBackground(new java.awt.Color(102, 102, 102));
         btn_back.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
@@ -259,38 +269,60 @@ public class ProvostComplainBox extends javax.swing.JFrame {
                 btn_backActionPerformed(evt);
             }
         });
-        panel_parent.add(btn_back, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 650, 170, 60));
+        panel_parent.add(btn_back, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 700, 170, 60));
+
+        jLabel4.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("username: ");
+        panel_parent.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 590, -1, 20));
+
+        jLabel5.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("session: ");
+        panel_parent.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 590, -1, 20));
+
+        label_username.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        label_username.setForeground(new java.awt.Color(255, 255, 255));
+        panel_parent.add(label_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 590, 200, 20));
+
+        label_session.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        label_session.setForeground(new java.awt.Color(255, 255, 255));
+        panel_parent.add(label_session, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 590, 180, 20));
+
+        label_contact.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        label_contact.setForeground(new java.awt.Color(255, 255, 255));
+        panel_parent.add(label_contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(1290, 590, 180, 20));
 
         jPanel4.setBackground(new java.awt.Color(0, 51, 51));
         jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panel_complainBox1.setBackground(new java.awt.Color(0, 153, 153));
-        panel_complainBox1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        panel_complainBox1.addMouseListener(new java.awt.event.MouseAdapter() {
+        panel_complainBox.setBackground(new java.awt.Color(153, 0, 51));
+        panel_complainBox.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panel_complainBox.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panel_complainBox1MouseClicked(evt);
+                panel_complainBoxMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                panel_complainBox1MouseEntered(evt);
+                panel_complainBoxMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                panel_complainBox1MouseExited(evt);
+                panel_complainBoxMouseExited(evt);
             }
         });
-        panel_complainBox1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panel_complainBox.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label_home4.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         label_home4.setForeground(new java.awt.Color(255, 255, 255));
         label_home4.setText("COMPLAIN");
-        panel_complainBox1.add(label_home4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 160, -1));
+        panel_complainBox.add(label_home4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 160, -1));
 
         label_home15.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         label_home15.setForeground(new java.awt.Color(255, 255, 255));
         label_home15.setText("BOX");
-        panel_complainBox1.add(label_home15, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, -1, -1));
+        panel_complainBox.add(label_home15, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, -1, -1));
 
-        jPanel4.add(panel_complainBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 340, 80));
+        jPanel4.add(panel_complainBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 340, 80));
 
         panel_hallFee.setBackground(new java.awt.Color(153, 0, 51));
         panel_hallFee.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -319,7 +351,7 @@ public class ProvostComplainBox extends javax.swing.JFrame {
 
         jPanel4.add(panel_hallFee, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 340, 80));
 
-        panel_clearance.setBackground(new java.awt.Color(153, 0, 51));
+        panel_clearance.setBackground(new java.awt.Color(0, 153, 153));
         panel_clearance.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         panel_clearance.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -451,6 +483,83 @@ public class ProvostComplainBox extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_acceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_acceptActionPerformed
+        // TODO add your handling code here:
+        if (student_username.equals("") || contact.equals("") || session.equals("")) {
+            JOptionPane.showMessageDialog(this, "Please Select Desired Row to Delete");
+        } else {
+            try {
+                Connection con = DbConnection.getConnection();
+                PreparedStatement pst1 = con.prepareStatement("DELETE FROM complain where username=?");
+                PreparedStatement pst2 = con.prepareStatement("DELETE FROM payment where username=?");
+                PreparedStatement pst3 = con.prepareStatement("DELETE FROM room_details where username=?");
+                PreparedStatement pst4 = con.prepareStatement("DELETE FROM student where username=?");
+                PreparedStatement pst5 = con.prepareStatement("DELETE FROM clearance where username=?");
+                pst1.setString(1, student_username);
+                pst2.setString(1, student_username);
+                pst3.setString(1, student_username);
+                pst4.setString(1, student_username);
+                pst5.setString(1, student_username);
+                int row = pst1.executeUpdate();
+                row += pst2.executeUpdate();
+                row += pst3.executeUpdate();
+                row += pst4.executeUpdate();
+                row += pst5.executeUpdate();
+                if (row > 0) {
+                    JOptionPane.showMessageDialog(this, "Student Cleared");
+                    showRechord(provost_username);
+                    label_contact.setText("");
+                    label_username.setText("");
+                    label_session.setText("");
+
+                }
+            } catch (Exception e) {
+
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            }
+
+        }
+    }//GEN-LAST:event_btn_acceptActionPerformed
+
+    private void btn_reject1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reject1ActionPerformed
+        // TODO add your handling code here:
+        if (student_username.equals("") || contact.equals("") || session.equals("")) {
+            JOptionPane.showMessageDialog(this, "Please Select Desired Row to Delete");
+        } else {
+            try {
+                Connection con = DbConnection.getConnection();
+               
+                PreparedStatement pst5 = con.prepareStatement("DELETE FROM clearance where username=?");
+                
+                pst5.setString(1, student_username);
+                int row =0;
+                row += pst5.executeUpdate();
+                if (row > 0) {
+                    JOptionPane.showMessageDialog(this, "Request Rejected");
+                    showRechord(provost_username);
+                    label_contact.setText("");
+                    label_username.setText("");
+                    label_session.setText("");
+                }
+            } catch (Exception e) {
+
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            }
+    }//GEN-LAST:event_btn_reject1ActionPerformed
+    }
+    private void table_infoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_infoMouseClicked
+        // TODO add your handling code here:
+
+        int rowNO = table_info.getSelectedRow();
+        DefaultTableModel table = (DefaultTableModel) table_info.getModel();
+        student_username = table.getValueAt(rowNO, 0).toString();
+        session = table.getValueAt(rowNO, 1).toString();
+        contact = table.getValueAt(rowNO, 2).toString();
+        label_username.setText(student_username);
+        label_contact.setText(contact);
+        label_session.setText(session);
+    }//GEN-LAST:event_table_infoMouseClicked
+
     private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
         // TODO add your handling code here:
         JFrame prev = controller.prevFrame();
@@ -458,76 +567,24 @@ public class ProvostComplainBox extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btn_backActionPerformed
 
-    private void btn_seeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_seeActionPerformed
-           // Create a JTextArea to hold the long text
-    JTextArea textArea = new JTextArea(text, 10, 40); // 10 rows, 40 columns
-    textArea.setFont(new Font("Arial", Font.BOLD, 16)); // Adjust font size
-    textArea.setLineWrap(true);
-    textArea.setWrapStyleWord(true);
-    textArea.setEditable(false);
-
-    // Put the JTextArea inside a JScrollPane to make it scrollable
-    JScrollPane scrollPane = new JScrollPane(textArea);
-    
-    // Show the scrollable text in a JOptionPane
-    JOptionPane.showMessageDialog(panel_parent, scrollPane, "Message", JOptionPane.INFORMATION_MESSAGE);
-        
-    }//GEN-LAST:event_btn_seeActionPerformed
-
-    private void btn_reject1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reject1ActionPerformed
-        // TODO add your handling code here:
-        if (stu_name.equals("")) {
-            JOptionPane.showMessageDialog(this, "Please select any row to delete");
-        } else {
-            try {
-                Connection con = DbConnection.getConnection();
-                PreparedStatement pst = con.prepareStatement("DELETE FROM complain WHERE hall_name = ? AND username = ? AND title = ? AND text = ?");
-                pst.setString(1, hall_name);
-                pst.setString(2, stu_name);
-                pst.setString(3, title);
-                pst.setString(4, text);
-                int rowsAffected = pst.executeUpdate(); // Use executeUpdate() for DELETE operations
-
-                if (rowsAffected > 0) {
-                    JOptionPane.showMessageDialog(this, "Complain deleted successfully");
-                    showRechord(provost_username);
-                } else {
-                    JOptionPane.showMessageDialog(this, "No matching record found");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-
-    }//GEN-LAST:event_btn_reject1ActionPerformed
-
-    private void table_complainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_complainMouseClicked
-        // TODO add your handling code here:
-        int rowcount = table_complain.getSelectedRow();
-        stu_name = table_complain.getValueAt(rowcount, 0).toString();
-        title = table_complain.getValueAt(rowcount, 1).toString();
-        text = table_complain.getValueAt(rowcount, 2).toString();
-    }//GEN-LAST:event_table_complainMouseClicked
-
-    private void panel_complainBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_complainBox1MouseClicked
+    private void panel_complainBoxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_complainBoxMouseClicked
         // TODO add your handling code here:
         controller.addFrame(this);
         new ProvostComplainBox(controller, provost_username).setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_panel_complainBox1MouseClicked
+    }//GEN-LAST:event_panel_complainBoxMouseClicked
 
-    private void panel_complainBox1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_complainBox1MouseEntered
+    private void panel_complainBoxMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_complainBoxMouseEntered
         // TODO add your handling code here:
         Color clr = new Color(0, 153, 153);
         panel_complainBox.setBackground(clr);
-    }//GEN-LAST:event_panel_complainBox1MouseEntered
+    }//GEN-LAST:event_panel_complainBoxMouseEntered
 
-    private void panel_complainBox1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_complainBox1MouseExited
+    private void panel_complainBoxMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_complainBoxMouseExited
         // TODO add your handling code here:
         Color clr = new Color(153, 0, 51);
         panel_complainBox.setBackground(clr);
-    }//GEN-LAST:event_panel_complainBox1MouseExited
+    }//GEN-LAST:event_panel_complainBoxMouseExited
 
     private void panel_hallFeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_hallFeeMouseClicked
         // TODO add your handling code here:
@@ -565,8 +622,7 @@ public class ProvostComplainBox extends javax.swing.JFrame {
 
     private void panel_clearanceMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_clearanceMouseExited
         // TODO add your handling code here:
-        Color clr = new Color(153, 0, 51);
-        panel_clearance.setBackground(clr);
+        
     }//GEN-LAST:event_panel_clearanceMouseExited
 
     private void panel_hallAssoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_hallAssoMouseClicked
@@ -651,13 +707,13 @@ public class ProvostComplainBox extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ProvostComplainBox.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(provostClearance.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ProvostComplainBox.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(provostClearance.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ProvostComplainBox.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(provostClearance.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ProvostComplainBox.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(provostClearance.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -695,49 +751,47 @@ public class ProvostComplainBox extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ProvostComplainBox().setVisible(true);
+                new provostClearance().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_accept;
     private javax.swing.JButton btn_back;
     private javax.swing.ButtonGroup btn_group;
     private javax.swing.JButton btn_reject1;
-    private javax.swing.JButton btn_see;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel label_contact;
     private javax.swing.JLabel label_hallconnect;
     private javax.swing.JLabel label_home10;
     private javax.swing.JLabel label_home11;
     private javax.swing.JLabel label_home12;
     private javax.swing.JLabel label_home13;
-    private javax.swing.JLabel label_home14;
     private javax.swing.JLabel label_home15;
-    private javax.swing.JLabel label_home16;
-    private javax.swing.JLabel label_home17;
     private javax.swing.JLabel label_home2;
-    private javax.swing.JLabel label_home3;
     private javax.swing.JLabel label_home4;
     private javax.swing.JLabel label_home5;
     private javax.swing.JLabel label_home6;
     private javax.swing.JLabel label_home7;
     private javax.swing.JLabel label_home8;
     private javax.swing.JLabel label_home9;
+    private javax.swing.JLabel label_session;
+    private javax.swing.JLabel label_username;
     private javax.swing.JPanel panel_addNotice;
     private javax.swing.JPanel panel_clearance;
     private javax.swing.JPanel panel_complainBox;
-    private javax.swing.JPanel panel_complainBox1;
-    private javax.swing.JPanel panel_complainBox2;
     private javax.swing.JPanel panel_hallAsso;
     private javax.swing.JPanel panel_hallFee;
     private javax.swing.JPanel panel_parent;
     private javax.swing.JPanel panel_signupRequest;
-    private javax.swing.JTable table_complain;
+    private javax.swing.JTable table_info;
     // End of variables declaration//GEN-END:variables
 }

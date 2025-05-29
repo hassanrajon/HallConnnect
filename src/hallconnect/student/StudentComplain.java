@@ -19,14 +19,14 @@ import javax.swing.JOptionPane;
 public class StudentComplain extends javax.swing.JFrame {
 
     private CentralController controller = new CentralController();
-    private String student_name;
+    private String username;
 
     /**
      * Creates new form loginPage
      */
-    public StudentComplain(CentralController controller, String stu_name) {
+    public StudentComplain(CentralController controller, String username) {
         this.controller = controller;
-        this.student_name = stu_name;
+        this.username = username;
         initComponents();
     }
 
@@ -41,7 +41,7 @@ public class StudentComplain extends javax.swing.JFrame {
 
             // First Query
             PreparedStatement pst = con.prepareStatement("SELECT name FROM student WHERE username=?");
-            pst.setString(1, student_name);
+            pst.setString(1, username);
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {  // Move cursor to the first row
@@ -224,7 +224,7 @@ public class StudentComplain extends javax.swing.JFrame {
                 Connection con = DbConnection.getConnection();
                 PreparedStatement pst = con.prepareStatement("INSERT INTO complain (hall_name,username,title,text) values(?,?,?,?)");
                 pst.setString(1, hall_name);
-                pst.setString(2, student_name);
+                pst.setString(2, username);
                 pst.setString(3, title);
                 pst.setString(4, text);
                 int row = pst.executeUpdate();

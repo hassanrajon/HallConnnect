@@ -4,8 +4,11 @@
  */
 package hallconnect.student;
 
-import hallconnect.Associates;
+import hallconnect.BH_Associates;
+import hallconnect.MH_Associates;
+import hallconnect.MMH_Associates;
 import hallconnect.database.CentralController;
+import hallconnect.database.DbConnection;
 import hallconnect.signup.loginPage;
 import java.awt.Color;
 import java.sql.ResultSet;
@@ -19,18 +22,42 @@ import javax.swing.JOptionPane;
  * @author Lenovo
  */
 public class StudentDashboard extends javax.swing.JFrame {
-  private CentralController controller = new CentralController();
-  private String student_name;
+
+    private CentralController controller = new CentralController();
+    private String student_username;
+
     /**
      * Creates new form loginPage
      */
-    public StudentDashboard(CentralController controller,String stu_name) {
-        this.controller=controller;
-        this.student_name=stu_name;
+    public StudentDashboard(CentralController controller, String student_username) {
+        this.controller = controller;
+        this.student_username = student_username;
         initComponents();
+        showData();
     }
+
     public StudentDashboard() {
         initComponents();
+    }
+
+    void showData() {
+        try {
+            Connection con = DbConnection.getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT name,reg,session,contact,email,blood FROM student where username=?");
+            pst.setString(1, student_username);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                label_blood.setText(rs.getString("blood"));
+                lable_reg.setText(rs.getString("reg"));
+                label_contact.setText(rs.getString("contact"));
+                label_name.setText(rs.getString("name"));
+                label_email.setText(rs.getString("email"));
+                label_session.setText(rs.getString("session"));
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -48,21 +75,24 @@ public class StudentDashboard extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         label_welcome = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        label_home18 = new javax.swing.JLabel();
+        lable_reg = new javax.swing.JLabel();
         label_home19 = new javax.swing.JLabel();
         label_home20 = new javax.swing.JLabel();
         label_home21 = new javax.swing.JLabel();
         label_home22 = new javax.swing.JLabel();
         label_home23 = new javax.swing.JLabel();
+        label_home24 = new javax.swing.JLabel();
+        label_name = new javax.swing.JLabel();
+        label_session = new javax.swing.JLabel();
+        label_contact = new javax.swing.JLabel();
+        label_blood = new javax.swing.JLabel();
+        label_email = new javax.swing.JLabel();
         panel_clearence = new javax.swing.JPanel();
         label_home2 = new javax.swing.JLabel();
         label_home3 = new javax.swing.JLabel();
         panel_fee = new javax.swing.JPanel();
         label_home4 = new javax.swing.JLabel();
         label_home5 = new javax.swing.JLabel();
-        panel_update_info = new javax.swing.JPanel();
-        label_home6 = new javax.swing.JLabel();
-        label_home11 = new javax.swing.JLabel();
         panel_notice = new javax.swing.JPanel();
         label_home8 = new javax.swing.JLabel();
         label_home9 = new javax.swing.JLabel();
@@ -119,10 +149,10 @@ public class StudentDashboard extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(0, 153, 153), null, null));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        label_home18.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        label_home18.setForeground(new java.awt.Color(255, 255, 255));
-        label_home18.setText("Name           :");
-        jPanel2.add(label_home18, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, 30));
+        lable_reg.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        lable_reg.setForeground(new java.awt.Color(255, 255, 255));
+        lable_reg.setText("Name           :");
+        jPanel2.add(lable_reg, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 360, 30));
 
         label_home19.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         label_home19.setForeground(new java.awt.Color(255, 255, 255));
@@ -148,6 +178,36 @@ public class StudentDashboard extends javax.swing.JFrame {
         label_home23.setForeground(new java.awt.Color(255, 255, 255));
         label_home23.setText("Blood            :");
         jPanel2.add(label_home23, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, -1, 30));
+
+        label_home24.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        label_home24.setForeground(new java.awt.Color(255, 255, 255));
+        label_home24.setText("Name           :");
+        jPanel2.add(label_home24, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, 30));
+
+        label_name.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        label_name.setForeground(new java.awt.Color(255, 255, 255));
+        label_name.setText("Name           :");
+        jPanel2.add(label_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 360, 30));
+
+        label_session.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        label_session.setForeground(new java.awt.Color(255, 255, 255));
+        label_session.setText("Name           :");
+        jPanel2.add(label_session, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 360, 30));
+
+        label_contact.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        label_contact.setForeground(new java.awt.Color(255, 255, 255));
+        label_contact.setText("Name           :");
+        jPanel2.add(label_contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 360, 30));
+
+        label_blood.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        label_blood.setForeground(new java.awt.Color(255, 255, 255));
+        label_blood.setText("Name           :");
+        jPanel2.add(label_blood, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, 360, 30));
+
+        label_email.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        label_email.setForeground(new java.awt.Color(255, 255, 255));
+        label_email.setText("Name           :");
+        jPanel2.add(label_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, 360, 30));
 
         panel_parent.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 230, 670, 320));
 
@@ -242,51 +302,6 @@ public class StudentDashboard extends javax.swing.JFrame {
         );
 
         panel_parent.add(panel_fee, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, 260, 140));
-
-        panel_update_info.setBackground(new java.awt.Color(153, 0, 51));
-        panel_update_info.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        panel_update_info.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                panel_update_infoMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                panel_update_infoMouseExited(evt);
-            }
-        });
-
-        label_home6.setFont(new java.awt.Font("Arial Black", 1, 28)); // NOI18N
-        label_home6.setForeground(new java.awt.Color(255, 255, 255));
-        label_home6.setText("Update");
-
-        label_home11.setFont(new java.awt.Font("Arial Black", 1, 28)); // NOI18N
-        label_home11.setForeground(new java.awt.Color(255, 255, 255));
-        label_home11.setText("Information");
-
-        javax.swing.GroupLayout panel_update_infoLayout = new javax.swing.GroupLayout(panel_update_info);
-        panel_update_info.setLayout(panel_update_infoLayout);
-        panel_update_infoLayout.setHorizontalGroup(
-            panel_update_infoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_update_infoLayout.createSequentialGroup()
-                .addGroup(panel_update_infoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_update_infoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(label_home11))
-                    .addGroup(panel_update_infoLayout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(label_home6)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        panel_update_infoLayout.setVerticalGroup(
-            panel_update_infoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_update_infoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(label_home6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(label_home11)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        panel_parent.add(panel_update_info, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 570, 200, 100));
 
         panel_notice.setBackground(new java.awt.Color(153, 0, 51));
         panel_notice.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -465,7 +480,7 @@ public class StudentDashboard extends javax.swing.JFrame {
                 btn_exitActionPerformed(evt);
             }
         });
-        panel_parent.add(btn_exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 590, 200, 70));
+        panel_parent.add(btn_exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 600, 200, 70));
 
         btn_logout.setBackground(new java.awt.Color(102, 102, 102));
         btn_logout.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
@@ -478,7 +493,7 @@ public class StudentDashboard extends javax.swing.JFrame {
                 btn_logoutActionPerformed(evt);
             }
         });
-        panel_parent.add(btn_logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 590, 200, 70));
+        panel_parent.add(btn_logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 600, 200, 70));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -511,12 +526,6 @@ public class StudentDashboard extends javax.swing.JFrame {
         panel_fee.setBackground(clr);
     }//GEN-LAST:event_panel_feeMouseEntered
 
-    private void panel_update_infoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_update_infoMouseEntered
-        // TODO add your handling code here:
-        Color clr = new Color(0, 153, 153);
-        panel_update_info.setBackground(clr);
-    }//GEN-LAST:event_panel_update_infoMouseEntered
-
     private void panel_noticeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_noticeMouseEntered
         // TODO add your handling code here:
         Color clr = new Color(0, 153, 153);
@@ -547,12 +556,6 @@ public class StudentDashboard extends javax.swing.JFrame {
         panel_fee.setBackground(clr);
     }//GEN-LAST:event_panel_feeMouseExited
 
-    private void panel_update_infoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_update_infoMouseExited
-        // TODO add your handling code here:
-        Color clr = new Color(153, 0, 51);
-        panel_update_info.setBackground(clr);
-    }//GEN-LAST:event_panel_update_infoMouseExited
-
     private void panel_noticeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_noticeMouseExited
         // TODO add your handling code here:
         Color clr = new Color(153, 0, 51);
@@ -581,19 +584,19 @@ public class StudentDashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
         Color clr = new Color(0, 153, 153);
         panel_room.setBackground(clr);
-        
+
     }//GEN-LAST:event_panel_roomMouseEntered
 
     private void panel_roomMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_roomMouseExited
         // TODO add your handling code here:
-         Color clr = new Color(153, 0, 51);
+        Color clr = new Color(153, 0, 51);
         panel_room.setBackground(clr);
     }//GEN-LAST:event_panel_roomMouseExited
 
     private void panel_feeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_feeMouseClicked
         // TODO add your handling code here:
         controller.addFrame(this);
-        StudentFeeConfirmation  StudentFeeConfirmation = new StudentFeeConfirmation(controller);
+        StudentFeeConfirmation StudentFeeConfirmation = new StudentFeeConfirmation(controller, student_username, label_session.getText());
         StudentFeeConfirmation.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_panel_feeMouseClicked
@@ -604,34 +607,58 @@ public class StudentDashboard extends javax.swing.JFrame {
         StudentRoomDetails StudentRoomDetails = new StudentRoomDetails(controller);
         StudentRoomDetails.setVisible(true);
         this.setVisible(false);
-        
+
     }//GEN-LAST:event_panel_roomMouseClicked
 
     private void panel_complainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_complainMouseClicked
         // TODO add your handling code here:
-        
+
         controller.addFrame(this);
-        StudentComplain stdcmp = new StudentComplain(controller,student_name);
+        StudentComplain stdcmp = new StudentComplain(controller, student_username);
         stdcmp.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_panel_complainMouseClicked
 
     private void panel_associatesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_associatesMouseClicked
         // TODO add your handling code here:
-        
-        controller.addFrame(this);
-        Associates Associates = new Associates(controller);
-        Associates.setVisible(true);
-        this.setVisible(false);
+        String hall_name = null;
+        try {
+            Connection con = DbConnection.getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT hall_name FROM room_details where username=?");
+            pst.setString(1, student_username);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                hall_name = rs.getString("hall_name");
+                if (hall_name.equals("BANGABONDHU HALL")) {
+                    controller.addFrame(this);
+                    BH_Associates bh = new BH_Associates(controller);
+                    bh.setVisible(true);
+                    this.setVisible(false);
+                } else if (hall_name.equals("MUKTIJODDHA HALL")) {
+                    controller.addFrame(this);
+                    MH_Associates bh = new MH_Associates(controller);
+                    bh.setVisible(true);
+                    this.setVisible(false);
+                } else {
+                    controller.addFrame(this);
+                    MMH_Associates bh = new MMH_Associates(controller);
+                    bh.setVisible(true);
+                    this.setVisible(false);
+                }
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
     }//GEN-LAST:event_panel_associatesMouseClicked
 
     private void panel_clearenceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_clearenceMouseClicked
         // TODO add your handling code here:
         controller.addFrame(this);
-        StudentClearence StudentClearence = new StudentClearence(controller);
+        StudentClearence StudentClearence = new StudentClearence(controller,student_username,lable_reg.getText(),label_session.getText(),label_contact.getText(),label_email.getText(),label_blood.getText());
         StudentClearence.setVisible(true);
         this.setVisible(false);
-        
+
     }//GEN-LAST:event_panel_clearenceMouseClicked
 
     private void panel_noticeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_noticeMouseClicked
@@ -703,26 +730,30 @@ public class StudentDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel label_blood;
+    private javax.swing.JLabel label_contact;
+    private javax.swing.JLabel label_email;
     private javax.swing.JLabel label_hallconnect;
     private javax.swing.JLabel label_home10;
-    private javax.swing.JLabel label_home11;
     private javax.swing.JLabel label_home12;
     private javax.swing.JLabel label_home13;
-    private javax.swing.JLabel label_home18;
     private javax.swing.JLabel label_home19;
     private javax.swing.JLabel label_home2;
     private javax.swing.JLabel label_home20;
     private javax.swing.JLabel label_home21;
     private javax.swing.JLabel label_home22;
     private javax.swing.JLabel label_home23;
+    private javax.swing.JLabel label_home24;
     private javax.swing.JLabel label_home3;
     private javax.swing.JLabel label_home4;
     private javax.swing.JLabel label_home5;
-    private javax.swing.JLabel label_home6;
     private javax.swing.JLabel label_home7;
     private javax.swing.JLabel label_home8;
     private javax.swing.JLabel label_home9;
+    private javax.swing.JLabel label_name;
+    private javax.swing.JLabel label_session;
     private javax.swing.JLabel label_welcome;
+    private javax.swing.JLabel lable_reg;
     private javax.swing.JPanel panel_associates;
     private javax.swing.JPanel panel_clearence;
     private javax.swing.JPanel panel_complain;
@@ -730,6 +761,5 @@ public class StudentDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel panel_notice;
     private javax.swing.JPanel panel_parent;
     private javax.swing.JPanel panel_room;
-    private javax.swing.JPanel panel_update_info;
     // End of variables declaration//GEN-END:variables
 }

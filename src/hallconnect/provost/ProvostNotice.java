@@ -30,7 +30,7 @@ public class ProvostNotice extends javax.swing.JFrame {
 
     private CentralController controller = new CentralController();
     File selectedFile;
-
+    
     /**
      * Creates new form loginPage
      */
