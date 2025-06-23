@@ -57,11 +57,11 @@ public class loginPage extends javax.swing.JFrame {
         btn_back = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         label_login = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         panel_parent.setBackground(new java.awt.Color(0, 51, 51));
-        panel_parent.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         panel_parent.setForeground(new java.awt.Color(255, 255, 255));
         panel_parent.setPreferredSize(new java.awt.Dimension(1536, 800));
         panel_parent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -77,7 +77,7 @@ public class loginPage extends javax.swing.JFrame {
                 btn_signupActionPerformed(evt);
             }
         });
-        panel_parent.add(btn_signup, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 600, 170, 54));
+        panel_parent.add(btn_signup, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 570, 170, 54));
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
 
@@ -145,7 +145,7 @@ public class loginPage extends javax.swing.JFrame {
                 btn_loginActionPerformed(evt);
             }
         });
-        panel_parent.add(btn_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 600, 150, 54));
+        panel_parent.add(btn_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 570, 150, 54));
 
         btn_back.setBackground(new java.awt.Color(102, 102, 102));
         btn_back.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
@@ -158,13 +158,23 @@ public class loginPage extends javax.swing.JFrame {
                 btn_backActionPerformed(evt);
             }
         });
-        panel_parent.add(btn_back, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 600, 140, 54));
+        panel_parent.add(btn_back, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 570, 140, 54));
         panel_parent.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 193, 260, 10));
 
         label_login.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
         label_login.setForeground(new java.awt.Color(255, 255, 255));
         label_login.setText("Log In");
         panel_parent.add(label_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 140, 160, 50));
+
+        jButton1.setBackground(new java.awt.Color(0, 51, 51));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("forgot password  ??");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        panel_parent.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 670, 520, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -246,6 +256,9 @@ public class loginPage extends javax.swing.JFrame {
                     if (rs2.next()) {
 
                         JOptionPane.showMessageDialog(this, "YOUR REQUEST IS IN PENDING, PLEASE WAIT");
+                    }else{
+                                        JOptionPane.showMessageDialog(this, "INVALID USERNAME AND PASSWORD");
+
                     }
                 } else {
                     JOptionPane.showMessageDialog(this, "INVALID USERNAME AND PASSWORD");
@@ -264,6 +277,15 @@ public class loginPage extends javax.swing.JFrame {
         prev.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btn_backActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        controller.addFrame(this);
+        forgotPassword fg = new forgotPassword(controller);
+        fg.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -308,6 +330,7 @@ public class loginPage extends javax.swing.JFrame {
     private javax.swing.JButton btn_login;
     private javax.swing.JButton btn_signup;
     private javax.swing.JComboBox<String> combo_role;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel label_hallconnect;
