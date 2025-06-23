@@ -43,13 +43,10 @@ CentralController controller = new CentralController();
         btn_back = new javax.swing.JButton();
         label_home3 = new javax.swing.JLabel();
         label_home4 = new javax.swing.JLabel();
-        label_home5 = new javax.swing.JLabel();
         label_home7 = new javax.swing.JLabel();
         label_home6 = new javax.swing.JLabel();
         label_home8 = new javax.swing.JLabel();
-        label_home19 = new javax.swing.JLabel();
         label_home18 = new javax.swing.JLabel();
-        label_home17 = new javax.swing.JLabel();
         label_home16 = new javax.swing.JLabel();
         label_home15 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -137,17 +134,12 @@ CentralController controller = new CentralController();
         label_home3.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         label_home3.setForeground(new java.awt.Color(255, 255, 255));
         label_home3.setText("Hall                       :");
-        jPanel2.add(label_home3, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 37, -1, 30));
+        jPanel2.add(label_home3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, 30));
 
         label_home4.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         label_home4.setForeground(new java.awt.Color(255, 255, 255));
         label_home4.setText("Provost                  :");
-        jPanel2.add(label_home4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, 30));
-
-        label_home5.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        label_home5.setForeground(new java.awt.Color(255, 255, 255));
-        label_home5.setText("Current Students  :");
-        jPanel2.add(label_home5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, 30));
+        jPanel2.add(label_home4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, 30));
 
         label_home7.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         label_home7.setForeground(new java.awt.Color(255, 255, 255));
@@ -164,30 +156,20 @@ CentralController controller = new CentralController();
         label_home8.setText("Facilities               :");
         jPanel2.add(label_home8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, 30));
 
-        label_home19.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        label_home19.setForeground(new java.awt.Color(255, 255, 255));
-        label_home19.setText("placeholder");
-        jPanel2.add(label_home19, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, -1, 30));
-
         label_home18.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         label_home18.setForeground(new java.awt.Color(255, 255, 255));
         label_home18.setText("210 ( including 30 seats in a shared room)  ");
         jPanel2.add(label_home18, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, -1, 30));
 
-        label_home17.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        label_home17.setForeground(new java.awt.Color(255, 255, 255));
-        label_home17.setText("placeholder");
-        jPanel2.add(label_home17, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, -1, 30));
-
         label_home16.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         label_home16.setForeground(new java.awt.Color(255, 255, 255));
         label_home16.setText("MD. SHAHID IQBAL");
-        jPanel2.add(label_home16, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, -1, 30));
+        jPanel2.add(label_home16, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, -1, 30));
 
         label_home15.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         label_home15.setForeground(new java.awt.Color(255, 255, 255));
         label_home15.setText("Muktijoddha Hall");
-        jPanel2.add(label_home15, new org.netbeans.lib.awtextra.AbsoluteConstraints(304, 37, -1, 30));
+        jPanel2.add(label_home15, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 70, -1, 30));
 
         jList1.setBackground(new java.awt.Color(0,153,153,90));
         jList1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -318,12 +300,9 @@ CentralController controller = new CentralController();
     private javax.swing.JLabel label_hallconnect;
     private javax.swing.JLabel label_home15;
     private javax.swing.JLabel label_home16;
-    private javax.swing.JLabel label_home17;
     private javax.swing.JLabel label_home18;
-    private javax.swing.JLabel label_home19;
     private javax.swing.JLabel label_home3;
     private javax.swing.JLabel label_home4;
-    private javax.swing.JLabel label_home5;
     private javax.swing.JLabel label_home6;
     private javax.swing.JLabel label_home7;
     private javax.swing.JLabel label_home8;
